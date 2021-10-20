@@ -1,3 +1,3 @@
-module "networking" {
-  source = "./networking"
+module "network1" {
+  source = "./network1"
 }
