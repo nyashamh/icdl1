@@ -1,11 +1,11 @@
-resource "aws_vpc" " icdl-vpc-euw1" {
+resource "aws_vpc" "icdl-vpc-euw1" {
     cidr_block = "192.168.0.0/24"
     instance_tenancy = "default"
 
 }
 
 #public sun=bnets
-resource "aws_subnet" " icdl-pub-0a" {
+resource "aws_subnet" "icdl-pub-0a" {
     vpc_id = "aws_vpc.icdl-vpc-euwl.id"
     cidr_block = "192.168.0.0/27"
   
