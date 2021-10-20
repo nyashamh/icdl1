@@ -68,3 +68,23 @@ resource "aws_subnet" "icdl-pvt-1c" {
     }*/
   
 }
+
+data "aws_nat_gateway" "icdl-nat" {
+  subnet_id = aws_subnet.icdl-pub-0a.id
+
+  tags = {
+    "Name" = "icdl-nat"
+    "Creator" = "nyasha@cloud-fundis"
+  }
+}
+
+resource "aws_eip" "nyashas-eip" {
+  vpc = true
+  depends_on = [
+    aws_nat_gateway.icdl-nat
+  ]
+  tags = {
+    "Name"    = "epilloc"
+    "Creator" = "nyasha@cloud-fundis"
+  }
+}
