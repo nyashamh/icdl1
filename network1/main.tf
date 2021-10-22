@@ -102,3 +102,7 @@ resource "aws_eip" "icdl-eip" {
     "Creator" = "nyasha@cloud-fundis"
   }
 }
+resource "aws_vpc_endpoint" "icdl-endpoint" {
+  vpc_id       = aws_vpc.icdl-vpc-euw1.id
+  service_name = "com.amazonaws.eu-west-1.s3"
+}
