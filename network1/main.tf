@@ -1,10 +1,10 @@
 resource "aws_vpc" "icdl-vpc-euw1" {
     cidr_block = "192.168.0.0/24"
     instance_tenancy = "default"
-       /* tags                             = {
+       tags                             = {
         "Creator" = "hamish@cloud-fundis"
         "Name"    = "icdl-vpc-euw1"
-    }*/
+    }
 
 }
 
@@ -70,7 +70,8 @@ resource "aws_subnet" "icdl-pvt-1c" {
 }
 
 resource "aws_nat_gateway" "icdl-nat" {
-  #subnet_id = aws_subnet.icdl-pub-0a.id
+  subnet_id = aws_subnet.icdl-pub-0a.id
+  allocation_id        = "eipalloc-04c4eaaff88db6af8"
 
   tags = {
     "Name" = "icdl-nat"
