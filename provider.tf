@@ -11,6 +11,13 @@ terraform {
 }
 
 provider "aws" {
-  profile = "cfdev"
-  region  = "eu-west-1"
+  # default region
+  profile = "icdl"
+  region = "af-south-1"
+}
+
+provider "aws" {
+  profile = "icdl"
+  alias = "north"
+  region = "eu-west-1"
 }
