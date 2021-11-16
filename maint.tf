@@ -1,7 +1,8 @@
-module "network1" {
-  source = "./network1"
+module "south-network" {
+  source = "./modules/south-network"
+  #region = af-south-1
 }
 
-module "instances" {
+/*module "instances" {
  source = "./instances"
-}
+}*/
