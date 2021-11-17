@@ -181,3 +181,150 @@ resource "aws_route_table" "icdl-za-pvt-rt-table" {
   }
 
 }
+
+#internet gtw
+resource "aws_internet_gateway" "icdl-za-igw" {
+  vpc_id = aws_vpc.icdl-za-south-network.id
+
+  tags = {
+    "Name"      = "icdl-za-igw"
+    "Creator"   = "nyasha@cloud-fundis"
+    "Createdby" = "terraform"
+    "Region"    = "cape town"
+  }
+}
+/*
+#eip
+resource "aws_eip" "" {
+  instance                  = aws_instance.X.id
+  vpc                       = true
+  associate_with_private_ip = "10.1.1.11"
+
+    tags = {
+    "Name"      = ""
+    "Creator"   = "nyasha@cloud-fundis"
+    "Createdby" = "terraform"
+    "Region"    = "cape town"
+  }
+}
+
+#vpc_endpoint
+resource "aws_vpc_endpoint" "s3" {
+  vpc_id       = aws_vpc.icdl-za-south-network.id
+  service_name = "com.amazonaws.af-south-1.s3"
+
+  tags = {
+    "Creator" = "nyasha@cloud-fundis"
+    "Reason"  = "Make moving data faster"
+  }
+}
+
+#vpc peering
+resource "aws_vpc_peering_connection" "" {
+  peer_owner_id = var.peer_owner_id
+  peer_vpc_id   = aws_vpc.bar.id
+  vpc_id        = aws_vpc.icdl-za-south-network.id
+}
+
+#network acl
+resource "aws_network_acl" "X" {
+  vpc_id = aws_vpc.icdl-za-south-network.id
+
+}
+*/
+#security groups
+resource "aws_security_group" "OpenVPN_Access_Server_SG" {
+  name        = "OpenVPN_Access_Server_SG"
+  vpc_id      = aws_vpc.icdl-za-south-network.id
+    egress      = [
+        {
+            cidr_blocks      = [
+                "0.0.0.0/0",
+            ]
+            description      = ""
+            from_port        = 0
+            ipv6_cidr_blocks = []
+            prefix_list_ids  = []
+            protocol         = "-1"
+            security_groups  = []
+            self             = false
+            to_port          = 0
+        },
+    ]
+    
+    ingress     = [
+        {
+            cidr_blocks      = [
+                "0.0.0.0/0",
+                "156.155.234.32/32",
+            ]
+            description      = ""
+            from_port        = 443
+            ipv6_cidr_blocks = []
+            prefix_list_ids  = []
+            protocol         = "tcp"
+            security_groups  = []
+            self             = false
+            to_port          = 443
+        },
+        {
+            cidr_blocks      = [
+                "0.0.0.0/0",
+            ]
+            description      = ""
+            from_port        = 1194
+            ipv6_cidr_blocks = []
+            prefix_list_ids  = []
+            protocol         = "udp"
+            security_groups  = []
+            self             = false
+            to_port          = 1194
+        },
+        {
+            cidr_blocks      = [
+                "0.0.0.0/0",
+            ]
+            description      = ""
+            from_port        = 22
+            ipv6_cidr_blocks = []
+            prefix_list_ids  = []
+            protocol         = "tcp"
+            security_groups  = []
+            self             = false
+            to_port          = 22
+        },
+        {
+            cidr_blocks      = [
+                "0.0.0.0/0",
+            ]
+            description      = ""
+            from_port        = 943
+            ipv6_cidr_blocks = []
+            prefix_list_ids  = []
+            protocol         = "tcp"
+            security_groups  = []
+            self             = false
+            to_port          = 943
+        },
+        {
+            cidr_blocks      = [
+                "0.0.0.0/0",
+            ]
+            description      = ""
+            from_port        = 945
+            ipv6_cidr_blocks = []
+            prefix_list_ids  = []
+            protocol         = "tcp"
+            security_groups  = []
+            self             = false
+            to_port          = 945
+        },
+    ]
+
+    tags = {
+    "Name"      = "OpenVPN_Access_Server_SG"
+    "Creator"   = "nyasha@cloud-fundis"
+    "Createdby" = "terraform"
+    "Region"    = "cape town"
+    }
+}
