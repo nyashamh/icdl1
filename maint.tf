@@ -1,5 +1,5 @@
 module "south-network" {
-  source = "./modules/south-network"
+  source = "./terraform/modules/south-network"
   #region = af-south-1
 }
 

@@ -15,9 +15,3 @@ provider "aws" {
   profile = "icdl-prod"
   region = "af-south-1"
 }
-
-provider "aws" {
-  profile = "icdl-prod"
-  alias = "north"
-  region = "eu-west-1"
-}
