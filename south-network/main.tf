@@ -103,3 +103,81 @@ resource "aws_subnet" "icdl-za-priv-0-128" {
     "Region"    = "cape town"
   }
 }
+
+#route tables
+resource "aws_route_table" "icdl-za-rt-table" {
+  vpc_id = aws_vpc.icdl-za-south-network.id
+  
+  propagating_vgws = []
+    route            = [
+        {
+            carrier_gateway_id         = ""
+            cidr_block                 = "0.0.0.0/0"
+            destination_prefix_list_id = ""
+            egress_only_gateway_id     = ""
+            gateway_id                 = "igw-007749bcf2c736f6a"
+            instance_id                = ""
+            ipv6_cidr_block            = ""
+            local_gateway_id           = ""
+            nat_gateway_id             = ""
+            network_interface_id       = ""
+            transit_gateway_id         = ""
+            vpc_endpoint_id            = ""
+            vpc_peering_connection_id  = ""
+        },
+        {
+            carrier_gateway_id         = ""
+            cidr_block                 = "172.16.0.0/16"
+            destination_prefix_list_id = ""
+            egress_only_gateway_id     = ""
+            gateway_id                 = ""
+            instance_id                = ""
+            ipv6_cidr_block            = ""
+            local_gateway_id           = ""
+            nat_gateway_id             = ""
+            network_interface_id       = ""
+            transit_gateway_id         = ""
+            vpc_endpoint_id            = ""
+            vpc_peering_connection_id  = "pcx-0c53b96062c6831fe"
+        },
+    ]
+  
+  tags = {
+    "Name"      = "icdl-za-rt-table"
+    "Creator"   = "nyasha@cloud-fundis"
+    "Createdby" = "terraform"
+    "Region"    = "cape town"
+  }
+
+}
+
+resource "aws_route_table" "icdl-za-pvt-rt-table" {
+  vpc_id = aws_vpc.icdl-za-south-network.id
+
+    propagating_vgws = []
+    route            = [
+        {
+            carrier_gateway_id         = ""
+            cidr_block                 = "172.16.0.0/16"
+            destination_prefix_list_id = ""
+            egress_only_gateway_id     = ""
+            gateway_id                 = ""
+            instance_id                = ""
+            ipv6_cidr_block            = ""
+            local_gateway_id           = ""
+            nat_gateway_id             = ""
+            network_interface_id       = ""
+            transit_gateway_id         = ""
+            vpc_endpoint_id            = ""
+            vpc_peering_connection_id  = "pcx-0c53b96062c6831fe"
+        },
+    ]
+
+  tags = {
+    "Name"      = "icdl-za-pvt-rt-table"
+    "Creator"   = "nyasha@cloud-fundis"
+    "Createdby" = "terraform"
+    "Region"    = "cape town"
+  }
+
+}
