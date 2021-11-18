@@ -1,0 +1,47 @@
+
+import vpc
+terraform import module.south-network.aws_vpc.icdl-za-south-network vpc-05853c0c9f0293771
+
+import subnets
+terraform state show module.south-network.aws_subnet.icdl-za-south-pub-1-0
+
+terraform import module.south-network.aws_subnet.icdl-za-pub-1-64 subnet-0079ed87b2bc005ee
+
+terraform import module.south-network.aws_subnet.icdl-za-pub-1-128 subnet-0d4d26a43155146e9
+
+private subnets
+terraform import module.south-network.aws_subnet.icdl-za-priv-0-0 subnet-0b4e65b06a02f3ffa
+
+terraform import module.south-network.aws_subnet.icdl-za-priv-0-64 subnet-09a787cd42ae02ec8
+
+terraform import module.south-network.aws_subnet.icdl-za-priv-0-128 subnet-0817f27901aa2d887
+
+route tables
+terraform state show module.south-network.aws_route_table.icdl-za-rt-table
+
+terraform import module.south-network.aws_route_table.icdl-za-pvt-rt-table rtb-0f724982f511d86dd
+
+internet gateway
+terraform import module.south-network.aws_internet_gateway.icdl-za-igw igw-007749bcf2c736f6a
+
+eip
+terraform import module.south-network.aws_eip.icdl-za-eip 13.244.91.158
+
+vpc_endpoint
+terraform import module.south-network.aws_vpc_endpoint.icdl-za-s3endpoint vpce-07f9f7e5d7b4055ae
+
+vpc_peeering
+terraform import module.south-network.aws_vpc_peering_connection.icdl-af-to-icdl-eu pcx-0c53b96062c6831fe
+
+network_acl
+terraform import module.south-network.aws_network_acl.icdl-za-network-acl acl-0bc2493d1ba1b6b71
+
+
+
+
+
+
+
+
+security groups
+terraform import module.south-network.aws_security_group.OpenVPN_Access_Server_SG sg-008f65bc805894974
