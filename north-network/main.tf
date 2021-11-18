@@ -1,3 +1,4 @@
+/*
 resource "aws_vpc" "icdl-za-north-network" {
   cidr_block = "172.16.0.0/16"
 }
@@ -27,3 +28,4 @@ resource "aws_internet_gateway" " ICDL-temp-IGW" {
     vpc_id = aws_vpc.idicdl-za-north-network.id
 }
 
+*/
