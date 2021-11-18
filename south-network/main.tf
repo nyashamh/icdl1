@@ -195,43 +195,85 @@ resource "aws_internet_gateway" "icdl-za-igw" {
 }
 /*
 #eip
-resource "aws_eip" "" {
-  instance                  = aws_instance.X.id
+resource "aws_eip" "icdl-za-eip" {
+  instance                  = aws_instance.OpenVPN BYOL.id
   vpc                       = true
   associate_with_private_ip = "10.1.1.11"
 
     tags = {
-    "Name"      = ""
+    "Name"      = "cdl-za-eip"
     "Creator"   = "nyasha@cloud-fundis"
     "Createdby" = "terraform"
     "Region"    = "cape town"
   }
-}
+}*/
 
 #vpc_endpoint
-resource "aws_vpc_endpoint" "s3" {
+resource "aws_vpc_endpoint" "icdl-za-s3endpoint" {
   vpc_id       = aws_vpc.icdl-za-south-network.id
   service_name = "com.amazonaws.af-south-1.s3"
 
-  tags = {
-    "Creator" = "nyasha@cloud-fundis"
-    "Reason"  = "Make moving data faster"
-  }
+    policy                = jsonencode(
+        {
+            Statement = [
+                {
+                    Action    = "*"
+                    Effect    = "Allow"
+                    Principal = "*"
+                    Resource  = "*"
+                },
+            ]
+            Version   = "2008-10-17"
+        }
+    )
+    private_dns_enabled   = false
+    route_table_ids       = [
+        "rtb-00a48c6df4b8ffd38",
+        "rtb-0f724982f511d86dd",
+    ]
+    security_group_ids    = []
+    subnet_ids            = []
+    tags                  = {
+        "Name"    = "icdl-za-s3endpoint"
+        "creator" = "nyasha@cloud-fundis"
+        "reason"  = "Make moving data faster"
+    }
+    vpc_endpoint_type     = "Gateway"
 }
 
 #vpc peering
-resource "aws_vpc_peering_connection" "" {
-  peer_owner_id = var.peer_owner_id
-  peer_vpc_id   = aws_vpc.bar.id
+resource "aws_vpc_peering_connection" "icdl-af-to-icdl-eu" {
   vpc_id        = aws_vpc.icdl-za-south-network.id
+    peer_owner_id = "813260210012"
+    peer_region   = "eu-west-1"
+    peer_vpc_id   = "vpc-0c092d552baffc13d"
+    tags          = {
+        "Name"    = "icdl-af-to-icdl-eu"
+        "Creator" = "nyasha@cloud-fundis"
+        "Createdby"= "terraform"
+    }
+
+    accepter {
+        allow_classic_link_to_remote_vpc = false
+        allow_remote_vpc_dns_resolution  = true
+        allow_vpc_to_remote_classic_link = false
+    }
+
+    requester {
+        allow_classic_link_to_remote_vpc = false
+        allow_remote_vpc_dns_resolution  = true
+        allow_vpc_to_remote_classic_link = false
+    }
+
+    timeouts {}
 }
 
 #network acl
-resource "aws_network_acl" "X" {
+resource "aws_network_acl" "icdl-za-network-acl" {
   vpc_id = aws_vpc.icdl-za-south-network.id
 
 }
-*/
+
 #security groups
 resource "aws_security_group" "OpenVPN_Access_Server_SG" {
   name        = "OpenVPN_Access_Server_SG"
