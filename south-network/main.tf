@@ -29,6 +29,7 @@ resource "aws_subnet" "icdl-za-south-pub-1-0" {
   }
 }
 
+/*
 resource "aws_subnet" "icdl-za-pub-1-64" {
   vpc_id            = aws_vpc.icdl-za-south-network.id
   cidr_block        = "10.1.1.64/26"
@@ -58,7 +59,8 @@ resource "aws_subnet" "icdl-za-pub-1-128" {
     "Region"    = "cape town"
   }
 }
-
+*/
+#private subnets
 resource "aws_subnet" "icdl-za-priv-0-0" {
   vpc_id            = aws_vpc.icdl-za-south-network.id
   cidr_block        = "10.1.0.0/26"
@@ -73,7 +75,7 @@ resource "aws_subnet" "icdl-za-priv-0-0" {
     "Region"    = "cape town"
   }
 }
-
+/*
 resource "aws_subnet" "icdl-za-priv-0-64" {
   vpc_id            = aws_vpc.icdl-za-south-network.id
   cidr_block        = "10.1.0.64/26"
@@ -103,7 +105,7 @@ resource "aws_subnet" "icdl-za-priv-0-128" {
     "Region"    = "cape town"
   }
 }
-
+*/
 #route tables
 resource "aws_route_table" "icdl-za-rt-table" {
   vpc_id = aws_vpc.icdl-za-south-network.id
@@ -193,12 +195,17 @@ resource "aws_internet_gateway" "icdl-za-igw" {
     "Region"    = "cape town"
   }
 }
-/*
+
 #eip
 resource "aws_eip" "icdl-za-eip" {
-  instance                  = aws_instance.OpenVPN BYOL.id
-  vpc                       = true
-  associate_with_private_ip = "10.1.1.11"
+    instance             = "i-07f33411ef414aabe"
+    network_border_group = "af-south-1"
+    network_interface    = "eni-0815bdcd755b73218"
+    public_ipv4_pool     = "amazon"
+
+    vpc                  = true
+
+    timeouts {}
 
     tags = {
     "Name"      = "cdl-za-eip"
@@ -206,7 +213,7 @@ resource "aws_eip" "icdl-za-eip" {
     "Createdby" = "terraform"
     "Region"    = "cape town"
   }
-}*/
+}
 
 #vpc_endpoint
 resource "aws_vpc_endpoint" "icdl-za-s3endpoint" {
@@ -271,7 +278,46 @@ resource "aws_vpc_peering_connection" "icdl-af-to-icdl-eu" {
 #network acl
 resource "aws_network_acl" "icdl-za-network-acl" {
   vpc_id = aws_vpc.icdl-za-south-network.id
+      egress     = [
+        {
+            action          = "allow"
+            cidr_block      = "0.0.0.0/0"
+            from_port       = 0
+            icmp_code       = 0
+            icmp_type       = 0
+            ipv6_cidr_block = ""
+            protocol        = "-1"
+            rule_no         = 100
+            to_port         = 0
+        },
+    ]
 
+    ingress    = [
+        {
+            action          = "allow"
+            cidr_block      = "0.0.0.0/0"
+            from_port       = 0
+            icmp_code       = 0
+            icmp_type       = 0
+            ipv6_cidr_block = ""
+            protocol        = "-1"
+            rule_no         = 100
+            to_port         = 0
+        },
+    ]
+    subnet_ids = [
+        "subnet-0079ed87b2bc005ee",
+        "subnet-058d9e91725b55e0d",
+        "subnet-0817f27901aa2d887",
+        "subnet-09a787cd42ae02ec8",
+        "subnet-0b4e65b06a02f3ffa",
+        "subnet-0d4d26a43155146e9",
+    ]
+    tags       = {
+        "Name" = "icdl-za-network-acl"
+        "Creator" = "nyasha@cloud-fundis"
+        "Createdby"= "terraform"
+    }
 }
 
 #security groups
