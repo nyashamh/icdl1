@@ -44,7 +44,7 @@ resource "aws_instance" "ICDL2K19-AV01" {
           }
 }
 */
-
+/* import done already 15/11/21
 #security groups
 resource "aws_security_group" "OpenVPN_Access_Server_SG" {
   name        = "OpenVPN_Access_Server_SG"
@@ -141,7 +141,7 @@ resource "aws_security_group" "OpenVPN_Access_Server_SG" {
     "Createdby" = "terraform"
     "Region"    = "cape town"
     }
-}
+}*/
 /*
 resource "aws_security_group" "default" {
     name    = "default"
