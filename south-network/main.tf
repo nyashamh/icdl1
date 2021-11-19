@@ -303,7 +303,7 @@ resource "aws_network_acl" "icdl-za-network-acl" {
             protocol        = "-1"
             rule_no         = 100
             to_port         = 0
-        },
+        }
     ]
     subnet_ids = [
         "subnet-0079ed87b2bc005ee",

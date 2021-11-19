@@ -44,11 +44,12 @@ resource "aws_instance" "ICDL2K19-AV01" {
           }
 }
 */
+
 #security groups
 resource "aws_security_group" "OpenVPN_Access_Server_SG" {
   name        = "OpenVPN_Access_Server_SG"
-  description = "Managed by Terraform"
-  vpc_id      = module.south-network.aws_vpc.icdl-za-south-network.id
+  description = "This SG is for the OpenVPN access server"
+  vpc_id      = local.south-1-vpc_id
     egress      = [
         {
             cidr_blocks      = [
