@@ -1,5 +1,4 @@
 
-  
 locals {
   aws_region = "eu-west-1"
   north-1-vpc_id         = "vpc-0c092d552baffc13d"

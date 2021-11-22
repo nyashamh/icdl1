@@ -28,7 +28,7 @@ eip
 terraform import module.south-network.aws_eip.icdl-za-eip 13.244.91.158
 
 vpc_endpoint
-terraform import module.south-network.aws_vpc_endpoint.icdl-za-s3endpoint vpce-07f9f7e5d7b4055ae
+terraform imterraform import module.south-network.aws_s3_bucket.bucket credentials-and-licences port module.south-network.aws_vpc_endpoint.icdl-za-s3endpoint vpce-07f9f7e5d7b4055ae
 
 vpc_peeering
 terraform import module.south-network.aws_vpc_peering_connection.icdl-af-to-icdl-eu pcx-0c53b96062c6831fe
@@ -36,8 +36,14 @@ terraform import module.south-network.aws_vpc_peering_connection.icdl-af-to-icdl
 network_acl
 terraform import module.south-network.aws_network_acl.icdl-za-network-acl acl-0bc2493d1ba1b6b71
 
+s3 bucket
+terraform import module.south-network.aws_s3_bucket.bucket credentials-and-licences 
 
+s3 bucket1
+terraform import module.south-network.aws_s3_bucket.bucket1 icdl-za-backups
 
+s3 bucket2
+terraform import module.south-network.aws_s3_bucket.bucket2 icdl-za-file-gateway
 
 
 

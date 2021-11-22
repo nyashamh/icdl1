@@ -1,3 +1,4 @@
+
 data "aws_region" "current" {}
 
 data "aws_vpc" "icdl-north-1-network" {

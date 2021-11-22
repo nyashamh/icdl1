@@ -34,4 +34,9 @@ terraform import module.north-network.aws_vpc_endpoint.icdl-za-endpoint-1 vpce-0
 s3 endpoint
 terraform import module.north-network.aws_vpc_endpoint.icdl-za-endpoint-2 vpce-0e32b1da49d9b0f5b
 
+aws_ec2_managed_prefix_list1
+terraform import module.north-network.aws_ec2_managed_prefix_list.com.amazonaws.eu-west-1.s3 pl-6da54004
+
+
+aws_ec2_managed_prefix_list2
 
