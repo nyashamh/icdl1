@@ -8,11 +8,6 @@ module "south-instance" {
   #region = af-south-1
 }
 
-module "south-storage" {
-  source = "./south-storage"
-  #region = af-south-1
-}
-
 module "north-network" {
   source = "./north-network"
   #region = eu-west-1
