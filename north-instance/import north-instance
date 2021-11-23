@@ -1,0 +1,2 @@
+aws_lambda_function
+terraform import module.north-instance.aws_lambda_function.icdl-lambda StopStartICDLCRM

@@ -16,3 +16,12 @@ module "north-network" {
   }
 
 }
+
+module "north-instance" {
+  source = "./north-instance"
+  #region = eu-west-1
+  providers = {
+    aws = aws.north
+  }
+
+}
