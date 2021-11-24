@@ -174,6 +174,7 @@ resource "aws_route_table" "icdl-za-pvt-rt-table" {
             vpc_peering_connection_id  = "pcx-0c53b96062c6831fe"
         },
     ]
+    #nat_gateway_id = aws_nat_gateway.icdl-za-south-nat-gw.id
 
   tags = {
     "Name"      = "icdl-za-pvt-rt-table"
@@ -183,7 +184,7 @@ resource "aws_route_table" "icdl-za-pvt-rt-table" {
   }
 
 }
-
+/*
 #internet gtw
 resource "aws_internet_gateway" "icdl-za-igw" {
   vpc_id = aws_vpc.icdl-za-south-network.id
@@ -195,9 +196,10 @@ resource "aws_internet_gateway" "icdl-za-igw" {
     "Region"    = "cape town"
   }
 }
+*/ 
 
 #eip
-resource "aws_eip" "icdl-za-eip" {
+resource "aws_eip" "icdl-za-south-eip" {
     instance             = "i-07f33411ef414aabe"
     network_border_group = "af-south-1"
     network_interface    = "eni-0815bdcd755b73218"
@@ -208,7 +210,7 @@ resource "aws_eip" "icdl-za-eip" {
     timeouts {}
 
     tags = {
-    "Name"      = "cdl-za-eip"
+    "Name"      = "icdl-za-south-eip"
     "Creator"   = "nyasha@cloud-fundis"
     "Createdby" = "terraform"
     "Region"    = "cape town"
@@ -319,15 +321,14 @@ resource "aws_network_acl" "icdl-za-network-acl" {
         "Createdby"= "terraform"
     }
 }
-
 /*
 resource "aws_network_interface" "icdl-za-south-eni" {
-  subnet_id       = aws_subnet..id
-  private_ips     = [""]
-  security_groups = [aws_security_group.  .id]
+  subnet_id       = aws_subnet.icdl-za-south-pub-1-0.id
+  #private_ips     = [""]
+  #security_groups = [aws_security_group.OpenVPN_Access_Server_SG.id]
 
   attachment {
-    instance     = aws_instance. .id
+    instance     = aws_instance.OpenVPN-BYOL.id
     device_index = 1
   }
 tags             = {
@@ -336,41 +337,14 @@ tags             = {
   "Createdby"    = "terraform"
 
 }
-
-resource "aws_nat_gateway" "icdl-za-south-nat" {
-  allocation_id = aws_eip. .id
-  subnet_id     = aws_subnet. .id
-
+*/
+resource "aws_nat_gateway" "icdl-za-south-nat-gw" {
+  allocation_id = aws_eip.icdl-za-south-eip.id
+  subnet_id     = aws_subnet.icdl-za-south-pub-1-0.id
   tags           = {  
-    "Name"         = "icdl-za-south-nat"
-    "Creator"      = "nyasha@cloud-fundis"
-    "Createdby"    = "terraform"
-
-
-  }
-  # To ensure proper ordering, it is recommended to add an explicit dependency
-  # on the Internet Gateway for the VPC.
-  depends_on = [aws_internet_gateway.  ]
-}
-
-resource "aws_internet_gateway" "icdl-za-south-gw" {
-  vpc_id           = aws_vpc.icdl-za-south-network.id
-
-  tags = {
-    "Name"         = "icdl-za-south-gw"
+    "Name"         = "icdl-za-south-nat-gw"
     "Creator"      = "nyasha@cloud-fundis"
     "Createdby"    = "terraform"
   }
 }
 
-resource "aws_route_table" "icdl-south-nat-rtbl" {
-  vpc_id = aws_vpc.icdl-za-south-network.id
-
-  route = []
-
-  tags = {
-    "Name"         = "icdl-south-nat-rtbl"
-    "Creator"      = "nyasha@cloud-fundis"
-    "Createdby"    = "terraform"
-  }
-}*/

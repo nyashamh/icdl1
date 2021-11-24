@@ -5,9 +5,9 @@ terraform {
       source  = "hashicorp/aws"
       version = "~> 3.27"
     }
-      docker = {
-        source  = "kreuzwerker/docker"
-        #version = "2.15.0"
+    docker = {
+      source = "kreuzwerker/docker"
+      #version = "2.15.0"
     }
 
     goodle = {
@@ -30,7 +30,7 @@ provider "aws" {
 }
 
 provider "docker" {
-    # default region
+  # default region
   profile = "icdl-prod"
   region  = "af-south-1"
 }

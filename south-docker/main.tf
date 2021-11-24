@@ -10,5 +10,5 @@ resource "docker_container" "ubuntu" {
   /*ports {
     external = 
     internal =
-  }*/
+  }
 }*/
