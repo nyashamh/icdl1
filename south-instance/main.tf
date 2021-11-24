@@ -178,3 +178,12 @@ resource "aws_security_group" "default-cf-SG" {
     name    = "default-cf-SG"
     vpc_id  = aws_vpc.icdl-za-south-network.id
 }*/
+/*
+resource "aws_lambda_function" "icdl-south-nat-lambda" {
+  filename      = ""
+  function_name = ""
+  role          = ""
+  handler       = ""
+}*/
+
+

@@ -319,3 +319,58 @@ resource "aws_network_acl" "icdl-za-network-acl" {
         "Createdby"= "terraform"
     }
 }
+
+/*
+resource "aws_network_interface" "icdl-za-south-eni" {
+  subnet_id       = aws_subnet..id
+  private_ips     = [""]
+  security_groups = [aws_security_group.  .id]
+
+  attachment {
+    instance     = aws_instance. .id
+    device_index = 1
+  }
+tags             = {
+  "Name"         = "icdl-za-south-eni"
+  "Creator"      = "nyasha@cloud-fundis"
+  "Createdby"    = "terraform"
+
+}
+
+resource "aws_nat_gateway" "icdl-za-south-nat" {
+  allocation_id = aws_eip. .id
+  subnet_id     = aws_subnet. .id
+
+  tags           = {  
+    "Name"         = "icdl-za-south-nat"
+    "Creator"      = "nyasha@cloud-fundis"
+    "Createdby"    = "terraform"
+
+
+  }
+  # To ensure proper ordering, it is recommended to add an explicit dependency
+  # on the Internet Gateway for the VPC.
+  depends_on = [aws_internet_gateway.  ]
+}
+
+resource "aws_internet_gateway" "icdl-za-south-gw" {
+  vpc_id           = aws_vpc.icdl-za-south-network.id
+
+  tags = {
+    "Name"         = "icdl-za-south-gw"
+    "Creator"      = "nyasha@cloud-fundis"
+    "Createdby"    = "terraform"
+  }
+}
+
+resource "aws_route_table" "icdl-south-nat-rtbl" {
+  vpc_id = aws_vpc.icdl-za-south-network.id
+
+  route = []
+
+  tags = {
+    "Name"         = "icdl-south-nat-rtbl"
+    "Creator"      = "nyasha@cloud-fundis"
+    "Createdby"    = "terraform"
+  }
+}*/

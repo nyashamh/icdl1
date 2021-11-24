@@ -8,6 +8,11 @@ module "south-instance" {
   #region = af-south-1
 }
 
+module "south-docker" {
+  source = "./south-docker"
+  #region = af-south-1
+}
+
 module "north-network" {
   source = "./north-network"
   #region = eu-west-1

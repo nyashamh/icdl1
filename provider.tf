@@ -5,6 +5,19 @@ terraform {
       source  = "hashicorp/aws"
       version = "~> 3.27"
     }
+      docker = {
+        source  = "kreuzwerker/docker"
+        #version = "2.15.0"
+    }
+
+    goodle = {
+      source = "hashicorp/google"
+    }
+
+    random = {
+      source = "hashicorp/random"
+    }
+
   }
 
   required_version = ">= 1.0"
@@ -16,8 +29,15 @@ provider "aws" {
   region  = "af-south-1"
 }
 
+provider "docker" {
+    # default region
+  profile = "icdl-prod"
+  region  = "af-south-1"
+}
+
 provider "aws" {
   profile = "icdl-prod"
   alias   = "north"
   region  = "eu-west-1"
 }
+
