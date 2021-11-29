@@ -16,7 +16,7 @@ resource "aws_lambda_function" "icdl-lambda" {
         "lambda-console:blueprint" = "hello-world-python"
         "CreatedBy"                = "terraform"
         "Creator"                  = "nyasha@cloud-fundis"
-        "Name"                     = "StopStartICDLCRM"
+        "Name"                     = ""
         "Region"                   = "Ireland"
     }
     timeout                        = 3

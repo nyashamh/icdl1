@@ -347,4 +347,3 @@ resource "aws_nat_gateway" "icdl-za-south-nat-gw" {
     "Createdby"    = "terraform"
   }
 }
-
