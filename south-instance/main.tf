@@ -10,7 +10,7 @@ resource "aws_instance" "OpenVPN-BYOL" {
           "Region"    = "cape town"
           }
 }
-
+/*
 resource "aws_instance" "ICDL2K19-DC01" {
      ami           = "ami-0aa317924368277f8"
      instance_type = "t3.micro"

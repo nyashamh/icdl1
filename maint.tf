@@ -6,12 +6,9 @@ module "south-instance" {
   source = "./south-instance"
   #region = af-south-1
 }
-module "south-docker" { #####to be deleted
-  source = "./south-docker"
-  #region = af-south-1
-}
+
 module "south-eventbridge" {
-    source = "./south-docker"
+    source = "./south-eventbridge"
   #region = af-south-1
 }
 module "north-network" {
