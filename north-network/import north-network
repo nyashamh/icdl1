@@ -39,6 +39,15 @@ xxxxx   terraform import module.north-network.aws_ec2_managed_prefix_list.com.am
 
 
 aws_ec2_managed_prefix_list2
+xxxxx
+
+customer gateway
+terraform import module.north-network.aws_customer_gateway.ICDL-vpn cgw-0b8e2627b49a4685f
+
+virtual private gateway
+terraform import module.north-network.aws_vpn_gateway.ICDL-VGW vgw-08d6781e4479aea48
+
+
 
 s3 bucket0
 terraform import module.north-network.aws_s3_bucket.bucket0 icdl-backups

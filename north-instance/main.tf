@@ -1,3 +1,242 @@
+#aws -instance
+resource "aws_instance" "ICDL2K12-CRM01" {
+    ami                                  = "ami-064a169afbffa8eb0"
+    #arn                                  = "arn:aws:ec2:eu-west-1:813260210012:instance/i-0a775b8c631e8ad27"
+    associate_public_ip_address          = false
+    availability_zone                    = "eu-west-1b"
+    cpu_core_count                       = 2
+    cpu_threads_per_core                 = 2
+    disable_api_termination              = true
+    ebs_optimized                        = true
+    get_password_data                    = false
+    hibernation                          = false
+    iam_instance_profile                 = "RoleForS3AccessFromEc2"
+    #id                                   = "i-0a775b8c631e8ad27"
+    instance_initiated_shutdown_behavior = "stop"
+    #instance_state                       = "running"
+    instance_type                        = "t3a.xlarge"
+    ipv6_address_count                   = 0
+    ipv6_addresses                       = []
+    key_name                             = "Hamish-ICDL-eu-west-keypair"
+    monitoring                           = false
+    #primary_network_interface_id         = "eni-062f9bad4e2fec027"
+    #private_dns                          = "ip-172-16-2-15.eu-west-1.compute.internal"
+    private_ip                           = "172.16.2.15"
+    secondary_private_ips                = []
+    security_groups                      = []
+    source_dest_check                    = true
+    subnet_id                            = "subnet-0146062e1f9031420"
+    tags                                 = {
+        "Name"       = "ICDL2K12-CRM01"
+        "CreatedBy"  = "terraform"
+        "Creator"    = "nyasaah@cloud-fundis"
+        "Region"     = "Ireland"
+    }
+    tenancy                              = "default"
+    vpc_security_group_ids               = [
+        "sg-07fe9673bfb269ba7",
+        "sg-0baf45e0b04dcaef9",
+    ]
+
+    capacity_reservation_specification {
+        capacity_reservation_preference = "open"
+    }
+
+    credit_specification {
+        cpu_credits = "unlimited"
+    }
+
+    enclave_options {
+        enabled = false
+    }
+
+    metadata_options {
+        http_endpoint               = "enabled"
+        http_put_response_hop_limit = 1
+        http_tokens                 = "optional"
+    }
+
+    root_block_device {
+        delete_on_termination = false
+        #device_name           = "/dev/sda1"
+        encrypted             = false
+        iops                  = 900
+
+        tags                  = {
+            "Name" = "ICDL2K12-CRM01-disk"
+        }
+
+        throughput            = 0
+        #volume_id             = "vol-01ca741dc26d7c0f9"
+        volume_size           = 300
+        volume_type           = "gp2"
+    }
+
+    timeouts {}
+}
+
+
+#ami's
+resource "aws_ami" "CRM-13-Oct-19-Final"  {
+    architecture        = "x86_64"
+    #arn                 = "arn:aws:ec2:eu-west-1::image/ami-085927201b8b493db"
+    description         = "Final working CRM 2011 in the cloud"
+    ena_support         = true
+    #hypervisor          = "xen"
+    #id                  = "ami-085927201b8b493db"
+    image_location      = "813260210012/CRM-13-Oct-19-Final"
+    #image_type          = "machine"
+    name                = "CRM-13-Oct-19-Final"
+    #owner_id            = "813260210012"
+    #platform            = "windows"
+    #platform_details    = "Windows"
+    #public              = false
+    root_device_name    = "/dev/sda1"
+    #root_snapshot_id    = "snap-03784b345ace3b3fb"
+    sriov_net_support   = "simple"
+
+    tags                = {
+        "Name"          = "ICDL2K12r2CRM2011"
+        "CreatedBy"     = "terraform"
+        "Creator"       = "nyasaah@cloud-fundis"
+        "Region"        = "Ireland"
+    }
+
+    #usage_operation     = "RunInstances:0002"
+    virtualization_type = "hvm"
+
+    ebs_block_device {
+        delete_on_termination = false
+        device_name           = "/dev/sda1"
+        encrypted             = false
+        iops                  = 0
+        snapshot_id           = "snap-03784b345ace3b3fb"
+        throughput            = 0
+        volume_size           = 150
+        volume_type           = "gp2"
+    }
+
+    timeouts {}
+}
+
+resource "aws_ami" "ICDL2K12-CRM01-0729"  {
+    architecture        = "x86_64"
+    #arn                 = "arn:aws:ec2:eu-west-1::image/ami-04eed3ce14b9489ad"
+    description         = "Image created of the CRM server before an upgrade"
+    ena_support         = true
+    #hypervisor          = "xen"
+    #id                  = "ami-04eed3ce14b9489ad"
+    image_location      = "813260210012/ICDL2K12-CRM01-0729"
+    #image_type          = "machine"
+    name                = "ICDL2K12-CRM01-0729"
+    #owner_id            = "813260210012"
+    #platform            = "windows"
+    #platform_details    = "Windows"
+    #public              = false
+    root_device_name    = "/dev/sda1"
+    #root_snapshot_id    = "snap-04849ba698434c909"
+    sriov_net_support   = "simple"
+    tags                = {
+        "Name"          = "ICDL2K12-CRM01-BACKUP-0729"
+        "CreatedBy"     = "terraform"
+        "Creator"       = "nyasaah@cloud-fundis"
+        "Region"        = "Ireland"
+    }
+
+    #usage_operation     = "RunInstances:0002"
+    virtualization_type = "hvm"
+
+    ebs_block_device {
+        delete_on_termination = false
+        device_name           = "/dev/sda1"
+        encrypted             = false
+        iops                  = 0
+        snapshot_id           = "snap-04849ba698434c909"
+        throughput            = 0
+        volume_size           = 250
+        volume_type           = "gp2"
+    }
+
+    timeouts {}
+}
+
+#ebs volumes
+resource "aws_ebs_volume" "ICDL2K12-CRM01-disk" {
+    availability_zone    = "eu-west-1b"
+    encrypted            = false
+    #id                   = "vol-01ca741dc26d7c0f9"
+    iops                 = 900
+    multi_attach_enabled = false
+    size                 = 300
+    snapshot_id          = "snap-0f293fce66ef8546a"
+    tags                 = {
+        "Name"           = "ICDL2K12-CRM01-disk"
+        "CreatedBy"      = "terraform"
+        "Creator"        = "nyasaah@cloud-fundis"
+        "Region"         = "Ireland"
+    }
+    
+    ##throughput           = 0
+    type                 = "gp2"
+}
+
+#ebs snapshots
+resource "aws_ebs_snapshot" "icdl-za-north-snapshot0" {
+    description = "Created by CreateImage(i-0a775b8c631e8ad27) for ami-04eed3ce14b9489ad"
+    #encrypted   = false
+    #id          = "snap-04849ba698434c909"
+    #owner_id    = "813260210012"
+    tags        = {
+        "Name"       = "icdl-za-north-snapshot0"
+        "CreatedBy"  = "terraform"
+        "Creator"    = "nyasaah@cloud-fundis"
+        "Region"     = "Ireland"
+    }
+
+    volume_id   = "vol-01ca741dc26d7c0f9"
+    #volume_size = 250
+
+    timeouts {}
+}
+
+resource "aws_ebs_snapshot" "icdl-za-north-snapshot1" {
+    description = "ICDL2K12-CRM01"
+    #encrypted   = false
+    #id          = "snap-017d57334c464b580"
+    #owner_id    = "813260210012"
+    tags        = {
+        "Name"         = "icdl-za-north-snapshot1"
+        "creator"      = "hamish@cloud-fundis"
+        "date-created" = "January2020"
+        "TerraformedBy"= "nyasha@cloudfundis.com"
+    }
+    
+    volume_id   = "vol-01ca741dc26d7c0f9"
+    #volume_size = 150
+
+    timeouts {}
+}
+
+resource "aws_ebs_snapshot" "icdl-za-north-snapshot2" {
+    description = "Created by CreateImage(i-0a775b8c631e8ad27) for ami-085927201b8b493db from vol-01ca741dc26d7c0f9"
+    #encrypted   = false
+    #id          = "snap-03784b345ace3b3fb"
+    #owner_id    = "813260210012"
+    tags        = {
+        "Name"       = "icdl-za-north-snapshot2"
+        "CreatedBy"  = "terraform"
+        "Creator"    = "nyasaah@cloud-fundis"
+        "Region"     = "Ireland"
+    }
+
+    volume_id   = "vol-01ca741dc26d7c0f9"
+    #volume_size = 150
+
+    timeouts {}
+}
+
+
+
 resource "aws_lambda_function" "icdl-lambda" {
     architectures                  = [
         "x86_64",
@@ -28,3 +267,282 @@ resource "aws_lambda_function" "icdl-lambda" {
     }
 
 }
+#security groups
+resource "aws_security_group" "VPNAccess" {
+    description = "This security group was generated by AWS Marketplace and is based on recommended settings for OpenVPN Access Server version 2.7.5 provided by OpenVPN Inc"
+    egress      = [
+        {
+            cidr_blocks      = [
+                "0.0.0.0/0",
+            ]
+            description      = ""
+            from_port        = 0
+            ipv6_cidr_blocks = []
+            prefix_list_ids  = []
+            protocol         = "-1"
+            security_groups  = []
+            self             = false
+            to_port          = 0
+        },
+    ]
+    #id          = "sg-00907d43cdbd0146c"
+    ingress     = [
+        {
+            cidr_blocks      = [
+                "0.0.0.0/0",
+            ]
+            description      = ""
+            from_port        = 443
+            ipv6_cidr_blocks = []
+            prefix_list_ids  = []
+            protocol         = "tcp"
+            security_groups  = []
+            self             = false
+            to_port          = 443
+        },
+        {
+            cidr_blocks      = [
+                "0.0.0.0/0",
+            ]
+            description      = "Allow Anyone to log on"
+            from_port        = 943
+            ipv6_cidr_blocks = [
+                "::/0",
+            ]
+            prefix_list_ids  = []
+            protocol         = "tcp"
+            security_groups  = []
+            self             = false
+            to_port          = 943
+        },
+        {
+            cidr_blocks      = [
+                "0.0.0.0/0",
+            ]
+            description      = "Clients use this port to connect"
+            from_port        = 1194
+            ipv6_cidr_blocks = [
+                "::/0",
+            ]
+            prefix_list_ids  = []
+            protocol         = "udp"
+            security_groups  = []
+            self             = false
+            to_port          = 1194
+        },
+        {
+            cidr_blocks      = [
+                "156.155.230.109/32",
+            ]
+            description      = "From Cloud-Fundis office"
+            from_port        = 22
+            ipv6_cidr_blocks = []
+            prefix_list_ids  = []
+            protocol         = "tcp"
+            security_groups  = []
+            self             = false
+            to_port          = 22
+        },
+        {
+            cidr_blocks      = [
+                "156.155.230.109/32",
+            ]
+            description      = "Web Admin UI for OpenVPN"
+            from_port        = 943
+            ipv6_cidr_blocks = []
+            prefix_list_ids  = []
+            protocol         = "tcp"
+            security_groups  = []
+            self             = false
+            to_port          = 943
+        },
+        {
+            cidr_blocks      = [
+                "172.16.2.0/24",
+            ]
+            description      = "Ping from private network"
+            from_port        = -1
+            ipv6_cidr_blocks = []
+            prefix_list_ids  = []
+            protocol         = "icmp"
+            security_groups  = []
+            self             = false
+            to_port          = -1
+        },
+        {
+            cidr_blocks      = [
+                "172.16.2.13/32",
+            ]
+            description      = "Allow ssh from bastion"
+            from_port        = 22
+            ipv6_cidr_blocks = []
+            prefix_list_ids  = []
+            protocol         = "tcp"
+            security_groups  = []
+            self             = false
+            to_port          = 22
+        },
+        {
+            cidr_blocks      = [
+                "197.229.0.68/32",
+            ]
+            description      = "3G Hostspot"
+            from_port        = 22
+            ipv6_cidr_blocks = []
+            prefix_list_ids  = []
+            protocol         = "tcp"
+            security_groups  = []
+            self             = false
+            to_port          = 22
+        },
+    ]
+    name        = "VPNAccess"
+    #owner_id    = "813260210012"
+    tags        = {
+        "Name"       = "icdl-za-north-snapshot2"
+        "CreatedBy"  = "terraform"
+        "Creator"    = "nyasaah@cloud-fundis"
+        "Region"     = "Ireland"
+
+    }
+    vpc_id      = "vpc-0c092d552baffc13d"
+
+    timeouts {}
+}
+
+resource "aws_security_group" "SG-In-Priv-subnet" {
+    description = "launch-wizard-1 created 2019-06-19T14:00:32.586+02:00"
+    egress      = [
+        {
+            cidr_blocks      = [
+                "0.0.0.0/0",
+            ]
+            description      = ""
+            from_port        = 0
+            ipv6_cidr_blocks = []
+            prefix_list_ids  = []
+            protocol         = "-1"
+            security_groups  = []
+            self             = false
+            to_port          = 0
+        },
+    ]
+    #id          = "sg-0522cc2d8eab470a9"
+    ingress     = [
+        {
+            cidr_blocks      = [
+                "10.1.0.0/16",
+            ]
+            description      = "Allow everything from the af-south region"
+            from_port        = 0
+            ipv6_cidr_blocks = []
+            prefix_list_ids  = []
+            protocol         = "-1"
+            security_groups  = []
+            self             = false
+            to_port          = 0
+        },
+        {
+            cidr_blocks      = [
+                "172.16.2.13/32",
+            ]
+            description      = "Allow ssh from bastion"
+            from_port        = 22
+            ipv6_cidr_blocks = []
+            prefix_list_ids  = []
+            protocol         = "tcp"
+            security_groups  = []
+            self             = false
+            to_port          = 22
+        },
+        {
+            cidr_blocks      = [
+                "172.16.2.13/32",
+            ]
+            description      = "Ping from the bastion"
+            from_port        = -1
+            ipv6_cidr_blocks = []
+            prefix_list_ids  = []
+            protocol         = "icmp"
+            security_groups  = []
+            self             = false
+            to_port          = -1
+        },
+    ]
+    name        = "SG-In-Priv-subnet"
+    #owner_id    = "813260210012"
+    tags        = {
+        "Name"       = "SG-In-Priv-subnet"
+        "CreatedBy"  = "terraform"
+        "Creator"    = "nyasaah@cloud-fundis"
+        "Region"     = "Ireland"
+    }
+    vpc_id      = "vpc-0c092d552baffc13d"
+
+    timeouts {}
+}
+
+resource "aws_security_group" "Allow-from-af-south-to-eu-west" {
+    description = "Allow traffic from af-south-1 to eu-west-1"
+    egress      = [
+        {
+            cidr_blocks      = [
+                "0.0.0.0/0",
+            ]
+            description      = ""
+            from_port        = 0
+            ipv6_cidr_blocks = []
+            prefix_list_ids  = []
+            protocol         = "-1"
+            security_groups  = []
+            self             = false
+            to_port          = 0
+        },
+    ]
+    #id          = "sg-07fe9673bfb269ba7"
+    ingress     = [
+        {
+            cidr_blocks      = [
+                "0.0.0.0/0",
+            ]
+            description      = ""
+            from_port        = 0
+            ipv6_cidr_blocks = []
+            prefix_list_ids  = []
+            protocol         = "-1"
+            security_groups  = []
+            self             = true
+            to_port          = 0
+        },
+        {
+            cidr_blocks      = [
+                "10.1.0.0/16",
+            ]
+            description      = "Allow all traffic from af-south-1 to eu-west"
+            from_port        = 0
+            ipv6_cidr_blocks = []
+            prefix_list_ids  = []
+            protocol         = "-1"
+            security_groups  = []
+            self             = false
+            to_port          = 0
+        },
+    ]
+    name        = "Allow-from-af-south-to-eu-west"
+    #owner_id    = "813260210012"
+    tags        = {
+        "Name"       = "Allow-from-af-south-to-eu-west"
+        "CreatedBy"  = "terraform"
+        "Creator"    = "nyasaah@cloud-fundis"
+        "Region"     = "Ireland"
+    }
+    vpc_id      = "vpc-0c092d552baffc13d"
+
+    timeouts {}
+}
+
+#keypairs
+/*
+resource "aws_key_pair" "Hamish-ICDL-Keypair" {
+    key_name   = "Hamish-ICDL-Keypair"
+}*/

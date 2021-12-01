@@ -531,3 +531,29 @@ resource "aws_security_group" "OpenVPN_Access_Server_SG" {
     "Region"    = "cape town"
     }
 }
+
+#customer gateway
+resource "aws_customer_gateway" "icdl-za-south-cus-gw" {
+    bgp_asn    = "65000"
+    ip_address = "105.22.73.14"
+    tags       = {
+      "Name"      = "icdl-za-south-cus-gw"
+      "Creator"   = "nyasha@cloud-fundis"
+      "Createdby" = "terraform"
+      "Region"    = "cape town"
+    }
+
+    type       = "ipsec.1"
+}
+
+#virtual private gateway
+resource "aws_vpn_gateway" "VPN-to-af-south-1" {
+    amazon_side_asn = "64512"
+    tags            = {
+      "Name"        = "VPN-to-af-south-1"
+      "Creator"     = "nyasha@cloud-fundis"
+      "Createdby"   = "terraform"
+      "Region"      = "cape town"
+    }
+    vpc_id          = "vpc-05853c0c9f0293771"
+}

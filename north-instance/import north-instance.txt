@@ -1,0 +1,35 @@
+instance
+terraform import module.north-instance.aws_instance.ICDL2K12-CRM01 i-0a775b8c631e8ad27
+
+ami 0
+terraform import module.north-instance.aws_ami.CRM-13-Oct-19-Final ami-085927201b8b493db
+
+ami 1
+terraform import module.north-instance.aws_ami.ICDL2K12-CRM01-0729 ami-04eed3ce14b9489ad
+
+ebs volume 0
+terraform import module.north-instance.aws_ebs_volume.ICDL2K12-CRM01-disk vol-01ca741dc26d7c0f9
+
+ebs snapshot0
+terraform import module.north-instance.aws_ebs_snapshot.icdl-za-north-snapshot0 snap-04849ba698434c909
+
+ebs snapshot1
+terraform import module.north-instance.aws_ebs_snapshot.icdl-za-north-snapshot1 snap-017d57334c464b580
+
+ebs snapshot2
+terraform import module.north-instance.aws_ebs_snapshot.icdl-za-north-snapshot2 snap-03784b345ace3b3fb
+
+aws_lambda_function
+terraform import module.north-instance.aws_lambda_function.icdl-lambda StopStartICDLCRM
+
+security group 0
+terraform import module.north-instance.aws_security_group.VPNAccess sg-00907d43cdbd0146c
+
+security group 1
+terraform import module.north-instance.aws_security_group.SG-In-Priv-subnet sg-0522cc2d8eab470a9
+
+security group 2
+terraform import module.north-instance.aws_security_group.Allow-from-af-south-to-eu-west sg-07fe9673bfb269ba7
+
+keypair1
+terraform import aws_key_pair.Hamish-ICDL-Keypair Hamish-ICDL-Keypair 

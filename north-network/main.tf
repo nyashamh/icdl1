@@ -23,7 +23,7 @@ resource "aws_subnet" "icdl-za-north-pub-1-0" {
   map_public_ip_on_launch         = false
     tags                            = {
         "CreatedBy" = "terraform"
-        "Creator"   = "nyasaah@cloud-fundis"
+        "Creator"   = "nyasha@cloud-fundis"
         "Name"      = "icdl-za-north-pub-1-0"
         "Region"    = "Ireland"
     }
@@ -39,7 +39,7 @@ resource "aws_subnet" "ICDL-private-subnet" {
   tags                            = {
     "Name"      = "ICDL-private-subnet"
     "CreatedBy" = "terraform"
-    "Creator"   = "nyasaah@cloud-fundis"
+    "Creator"   = "nyasha@cloud-fundis"
     "Region"    = "Ireland"
     }
 
@@ -259,4 +259,27 @@ resource "aws_vpc_peering_connection" "icdl-eu-to-icdl-af" {
 
 }
 
+resource "aws_customer_gateway" "ICDL-vpn" {
+    bgp_asn    = "65000"
+    ip_address = "105.22.73.14"
+    tags       = {
+        "Name"       = "ICDL-vpn"
+        "CreatedBy"  = "terraform"
+        "Creator"    = "nyasaah@cloud-fundis"
+        "Region"     = "Ireland"
+    }
 
+    type       = "ipsec.1"
+}
+
+resource "aws_vpn_gateway" "ICDL-VGW" {
+    amazon_side_asn = "64512"
+    tags            = {
+        "Name"      = "ICDL-VGW"
+        "CreatedBy" = "terraform"
+        "Creator"   = "nyasaah@cloud-fundis"
+        "Region"    = "Ireland"
+    }
+
+    vpc_id          = "vpc-0c092d552baffc13d"
+}
