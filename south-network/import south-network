@@ -27,6 +27,21 @@ terraform import module.south-network.aws_internet_gateway.icdl-za-igw igw-00774
 eip
 terraform import module.south-network.aws_eip.icdl-za-eip 13.244.91.158
 
+dhcp0
+terraform import module.south-network.aws_vpc_dhcp_options.icdl-priv-dhcp-1 dopt-06a3008ac6b0eb177
+
+dhcp1
+terraform import module.south-network.aws_vpc_dhcp_options.icdl-priv-dhcp dopt-0e3d61e19b532f923
+
+dhcp2
+terraform import module.south-network.aws_vpc_dhcp_options.icdl-za-dhcp-01 dopt-0c1ede975c4026a64
+
+aws_ec2_managed_prefix_list 0
+terraform import aws_ec2_managed_prefix_list.com.amazonaws.af-south-1.s3 pl-a3ac49ca
+
+aws_ec2_managed_prefix_list 1
+terraform import aws_ec2_managed_prefix_list.com.amazonaws.af-south-1.dynamodb pl-d6ae4bbf
+
 vpc_endpoint
 terraform imterraform import module.south-network.aws_s3_bucket.bucket credentials-and-licences port module.south-network.aws_vpc_endpoint.icdl-za-s3endpoint vpce-07f9f7e5d7b4055ae
 

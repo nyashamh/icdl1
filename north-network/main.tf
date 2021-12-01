@@ -234,14 +234,12 @@ resource "aws_vpc_endpoint" "icdl-za-endpoint-2" {
 
 #vpc peering
 resource "aws_vpc_peering_connection" "icdl-eu-to-icdl-af" {
-    #vpc_id       = aws_vpc.icdl-za-north-network.id
-    vpc_id        = local.north-1-vpc_id
-    #vpc_id = "vpc-0c092d552baffc13d"
     peer_owner_id = "813260210012"
     peer_region   = "eu-west-1"
     peer_vpc_id   = "vpc-0c092d552baffc13d"
+    vpc_id        = "vpc-05853c0c9f0293771"
     tags          = {
-        "Name"       = "icdl-af-to-icdl-eu"
+        "Name"       = "icdl-eu-to-icdl-af"
         "CreatedBy"  = "terraform"
         "Creator"    = "nyasaah@cloud-fundis"
         "Region"     = "Ireland"

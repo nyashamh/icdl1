@@ -197,8 +197,9 @@ resource "aws_internet_gateway" "icdl-za-igw" {
   }
 }
 */ 
-
-#eip
+/*
+#remove and replace
+#eip 
 resource "aws_eip" "icdl-za-south-eip" {
     instance             = "i-07f33411ef414aabe"
     network_border_group = "af-south-1"
@@ -215,7 +216,79 @@ resource "aws_eip" "icdl-za-south-eip" {
     "Createdby" = "terraform"
     "Region"    = "cape town"
   }
+}*/
+
+resource "aws_eip" "icdl-za-eip" {
+    instance             = "i-07f33411ef414aabe"
+    network_border_group = "af-south-1"
+    network_interface    = "eni-0815bdcd755b73218"
+    public_ipv4_pool     = "amazon"
+    tags                 = {
+        "Name"           = "icdl-za-eip"
+        "Creator"        = "nyasha@cloud-fundis"
+        "Createdby"      = "terraform"
+        "Region"         = "cape town"
+    }
+
+ }
+
+resource "aws_vpc_dhcp_options" "icdl-priv-dhcp-1" {
+    domain_name          = "icdl.local"
+    domain_name_servers  = [
+        "10.1.0.51",
+    ]
+    netbios_name_servers = [
+        "10.1.0.51",
+    ]
+    ntp_servers          = [
+        "196.25.1.1",
+        "196.25.1.9",
+    ]
+    tags                 = {
+        "Name"           = "icdl-priv-dhcp-1"
+        "Creator"        = "nyasha@cloud-fundis"
+        "Createdby"      = "terraform"
+        "Region"         = "cape town"
+    }
 }
+
+resource "aws_vpc_dhcp_options" "icdl-priv-dhcp" {
+    domain_name         = "icdl.org.za"
+    domain_name_servers = [
+        "10.1.0.51",
+        "AmazonProvidedDNS",
+    ]
+    tags                = {
+      "Name"            = "icdl-priv-dhcp"
+      "Creator"         = "nyasha@cloud-fundis"
+      "Createdby"       = "terraform"
+      "Region"          = "cape town"
+    }
+}
+
+resource "aws_vpc_dhcp_options" "icdl-za-dhcp-01" {
+    domain_name         = "icdl.org.za"
+    domain_name_servers = [
+        "AmazonProvidedDNS",
+    ]
+    tags                = {
+     "Name"             = "icdl-za-dhcp-01"
+     "Creator"          = "nyasha@cloud-fundis"
+     "Createdby"        = "terraform"
+     "Region"           = "cape town"
+
+    }
+}
+/*
+resource "aws_ec2_managed_prefix_list" "com.amazonaws.af-south-1.s3" {
+
+}
+
+resource "aws_ec2_managed_prefix_list" "com.amazonaws.af-south-1.dynamodb" {
+
+}*/
+
+
 
 #vpc_endpoint
 resource "aws_vpc_endpoint" "icdl-za-s3endpoint" {
@@ -337,13 +410,124 @@ tags             = {
   "Createdby"    = "terraform"
 
 }
-*/
+*/ 
+
+#replace and remove
 resource "aws_nat_gateway" "icdl-za-south-nat-gw" {
-  allocation_id = aws_eip.icdl-za-south-eip.id
+  allocation_id = aws_eip.icdl-za-eip.id
   subnet_id     = aws_subnet.icdl-za-south-pub-1-0.id
   tags           = {  
     "Name"         = "icdl-za-south-nat-gw"
     "Creator"      = "nyasha@cloud-fundis"
     "Createdby"    = "terraform"
   }
+}
+
+#internet gateway
+resource "aws_internet_gateway" "icdl-za-igw" {
+      vpc_id           = "vpc-05853c0c9f0293771"
+      tags             = {
+        "Name"         = "icdl-za-igw"
+        "Creator"      = "nyasha@cloud-fundis"
+        "Createdby"    = "terraform"
+    }
+
+}
+
+#added this sg by mistake, must be removed after terraform apply. Already in south-instance
+resource "aws_security_group" "OpenVPN_Access_Server_SG" {
+  name        = "OpenVPN_Access_Server_SG"
+  description = "This SG is for the OpenVPN access server"
+  #vpc_id      = local.south-1-vpc_id
+    egress      = [
+        {
+            cidr_blocks      = [
+                "0.0.0.0/0",
+            ]
+            description      = ""
+            from_port        = 0
+            ipv6_cidr_blocks = []
+            prefix_list_ids  = []
+            protocol         = "-1"
+            security_groups  = []
+            self             = false
+            to_port          = 0
+        },
+    ]
+    
+    ingress     = [
+        {
+            cidr_blocks      = [
+                "0.0.0.0/0",
+                "156.155.234.32/32",
+            ]
+            description      = ""
+            from_port        = 443
+            ipv6_cidr_blocks = []
+            prefix_list_ids  = []
+            protocol         = "tcp"
+            security_groups  = []
+            self             = false
+            to_port          = 443
+        },
+        {
+            cidr_blocks      = [
+                "0.0.0.0/0",
+            ]
+            description      = ""
+            from_port        = 1194
+            ipv6_cidr_blocks = []
+            prefix_list_ids  = []
+            protocol         = "udp"
+            security_groups  = []
+            self             = false
+            to_port          = 1194
+        },
+        {
+            cidr_blocks      = [
+                "0.0.0.0/0",
+            ]
+            description      = ""
+            from_port        = 22
+            ipv6_cidr_blocks = []
+            prefix_list_ids  = []
+            protocol         = "tcp"
+            security_groups  = []
+            self             = false
+            to_port          = 22
+        },
+        {
+            cidr_blocks      = [
+                "0.0.0.0/0",
+            ]
+            description      = ""
+            from_port        = 943
+            ipv6_cidr_blocks = []
+            prefix_list_ids  = []
+            protocol         = "tcp"
+            security_groups  = []
+            self             = false
+            to_port          = 943
+        },
+        {
+            cidr_blocks      = [
+                "0.0.0.0/0",
+            ]
+            description      = ""
+            from_port        = 945
+            ipv6_cidr_blocks = []
+            prefix_list_ids  = []
+            protocol         = "tcp"
+            security_groups  = []
+            self             = false
+            to_port          = 945
+        },
+    ]
+
+    tags = {
+    "Name"      = "OpenVPN_Access_Server_SG"
+    "Creator"   = "nyasha@cloud-fundis"
+    "Createdby" = "terraform"
+    "Region"    = "cape town"
+    }
 }

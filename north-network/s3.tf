@@ -7,7 +7,7 @@ resource "aws_s3_bucket" "bucket0" {
         "Creator"   = "nyasha@cloud-fundis"
         "Name"      = "icdl-backups"
         "CreatedBy" = "terraform"
-        "Region"    = "Cape Town"
+        "Region"    = "eu-west-1"
     }
 
     versioning {
@@ -24,7 +24,7 @@ resource "aws_s3_bucket" "bucket1" {
         "Creator"   = "nyasha@cloud-fundis"
         "Name"      = "icdl-presigned"
         "CreatedBy" = "terraform"
-        "Region"    = "Cape Town"
+        "Region"    = "eu-west-1"
     }
 
     versioning {
@@ -41,7 +41,8 @@ resource "aws_s3_bucket" "bucket2" {
         "Creator"   = "nyasha@cloud-fundis"
         "Name"      = "icdl.org.za"
         "CreatedBy" = "terraform"
-        "Region"    = "Cape Town"
+        "Region"    = "eu-west-1"
+    
     }
 
     versioning {
@@ -58,7 +59,7 @@ resource "aws_s3_bucket" "bucket3" {
         "Creator"   = "nyasha@cloud-fundis"
         "Name"      = "icdlafrica.org"
         "CreatedBy" = "terraform"
-        "Region"    = "Cape Town"
+        "Region"    = "eu-west-1"
     }
 
     versioning {
