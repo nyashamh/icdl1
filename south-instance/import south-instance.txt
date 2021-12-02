@@ -11,8 +11,75 @@ terraform import module.south-instance.aws_instance.Ubuntu-Cache i-0a19cf5616e3f
 import instance 3
 terraform import module.south-instance.aws_instance.ICDL2K19-AV01 i-0689c11a5bb1f6f54
 
-import ami
-terraform import module.south-instance.aws
+import ami 0
+terraform import module.south-instance.aws_ami.Eset-Antivirus ami-062d01a7ff216d72c
+
+import ami 1
+terraform import module.south-instance.aws_ami.ICDL2K19-DC01-BACKUP-0729  ami-02ab4f9dbc7bafbf9
+
+import ami 2
+terraform import module.south-instance.aws_ami.ubuntu-image ami-04ff25332bc840d3d
+
+import ami 3
+terraform import module.south-instance.aws_ami.OpenVPN-BYOL ami-0dbccb7a0677f6a98
+
+import ami 4
+terraform import module.south-instance.aws_ami.Ubuntu-Cache ami-03ea0be72ed92e263
+
+import ami 5
+terraform import module.south-instance.aws_ami.ICDL2K19-DC01-Pastel ami-02f32747edc660277
+
+ebs_volume 0
+terraform import module.south-instance.aws_ebs_volume.bastion vol-0d3cec85fdffaa555
+
+ebs_volume 1
+terraform import module.south-instance.aws_ebs_volume.OpenVPN-disk vol-0202014404183eadd
+
+ebs_volume 2
+terraform import module.south-instance.aws_ebs_volume.Windows_Server-AD_Pastel_Eset-disk vol-04ecaf213f84fd5b3
+
+ebs_volume 3
+terraform import module.south-instance.aws_ebs_volume.SharesVolume-disk vol-0015a35901e915405
+
+ebs_volume 4
+terraform import module.south-instance.aws_ebs_volume.Ubuntu_Cache-disk vol-0a34a9e1d7b1fa0e7
+
+ebs_volume 5
+terraform import module.south-instance.aws_ebs_volume.ESETAntiVirus-disk vol-0a6be54b943b547dd
+
+ebs_snapshot 0
+terraform import module.south-instance.aws_ebs_snapshot.icdl-za-south-snapshot0 snap-0f4f2bfb70165bbef
+
+ebs_snapshot 1
+terraform import module.south-instance.aws_ebs_snapshot.icdl-za-south-snapshot1 snap-0fe1b7e1d5554a402
+
+ebs_snapshot 2
+terraform import module.south-instance.aws_ebs_snapshot.icdl-za-south-snapshot2 snap-096df5d74403eb942
+
+ebs_snapshot 3
+terraform import module.south-instance.aws_ebs_snapshot.icdl-za-south-snapshot3 snap-02b69c9fa95d0ec07
+
+ebs_snapshot 4
+terraform import module.south-instance.aws_ebs_snapshot.icdl-za-south-snapshot4 snap-00878c73fa1822756
+
+ebs_snapshot 5
+terraform import module.south-instance.aws_ebs_snapshot.icdl-za-south-snapshot5 snap-0ae0fdbd0d62c1f5b
+
+ebs_snapshot 6
+terraform import module.south-instance.aws_ebs_snapshot.icdl-za-south-snapshot6 snap-03d3e8d37ec8a36e9
+
+ebs_snapshot 7
+terraform import module.south-instance.aws_ebs_snapshot.icdl-za-south-snapshot7 snap-08634c1abc0ab2c4e
+
+ebs_snapshot 8
+terraform import module.south-instance.aws_ebs_snapshot.icdl-za-south-snapshot8 snap-0cf7c7df9c684bb3b
+
+ebs_snapshot 9
+terraform import module.south-instance.aws_ebs_snapshot.icdl-za-south-snapshot9 snap-0615684b41495c328
+
+ebs_snapshot 10
+terraform import module.south-instance.aws_ebs_snapshot.icdl-za-south-snapshot10 snap-0c32c1d834483b7b8
+
 
 import sg 0
 terraform import module.south-instance.aws_security_group.OpenVPN_Access_Server_SG sg-008f65bc805894974

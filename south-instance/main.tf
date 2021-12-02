@@ -44,6 +44,101 @@ resource "aws_instance" "ICDL2K19-AV01" {
           }
 }
 
+#ami's
+resource "aws_ami" "Eset-Antivirus" {
+
+}
+
+resource "aws_ami" "ICDL2K19-DC01-BACKUP-0729" {
+
+}
+
+resource "aws_ami" "ubuntu-image" {
+
+}
+
+resource "aws_ami" "OpenVPN-BYOL" {
+
+}
+
+resource "aws_ami" "Ubuntu-Cache" {
+
+}
+
+resource "aws_ami" "ICDL2K19-DC01-Pastel" {
+
+}
+
+# ebs_volumes
+resource "aws_ebs_volume" "bastion" {
+
+}
+
+resource "aws_ebs_volume" "OpenVPN-disk" {
+
+}
+
+resource "aws_ebs_volume" "Windows_Server-AD_Pastel_Eset-disk" {
+
+}
+
+resource "aws_ebs_volume" "SharesVolume-disk" {
+
+}
+
+resource "aws_ebs_volume" "Ubuntu_Cache-disk" {
+
+}
+
+resource "aws_ebs_volume" "ESETAntiVirus-disk" {
+
+}
+
+#ebs snapshots
+resource "aws_ebs_snapshot" "icdl-za-south-snapshot0" {
+
+}
+
+resource "aws_ebs_snapshot" "icdl-za-south-snapshot1" {
+
+}
+
+resource "aws_ebs_snapshot" "icdl-za-south-snapshot2" {
+
+}
+
+resource "aws_ebs_snapshot" "icdl-za-south-snapshot3" {
+
+}
+
+resource "aws_ebs_snapshot" "icdl-za-south-snapshot4" {
+
+}
+
+resource "aws_ebs_snapshot" "icdl-za-south-snapshot5" {
+
+}
+
+resource "aws_ebs_snapshot" "icdl-za-south-snapshot6" {
+
+}
+
+resource "aws_ebs_snapshot" "icdl-za-south-snapshot7" {
+
+}
+
+resource "aws_ebs_snapshot" "icdl-za-south-snapshot8" {
+
+}
+
+resource "aws_ebs_snapshot" "icdl-za-south-snapshot9" {
+
+}
+
+resource "aws_ebs_snapshot" "icdl-za-south-snapshot10" {
+
+}
+
 /* import done already 15/11/21
 #security groups  fix thi one
 resource "aws_security_group" "OpenVPN_Access_Server_SG" {    
