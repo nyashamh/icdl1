@@ -1,3 +1,4 @@
+
 resource "aws_vpc" "icdl-za-south-network" {
     assign_generated_ipv6_cidr_block = false
     cidr_block                       = "10.1.0.0/16"
@@ -60,6 +61,7 @@ resource "aws_subnet" "icdl-za-pub-1-128" {
   }
 }
 */
+
 #private subnets
 resource "aws_subnet" "icdl-za-priv-0-0" {
   vpc_id            = aws_vpc.icdl-za-south-network.id
@@ -106,6 +108,7 @@ resource "aws_subnet" "icdl-za-priv-0-128" {
   }
 }
 */
+
 #route tables
 resource "aws_route_table" "icdl-za-rt-table" {
   vpc_id = aws_vpc.icdl-za-south-network.id
@@ -197,26 +200,6 @@ resource "aws_internet_gateway" "icdl-za-igw" {
   }
 }
 */ 
-/*
-#remove and replace
-#eip 
-resource "aws_eip" "icdl-za-south-eip" {
-    instance             = "i-07f33411ef414aabe"
-    network_border_group = "af-south-1"
-    network_interface    = "eni-0815bdcd755b73218"
-    public_ipv4_pool     = "amazon"
-
-    vpc                  = true
-
-    timeouts {}
-
-    tags = {
-    "Name"      = "icdl-za-south-eip"
-    "Creator"   = "nyasha@cloud-fundis"
-    "Createdby" = "terraform"
-    "Region"    = "cape town"
-  }
-}*/
 
 resource "aws_eip" "icdl-za-eip" {
     instance             = "i-07f33411ef414aabe"
@@ -287,8 +270,6 @@ resource "aws_ec2_managed_prefix_list" "com.amazonaws.af-south-1.s3" {
 resource "aws_ec2_managed_prefix_list" "com.amazonaws.af-south-1.dynamodb" {
 
 }*/
-
-
 
 #vpc_endpoint
 resource "aws_vpc_endpoint" "icdl-za-s3endpoint" {
@@ -411,7 +392,7 @@ tags             = {
 
 }
 */ 
-
+/*
 #replace and remove
 resource "aws_nat_gateway" "icdl-za-south-nat-gw" {
   allocation_id = aws_eip.icdl-za-eip.id
@@ -422,6 +403,7 @@ resource "aws_nat_gateway" "icdl-za-south-nat-gw" {
     "Createdby"    = "terraform"
   }
 }
+*/
 
 #internet gateway
 resource "aws_internet_gateway" "icdl-za-igw" {

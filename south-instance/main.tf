@@ -1,4 +1,4 @@
-/*
+
 #instances
 resource "aws_instance" "OpenVPN-BYOL" {
      ami           = "ami-0a33e4cabcbb38486"
@@ -10,7 +10,7 @@ resource "aws_instance" "OpenVPN-BYOL" {
           "Region"    = "cape town"
           }
 }
-/*
+
 resource "aws_instance" "ICDL2K19-DC01" {
      ami           = "ami-0aa317924368277f8"
      instance_type = "t3.micro"
@@ -43,10 +43,10 @@ resource "aws_instance" "ICDL2K19-AV01" {
           "Region"    = "cape town"
           }
 }
-*/
+
 /* import done already 15/11/21
-#security groups
-resource "aws_security_group" "OpenVPN_Access_Server_SG" {
+#security groups  fix thi one
+resource "aws_security_group" "OpenVPN_Access_Server_SG" {    
   name        = "OpenVPN_Access_Server_SG"
   description = "This SG is for the OpenVPN access server"
   vpc_id      = local.south-1-vpc_id
@@ -142,42 +142,329 @@ resource "aws_security_group" "OpenVPN_Access_Server_SG" {
     "Region"    = "cape town"
     }
 }*/
-/*
+
 resource "aws_security_group" "default" {
-    name    = "default"
-    vpc_id  = aws_vpc.icdl-za-south-network.id
-}
-*/
-/*
-resource "aws_security_group" "OpenVPNAccessServer" {
-    name    = "OpenVPNAccessServer"
-    vpc_id  = aws_vpc.icdl-za-south-network.id
+    description = "default VPC security group"
+    egress      = [
+        {
+            cidr_blocks      = [
+                "0.0.0.0/0",
+            ]
+            description      = ""
+            from_port        = 0
+            ipv6_cidr_blocks = []
+            prefix_list_ids  = []
+            protocol         = "-1"
+            security_groups  = []
+            self             = false
+            to_port          = 0
+        },
+    ]
+    ingress     = [
+        {
+            cidr_blocks      = [
+                "172.16.0.0/16",
+            ]
+            description      = "Allow all traffic from the eu-west region into this subnet"
+            from_port        = 0
+            ipv6_cidr_blocks = []
+            prefix_list_ids  = []
+            protocol         = "-1"
+            security_groups  = []
+            self             = false
+            to_port          = 0
+        },
+        {
+            cidr_blocks      = []
+            description      = ""
+            from_port        = 0
+            ipv6_cidr_blocks = []
+            prefix_list_ids  = []
+            protocol         = "-1"
+            security_groups  = []
+            self             = true
+            to_port          = 0
+        },
+    ]
+    name        = "default"
+    tags        = {}
+    tags_all    = {}
+    vpc_id      = "vpc-05853c0c9f0293771"
+
+    timeouts {}
 }
 
+resource "aws_security_group" "OpenVPNAccessServer" { ###this one
+    name    = "OpenVPNAccessServer"
+}
+
+
 resource "aws_security_group" "sg_for_ESET" {
-    name    = "sg_for_ESET"
-    vpc_id  = aws_vpc.icdl-za-south-network.id
+    description = "Security Group for the ESET software"
+    egress      = [
+        {
+            cidr_blocks      = [
+                "0.0.0.0/0",
+            ]
+            description      = ""
+            from_port        = 0
+            ipv6_cidr_blocks = []
+            prefix_list_ids  = []
+            protocol         = "-1"
+            security_groups  = []
+            self             = false
+            to_port          = 0
+        },
+    ]
+    ingress     = [
+        {
+            cidr_blocks      = [
+                "10.1.0.0/16",
+            ]
+            description      = ""
+            from_port        = 0
+            ipv6_cidr_blocks = []
+            prefix_list_ids  = []
+            protocol         = "-1"
+            security_groups  = []
+            self             = false
+            to_port          = 0
+        },
+        {
+            cidr_blocks      = [
+                "10.1.0.0/16",
+            ]
+            description      = ""
+            from_port        = 3389
+            ipv6_cidr_blocks = []
+            prefix_list_ids  = []
+            protocol         = "tcp"
+            security_groups  = []
+            self             = false
+            to_port          = 3389
+        },
+    ]
+    name        = "sg_for_ESET"
+    tags        = {}
+    vpc_id      = "vpc-05853c0c9f0293771"
+
+    timeouts {}
+
+}
+
+resource "aws_security_group" "sg_pastel" {
+    description = "Pastel POC Security Group"
+    egress      = [
+        {
+            cidr_blocks      = [
+                "0.0.0.0/0",
+            ]
+            description      = ""
+            from_port        = 0
+            ipv6_cidr_blocks = []
+            prefix_list_ids  = []
+            protocol         = "-1"
+            security_groups  = []
+            self             = false
+            to_port          = 0
+        },
+    ]
+    ingress     = [
+        {
+            cidr_blocks      = [
+                "0.0.0.0/0",
+            ]
+            description      = ""
+            from_port        = 3389
+            ipv6_cidr_blocks = []
+            prefix_list_ids  = []
+            protocol         = "tcp"
+            security_groups  = []
+            self             = false
+            to_port          = 3389
+        },
+    ]
+    name        = "sg_pastel"
+    tags        = {}
+    vpc_id      = "vpc-05853c0c9f0293771"
+
+    timeouts {} 
 }
 
 resource "aws_security_group" "sg_windows_server" {
-    name    = "sg_windows_server"
-    vpc_id  = aws_vpc.icdl-za-south-network.id
+    description = "SG to control access to AD, Pastel and Eset"
+    egress      = [
+        {
+            cidr_blocks      = [
+                "0.0.0.0/0",
+            ]
+            description      = ""
+            from_port        = 0
+            ipv6_cidr_blocks = []
+            prefix_list_ids  = []
+            protocol         = "-1"
+            security_groups  = []
+            self             = false
+            to_port          = 0
+        },
+    ]
+    ingress     = [
+        {
+            cidr_blocks      = [
+                "0.0.0.0/0",
+            ]
+            description      = ""
+            from_port        = 3389
+            ipv6_cidr_blocks = [
+                "::/0",
+            ]
+            prefix_list_ids  = []
+            protocol         = "tcp"
+            security_groups  = []
+            self             = false
+            to_port          = 3389
+        },
+        {
+            cidr_blocks      = [
+                "172.16.0.0/16",
+                "192.168.1.0/24",
+                "10.1.1.0/26",
+                "10.1.0.0/26",
+            ]
+            description      = ""
+            from_port        = 0
+            ipv6_cidr_blocks = []
+            prefix_list_ids  = []
+            protocol         = "-1"
+            security_groups  = []
+            self             = false
+            to_port          = 0
+        },
+    ]
+    name        = "sg_windows_server"
+    tags        = {}
+    tags_all    = {}
+    vpc_id      = "vpc-05853c0c9f0293771"
+
+    timeouts {}
+
 }
 
 resource "aws_security_group" "Allow-from-eu-west-to-af-south" {
-    name    = "Allow-from-eu-west-to-af-south"
-    vpc_id  = aws_vpc.icdl-za-south-network.id
+    description = "Allow from eu-west-1 to af-south-1"
+    egress      = [
+        {
+            cidr_blocks      = [
+                "0.0.0.0/0",
+            ]
+            description      = ""
+            from_port        = 0
+            ipv6_cidr_blocks = []
+            prefix_list_ids  = []
+            protocol         = "-1"
+            security_groups  = []
+            self             = false
+            to_port          = 0
+        },
+    ]
+    ingress     = [
+        {
+            cidr_blocks      = [
+                "0.0.0.0/0",
+            ]
+            description      = ""
+            from_port        = 0
+            ipv6_cidr_blocks = []
+            prefix_list_ids  = []
+            protocol         = "-1"
+            security_groups  = []
+            self             = true
+            to_port          = 0
+        },
+        {
+            cidr_blocks      = [
+                "10.1.0.0/16",
+            ]
+            description      = "Allow all traffic from af-south-1 to eu-west"
+            from_port        = 0
+            ipv6_cidr_blocks = []
+            prefix_list_ids  = []
+            protocol         = "-1"
+            security_groups  = []
+            self             = false
+            to_port          = 0
+        },
+    ]
+    name        = "Allow-from-eu-west-to-af-south"
+    tags        = {}
+    tags_all    = {}
+    vpc_id      = "vpc-0c092d552baffc13d"
+
+    timeouts {}
+
 }
 
 resource "aws_security_group" "sg_ubuntu_cache" {
-    name    = "sg_ubuntu_cache"
-    vpc_id  = aws_vpc.icdl-za-south-network.id
+    description = "Security Group for Ubuntu Cache"
+    egress      = [
+        {
+            cidr_blocks      = [
+                "0.0.0.0/0",
+            ]
+            description      = ""
+            from_port        = 0
+            ipv6_cidr_blocks = []
+            prefix_list_ids  = []
+            protocol         = "-1"
+            security_groups  = []
+            self             = false
+            to_port          = 0
+        },
+    ]
+    ingress     = [
+        {
+            cidr_blocks      = [
+                "0.0.0.0/0",
+            ]
+            description      = ""
+            from_port        = 22
+            ipv6_cidr_blocks = []
+            prefix_list_ids  = []
+            protocol         = "tcp"
+            security_groups  = []
+            self             = false
+            to_port          = 22
+        },
+        {
+            cidr_blocks      = [
+                "172.16.0.0/16",
+                "192.168.1.0/24",
+                "10.1.1.0/26",
+                "10.1.0.0/26",
+            ]
+            description      = ""
+            from_port        = 0
+            ipv6_cidr_blocks = []
+            prefix_list_ids  = []
+            protocol         = "-1"
+            security_groups  = []
+            self             = false
+            to_port          = 0
+        },
+    ]
+    name        = "sg_ubuntu_cache"
+    tags        = {}
+    tags_all    = {}
+    vpc_id      = "vpc-05853c0c9f0293771"
+
+    timeouts {}
+
 }
 
 resource "aws_security_group" "default-cf-SG" {
     name    = "default-cf-SG"
-    vpc_id  = aws_vpc.icdl-za-south-network.id
-}*/
+    #vpc_id  = aws_vpc.icdl-za-south-network.id
+}
 /*
 resource "aws_lambda_function" "icdl-south-nat-lambda" {
   filename      = ""

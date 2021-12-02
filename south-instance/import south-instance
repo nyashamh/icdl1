@@ -1,3 +1,0 @@
-
-import instance
-terraform import module.south-network.aws_instance.OpenVPN-BYOL 

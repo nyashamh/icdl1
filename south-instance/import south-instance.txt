@@ -1,0 +1,43 @@
+
+import instance 0
+terraform import module.south-instance.aws_instance.OpenVPN-BYOL i-07f33411ef414aabe 
+
+import instance 1
+terraform import module.south-instance.aws_instance.ICDL2K19-DC01 i-079912a33481e8728
+
+import instance 2
+terraform import module.south-instance.aws_instance.Ubuntu-Cache i-0a19cf5616e3ff1d6
+
+import instance 3
+terraform import module.south-instance.aws_instance.ICDL2K19-AV01 i-0689c11a5bb1f6f54
+
+import ami
+terraform import module.south-instance.aws
+
+import sg 0
+terraform import module.south-instance.aws_security_group.OpenVPN_Access_Server_SG sg-008f65bc805894974
+
+import sg 
+terraform import module.south-instance.aws_security_group.OpenVPNAccessServer sg-019fe9632b20c825e
+
+import sg
+terraform import module.south-instance.aws_security_group.default sg-058b98a494c29f67b
+
+import sg
+terraform import module.south-instance.aws_security_group.sg_for_ESET sg-050aaba71bdf6aec1
+
+import sg
+terraform import module.south-instance.aws_security_group.sg_pastel sg-06db5eae12c037e1a
+
+import sg
+terraform import module.south-instance.aws_security_group.sg_windows_server sg-079bc6c1a99ac6a67
+
+import sg
+terraform import module.south-instance.aws_security_group.Allow-from-eu-west-to-af-south sg-07f0ebfb8cc4fc9ef
+
+import sg
+terraform import module.south-instance.aws_security_group.sg_ubuntu_cache sg-09387b7f41417ca75
+
+import sg
+terraform import module.south-instance.aws_security_group.default-cf-SG sg-0a28ff02ad17185d9
+
