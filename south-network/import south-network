@@ -37,10 +37,10 @@ dhcp2
 terraform import module.south-network.aws_vpc_dhcp_options.icdl-za-dhcp-01 dopt-0c1ede975c4026a64
 
 aws_ec2_managed_prefix_list 0
-terraform import aws_ec2_managed_prefix_list.com.amazonaws.af-south-1.s3 pl-a3ac49ca
+terraform import module.south-network.aws_ec2_managed_prefix_list.za-s3 pl-a3ac49ca
 
 aws_ec2_managed_prefix_list 1
-terraform import aws_ec2_managed_prefix_list.com.amazonaws.af-south-1.dynamodb pl-d6ae4bbf
+terraform import module.south-network.aws_ec2_managed_prefix_list.za-dynamodb pl-d6ae4bbf
 
 vpc_endpoint
 terraform imterraform import module.south-network.aws_s3_bucket.bucket credentials-and-licences port module.south-network.aws_vpc_endpoint.icdl-za-s3endpoint vpce-07f9f7e5d7b4055ae
@@ -67,5 +67,5 @@ virtual private gateway
 terraform import module.south-network.aws_vpn_gateway.VPN-to-af-south-1 vgw-05df61bdc819ee812
 
 
-security groups
-terraform import module.south-network.aws_security_group.OpenVPN_Access_Server_SG sg-008f65bc805894974
+{security groups
+terraform import module.south-network.aws_security_group.OpenVPN_Access_Server_SG sg-008f65bc805894974}

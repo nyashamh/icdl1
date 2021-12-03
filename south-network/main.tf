@@ -262,14 +262,36 @@ resource "aws_vpc_dhcp_options" "icdl-za-dhcp-01" {
 
     }
 }
-/*
-resource "aws_ec2_managed_prefix_list" "com.amazonaws.af-south-1.s3" {
 
+resource "aws_ec2_managed_prefix_list" "za-s3" {
+    address_family = "IPv4"
+    max_entries    = 1
+    name           = "com.amazonaws.af-south-1.s3"
+    #tags           = {}
+    entry {
+        cidr = "3.5.228.0/22"
+    }
+    entry {
+        cidr = "52.95.175.0/24"
+    }
+    entry {
+        cidr = "52.95.176.0/24"
+    }
+    entry {
+        cidr = "52.95.180.0/24"
+    }
+    
 }
 
-resource "aws_ec2_managed_prefix_list" "com.amazonaws.af-south-1.dynamodb" {
-
-}*/
+resource "aws_ec2_managed_prefix_list" "za-dynamodb" {
+    address_family = "IPv4"
+    max_entries    = 1
+    name           = "com.amazonaws.af-south-1.dynamodb"
+    tags           = {}
+    entry {
+        cidr = "52.94.30.0/24"
+    }
+}
 
 #vpc_endpoint
 resource "aws_vpc_endpoint" "icdl-za-s3endpoint" {
@@ -392,8 +414,8 @@ tags             = {
 
 }
 */ 
+
 /*
-#replace and remove
 resource "aws_nat_gateway" "icdl-za-south-nat-gw" {
   allocation_id = aws_eip.icdl-za-eip.id
   subnet_id     = aws_subnet.icdl-za-south-pub-1-0.id
