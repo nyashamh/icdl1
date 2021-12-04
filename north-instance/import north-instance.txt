@@ -30,6 +30,3 @@ terraform import module.north-instance.aws_security_group.SG-In-Priv-subnet sg-0
 
 security group 2
 terraform import module.north-instance.aws_security_group.Allow-from-af-south-to-eu-west sg-07fe9673bfb269ba7
-
-keypair1
-terraform import aws_key_pair.Hamish-ICDL-Keypair Hamish-ICDL-Keypair 

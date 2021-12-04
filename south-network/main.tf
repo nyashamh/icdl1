@@ -147,7 +147,7 @@ resource "aws_route_table" "icdl-za-rt-table" {
         },
     ]
   
-  tags = {
+  tags          = {
     "Name"      = "icdl-za-rt-table"
     "Creator"   = "nyasha@cloud-fundis"
     "Createdby" = "terraform"
@@ -179,7 +179,7 @@ resource "aws_route_table" "icdl-za-pvt-rt-table" {
     ]
     #nat_gateway_id = aws_nat_gateway.icdl-za-south-nat-gw.id
 
-  tags = {
+  tags          = {
     "Name"      = "icdl-za-pvt-rt-table"
     "Creator"   = "nyasha@cloud-fundis"
     "Createdby" = "terraform"

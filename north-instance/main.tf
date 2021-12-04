@@ -1,7 +1,6 @@
 #aws -instance
 resource "aws_instance" "ICDL2K12-CRM01" {
     ami                                  = "ami-064a169afbffa8eb0"
-    #arn                                  = "arn:aws:ec2:eu-west-1:813260210012:instance/i-0a775b8c631e8ad27"
     associate_public_ip_address          = false
     availability_zone                    = "eu-west-1b"
     cpu_core_count                       = 2
@@ -11,16 +10,12 @@ resource "aws_instance" "ICDL2K12-CRM01" {
     get_password_data                    = false
     hibernation                          = false
     iam_instance_profile                 = "RoleForS3AccessFromEc2"
-    #id                                   = "i-0a775b8c631e8ad27"
     instance_initiated_shutdown_behavior = "stop"
-    #instance_state                       = "running"
     instance_type                        = "t3a.xlarge"
     ipv6_address_count                   = 0
     ipv6_addresses                       = []
     key_name                             = "Hamish-ICDL-eu-west-keypair"
     monitoring                           = false
-    #primary_network_interface_id         = "eni-062f9bad4e2fec027"
-    #private_dns                          = "ip-172-16-2-15.eu-west-1.compute.internal"
     private_ip                           = "172.16.2.15"
     secondary_private_ips                = []
     security_groups                      = []
@@ -58,7 +53,6 @@ resource "aws_instance" "ICDL2K12-CRM01" {
 
     root_block_device {
         delete_on_termination = false
-        #device_name           = "/dev/sda1"
         encrypted             = false
         iops                  = 900
 
@@ -67,7 +61,6 @@ resource "aws_instance" "ICDL2K12-CRM01" {
         }
 
         throughput            = 0
-        #volume_id             = "vol-01ca741dc26d7c0f9"
         volume_size           = 300
         volume_type           = "gp2"
     }
@@ -79,20 +72,11 @@ resource "aws_instance" "ICDL2K12-CRM01" {
 #ami's
 resource "aws_ami" "CRM-13-Oct-19-Final"  {
     architecture        = "x86_64"
-    #arn                 = "arn:aws:ec2:eu-west-1::image/ami-085927201b8b493db"
     description         = "Final working CRM 2011 in the cloud"
     ena_support         = true
-    #hypervisor          = "xen"
-    #id                  = "ami-085927201b8b493db"
     image_location      = "813260210012/CRM-13-Oct-19-Final"
-    #image_type          = "machine"
     name                = "CRM-13-Oct-19-Final"
-    #owner_id            = "813260210012"
-    #platform            = "windows"
-    #platform_details    = "Windows"
-    #public              = false
     root_device_name    = "/dev/sda1"
-    #root_snapshot_id    = "snap-03784b345ace3b3fb"
     sriov_net_support   = "simple"
 
     tags                = {
@@ -102,7 +86,6 @@ resource "aws_ami" "CRM-13-Oct-19-Final"  {
         "Region"        = "Ireland"
     }
 
-    #usage_operation     = "RunInstances:0002"
     virtualization_type = "hvm"
 
     ebs_block_device {
@@ -121,20 +104,11 @@ resource "aws_ami" "CRM-13-Oct-19-Final"  {
 
 resource "aws_ami" "ICDL2K12-CRM01-0729"  {
     architecture        = "x86_64"
-    #arn                 = "arn:aws:ec2:eu-west-1::image/ami-04eed3ce14b9489ad"
     description         = "Image created of the CRM server before an upgrade"
     ena_support         = true
-    #hypervisor          = "xen"
-    #id                  = "ami-04eed3ce14b9489ad"
     image_location      = "813260210012/ICDL2K12-CRM01-0729"
-    #image_type          = "machine"
     name                = "ICDL2K12-CRM01-0729"
-    #owner_id            = "813260210012"
-    #platform            = "windows"
-    #platform_details    = "Windows"
-    #public              = false
     root_device_name    = "/dev/sda1"
-    #root_snapshot_id    = "snap-04849ba698434c909"
     sriov_net_support   = "simple"
     tags                = {
         "Name"          = "ICDL2K12-CRM01-BACKUP-0729"
@@ -143,7 +117,6 @@ resource "aws_ami" "ICDL2K12-CRM01-0729"  {
         "Region"        = "Ireland"
     }
 
-    #usage_operation     = "RunInstances:0002"
     virtualization_type = "hvm"
 
     ebs_block_device {
@@ -164,7 +137,6 @@ resource "aws_ami" "ICDL2K12-CRM01-0729"  {
 resource "aws_ebs_volume" "ICDL2K12-CRM01-disk" {
     availability_zone    = "eu-west-1b"
     encrypted            = false
-    #id                   = "vol-01ca741dc26d7c0f9"
     iops                 = 900
     multi_attach_enabled = false
     size                 = 300
@@ -175,17 +147,13 @@ resource "aws_ebs_volume" "ICDL2K12-CRM01-disk" {
         "Creator"        = "nyasaah@cloud-fundis"
         "Region"         = "Ireland"
     }
-    
-    ##throughput           = 0
+
     type                 = "gp2"
 }
 
 #ebs snapshots
 resource "aws_ebs_snapshot" "icdl-za-north-snapshot0" {
     description = "Created by CreateImage(i-0a775b8c631e8ad27) for ami-04eed3ce14b9489ad"
-    #encrypted   = false
-    #id          = "snap-04849ba698434c909"
-    #owner_id    = "813260210012"
     tags        = {
         "Name"       = "icdl-za-north-snapshot0"
         "CreatedBy"  = "terraform"
@@ -194,16 +162,12 @@ resource "aws_ebs_snapshot" "icdl-za-north-snapshot0" {
     }
 
     volume_id   = "vol-01ca741dc26d7c0f9"
-    #volume_size = 250
 
     timeouts {}
 }
 
 resource "aws_ebs_snapshot" "icdl-za-north-snapshot1" {
     description = "ICDL2K12-CRM01"
-    #encrypted   = false
-    #id          = "snap-017d57334c464b580"
-    #owner_id    = "813260210012"
     tags        = {
         "Name"         = "icdl-za-north-snapshot1"
         "creator"      = "hamish@cloud-fundis"
@@ -212,16 +176,12 @@ resource "aws_ebs_snapshot" "icdl-za-north-snapshot1" {
     }
     
     volume_id   = "vol-01ca741dc26d7c0f9"
-    #volume_size = 150
 
     timeouts {}
 }
 
 resource "aws_ebs_snapshot" "icdl-za-north-snapshot2" {
     description = "Created by CreateImage(i-0a775b8c631e8ad27) for ami-085927201b8b493db from vol-01ca741dc26d7c0f9"
-    #encrypted   = false
-    #id          = "snap-03784b345ace3b3fb"
-    #owner_id    = "813260210012"
     tags        = {
         "Name"       = "icdl-za-north-snapshot2"
         "CreatedBy"  = "terraform"
@@ -230,12 +190,9 @@ resource "aws_ebs_snapshot" "icdl-za-north-snapshot2" {
     }
 
     volume_id   = "vol-01ca741dc26d7c0f9"
-    #volume_size = 150
 
     timeouts {}
 }
-
-
 
 resource "aws_lambda_function" "icdl-lambda" {
     architectures                  = [
@@ -285,7 +242,6 @@ resource "aws_security_group" "VPNAccess" {
             to_port          = 0
         },
     ]
-    #id          = "sg-00907d43cdbd0146c"
     ingress     = [
         {
             cidr_blocks      = [
@@ -396,9 +352,8 @@ resource "aws_security_group" "VPNAccess" {
             to_port          = 22
         },
     ]
-    name        = "VPNAccess"
-    #owner_id    = "813260210012"
-    tags        = {
+    name             = "VPNAccess"
+    tags             = {
         "Name"       = "icdl-za-north-snapshot2"
         "CreatedBy"  = "terraform"
         "Creator"    = "nyasaah@cloud-fundis"
@@ -427,7 +382,6 @@ resource "aws_security_group" "SG-In-Priv-subnet" {
             to_port          = 0
         },
     ]
-    #id          = "sg-0522cc2d8eab470a9"
     ingress     = [
         {
             cidr_blocks      = [
@@ -469,15 +423,14 @@ resource "aws_security_group" "SG-In-Priv-subnet" {
             to_port          = -1
         },
     ]
-    name        = "SG-In-Priv-subnet"
-    #owner_id    = "813260210012"
-    tags        = {
+    name             = "SG-In-Priv-subnet"
+    tags             = {
         "Name"       = "SG-In-Priv-subnet"
         "CreatedBy"  = "terraform"
         "Creator"    = "nyasaah@cloud-fundis"
         "Region"     = "Ireland"
     }
-    vpc_id      = "vpc-0c092d552baffc13d"
+    vpc_id           = "vpc-0c092d552baffc13d"
 
     timeouts {}
 }
@@ -499,7 +452,6 @@ resource "aws_security_group" "Allow-from-af-south-to-eu-west" {
             to_port          = 0
         },
     ]
-    #id          = "sg-07fe9673bfb269ba7"
     ingress     = [
         {
             cidr_blocks      = [
@@ -528,9 +480,8 @@ resource "aws_security_group" "Allow-from-af-south-to-eu-west" {
             to_port          = 0
         },
     ]
-    name        = "Allow-from-af-south-to-eu-west"
-    #owner_id    = "813260210012"
-    tags        = {
+    name             = "Allow-from-af-south-to-eu-west"
+    tags             = {
         "Name"       = "Allow-from-af-south-to-eu-west"
         "CreatedBy"  = "terraform"
         "Creator"    = "nyasaah@cloud-fundis"
@@ -540,9 +491,3 @@ resource "aws_security_group" "Allow-from-af-south-to-eu-west" {
 
     timeouts {}
 }
-
-#keypairs
-/*
-resource "aws_key_pair" "Hamish-ICDL-Keypair" {
-    key_name   = "Hamish-ICDL-Keypair"
-}*/

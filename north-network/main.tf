@@ -99,7 +99,7 @@ resource "aws_route_table" "ICDL-default-routing-table" {
     tags             = {
         "Name"       = "ICDL-default-routing-table"
         "CreatedBy"  = "terraform"
-        "Creator"    = "nyasaah@cloud-fundis"
+        "Creator"    = "nyasha@cloud-fundis"
         "Region"     = "Ireland"
     }
 }
@@ -127,7 +127,7 @@ resource "aws_route_table" "ICDL-private-subnet-rt-tbl" {
     tags             = {
         "Name"       = "ICDL-private-subnet-rt-tbl"
         "CreatedBy"  = "terraform"
-        "Creator"    = "nyasaah@cloud-fundis"
+        "Creator"    = "nyasha@cloud-fundis"
         "Region"     = "Ireland"
     }
 }
@@ -138,7 +138,7 @@ resource "aws_internet_gateway" "ICDL-temp-IGW" {
     tags   ={
       "Name" = "ICDL-temp-IGW"
       "CreatedBy"  = "terraform"
-      "Creator"    = "nyasaah@cloud-fundis"
+      "Creator"    = "nyasha@cloud-fundis"
       "Region"     = "Ireland"
     }
 }
@@ -151,21 +151,62 @@ resource "aws_vpc_dhcp_options" "ICDL-local-DHCP-options" {
     ]
     tags                = {
         "Name"      = "ICDL-local-DHCP-options"
-       "CreatedBy"  = "terraform"
-       "Creator"    = "nyasaah@cloud-fundis"
-       "Region"     = "Ireland"
+        "CreatedBy"  = "terraform"
+        "Creator"    = "nyasha@cloud-fundis"
+        "Region"     = "Ireland"
     }
 
 }
-/*
-#aws_ec2_managed_prefix_list
-resource "aws_ec2_managed_prefix_list" "com.amazonaws.eu-west-1.s3" {
 
+#aws_ec2_managed_prefix_list
+resource "aws_ec2_managed_prefix_list" "north-s3" {
+   address_family = "IPv4"
+    max_entries    = 0
+    name           = "com.amazonaws.eu-west-1.s3"
+    tags           = {
+        "Name"       = "north-s3"
+        "CreatedBy"  = "terraform"
+        "Creator"    = "nyasha@cloud-fundis"
+        "Region"     = "Ireland"
+    }
+    version        = 0
+
+    entry {
+        cidr = "3.5.64.0/21"
+    }
+    entry {
+        cidr = "3.5.72.0/23"
+    }
+    entry {
+        cidr = "52.218.0.0/17"
+    }
+    entry {
+        cidr = "52.92.0.0/17"
+    }
 }
 
-resource "aws_ec2_managed_prefix_list" "com.amazonaws.eu-west-1.dynamodb" {
+resource "aws_ec2_managed_prefix_list" "north-dynamodb" {
+    address_family = "IPv4"
+    max_entries    = 0
+    name           = "com.amazonaws.eu-west-1.dynamodb"
+    tags           = {
+        "Name"       = "north-dynamodb"
+        "CreatedBy"  = "terraform"
+        "Creator"    = "nyasha@cloud-fundis"
+        "Region"     = "Ireland"
+    }
+    version        = 0
 
-}*/
+    entry {
+        cidr = "52.119.240.0/21"
+    }
+    entry {
+        cidr = "52.94.24.0/23"
+    }
+    entry {
+        cidr = "52.94.5.0/24"
+    }
+}
 
 #enpoints
 resource "aws_vpc_endpoint" "icdl-za-endpoint-1" {
@@ -195,7 +236,7 @@ resource "aws_vpc_endpoint" "icdl-za-endpoint-1" {
     tags                  = {
         "Name"            = "icdl-za-endpoint-1"
         "CreatedBy"       = "terraform"
-        "Creator"         = "nyasaah@cloud-fundis"
+        "Creator"         = "nyasha@cloud-fundis"
         "Region"          = "Ireland"
     }
     vpc_endpoint_type     = "Interface"
@@ -227,7 +268,7 @@ resource "aws_vpc_endpoint" "icdl-za-endpoint-2" {
     tags                  = {
         "Name"       = "icdl-za-endpoint-2"
         "CreatedBy"  = "terraform"
-        "Creator"    = "nyasaah@cloud-fundis"
+        "Creator"    = "nyasha@cloud-fundis"
         "Region"     = "Ireland"
     }
 }
@@ -241,7 +282,7 @@ resource "aws_vpc_peering_connection" "icdl-eu-to-icdl-af" {
     tags          = {
         "Name"       = "icdl-eu-to-icdl-af"
         "CreatedBy"  = "terraform"
-        "Creator"    = "nyasaah@cloud-fundis"
+        "Creator"    = "nyasha@cloud-fundis"
         "Region"     = "Ireland"
     }
     accepter {
@@ -261,6 +302,7 @@ resource "aws_vpc_peering_connection" "icdl-eu-to-icdl-af" {
 
 resource "aws_customer_gateway" "ICDL-vpn" {
     bgp_asn    = "65000"
+
     ip_address = "105.22.73.14"
     tags       = {
         "Name"       = "ICDL-vpn"
@@ -277,7 +319,7 @@ resource "aws_vpn_gateway" "ICDL-VGW" {
     tags            = {
         "Name"      = "ICDL-VGW"
         "CreatedBy" = "terraform"
-        "Creator"   = "nyasaah@cloud-fundis"
+        "Creator"   = "nyasha@cloud-fundis"
         "Region"    = "Ireland"
     }
 
