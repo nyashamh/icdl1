@@ -84,28 +84,28 @@ terraform import module.south-instance.aws_ebs_snapshot.icdl-za-south-snapshot10
 import sg 0
 terraform import module.south-instance.aws_security_group.OpenVPN_Access_Server_SG sg-008f65bc805894974
 
-import sg 
+import sg 1
 terraform import module.south-instance.aws_security_group.OpenVPNAccessServer sg-019fe9632b20c825e
 
-import sg
+import sg 2
 terraform import module.south-instance.aws_security_group.default sg-058b98a494c29f67b
 
-import sg
+import sg  3
 terraform import module.south-instance.aws_security_group.sg_for_ESET sg-050aaba71bdf6aec1
 
-import sg
+import sg 4
 terraform import module.south-instance.aws_security_group.sg_pastel sg-06db5eae12c037e1a
 
-import sg
+import sg 5
 terraform import module.south-instance.aws_security_group.sg_windows_server sg-079bc6c1a99ac6a67
 
-import sg
+import sg 6
 terraform import module.south-instance.aws_security_group.Allow-from-eu-west-to-af-south sg-07f0ebfb8cc4fc9ef
 
-import sg
+import sg 7
 terraform import module.south-instance.aws_security_group.sg_ubuntu_cache sg-09387b7f41417ca75
 
-import sg
+import sg 8
 terraform import module.south-instance.aws_security_group.default-cf-SG sg-0a28ff02ad17185d9
 
 

@@ -54,7 +54,10 @@ resource "aws_ami" "Eset-Antivirus" {
     root_device_name    = "/dev/sda1"
     sriov_net_support   = "simple"
     tags                = {
-        "Name" = "Eset-Antivirus"
+        "Name"          = "Eset-Antivirus"
+        "Creator"       = "nyasha@cloud-fundis"
+        "Createdby"     = "terraform"
+        "Region"        = "cape town"
     }
     virtualization_type = "hvm"
 
@@ -81,7 +84,10 @@ resource "aws_ami" "ICDL2K19-DC01-BACKUP-0729" {
     root_device_name    = "/dev/sda1"
     sriov_net_support   = "simple"
     tags                = {
-        "Name" = "ICDL2K19-DC01-BACKUP-0729"
+        "Name"          = "ICDL2K19-DC01-BACKUP-0729"
+        "Creator"       = "nyasha@cloud-fundis"
+        "Createdby"     = "terraform"
+        "Region"        = "cape town"
     }
     
     virtualization_type = "hvm"
@@ -110,7 +116,10 @@ resource "aws_ami" "ubuntu-image" {
     sriov_net_support   = "simple"
 
     tags                = {
-        "Name" = "ubuntu-image"
+        "Name"          = "ubuntu-image"
+        "Creator"       = "nyasha@cloud-fundis"
+        "Createdby"     = "terraform"
+        "Region"        = "cape town"
     }
     
     virtualization_type = "hvm"
@@ -138,7 +147,10 @@ resource "aws_ami" "OpenVPN-BYOL" {
     root_device_name    = "/dev/sda1"
     sriov_net_support   = "simple"
     tags                = {
-        "Name" = "OpenVPN-BYOL"
+        "Name"          = "OpenVPN-BYOL"
+        "Creator"       = "nyasha@cloud-fundis"
+        "Createdby"     = "terraform"
+        "Region"        = "cape town"
     }
 
     virtualization_type = "hvm"
@@ -166,7 +178,10 @@ resource "aws_ami" "Ubuntu-Cache" {
     root_device_name    = "/dev/sda1"
     sriov_net_support   = "simple"
     tags                = {
-        "Name" = "Ubuntu-Cache"
+        "Name"          = "Ubuntu-Cache"
+        "Creator"       = "nyasha@cloud-fundis"
+        "Createdby"     = "terraform"
+        "Region"        = "cape town"        
     }
 
     virtualization_type = "hvm"
@@ -194,7 +209,10 @@ resource "aws_ami" "ICDL2K19-DC01-Pastel" {
     root_device_name    = "/dev/sda1"
     sriov_net_support   = "simple"
     tags                = {
-        "Name" = "ICDL2K19-DC01-Pastel"
+        "Name"          = "ICDL2K19-DC01-Pastel"
+        "Creator"       = "nyasha@cloud-fundis"
+        "Createdby"     = "terraform"
+        "Region"        = "cape town"
     }
     virtualization_type = "hvm"
 
@@ -253,9 +271,10 @@ resource "aws_ebs_volume" "Windows_Server-AD_Pastel_Eset-disk" {
     size                 = 70
     snapshot_id          = "snap-08634c1abc0ab2c4e"
     tags                 = {
-        "Creator" = "ndafara@cloud-fundis.co.za"
-        "Name"    = "Windows_Server-AD_Pastel_Eset-disk"
-        "Purpose" = "To run AD, Pastel and Eset"
+        "Creator"        = "ndafara@cloud-fundis.co.za"
+        "Name"           = "Windows_Server-AD_Pastel_Eset-disk"
+        "Purpose"        = "To run AD, Pastel and Eset"
+        "TerraformedBy"  = "nyasha@cloud-fundis"
     }
     type                 = "gp2"
 }
@@ -267,8 +286,9 @@ resource "aws_ebs_volume" "SharesVolume-disk" {
     multi_attach_enabled = false
     size                 = 240
     tags                 = {
-        "Name"    = "SharesVolume-disk"
-        "creator" = "hamish@cloud-fundis"
+        "Name"           = "SharesVolume-disk"
+        "creator"        = "hamish@cloud-fundis"
+        "TerraformedBy"  = "nyasha@cloud-fundis"
     }
     type                 = "gp2"
 }
@@ -281,9 +301,10 @@ resource "aws_ebs_volume" "Ubuntu_Cache-disk" {
     size                 = 30
     snapshot_id          = "snap-0f4f2bfb70165bbef"
     tags                 = {
-        "Creator" = "ndafara@cloud-fundis.co.za"
-        "Name"    = "Ubuntu_Cache-disk"
-        "Purpose" = "UbuntuCache"
+        "Creator"        = "ndafara@cloud-fundis.co.za"
+        "Name"           = "Ubuntu_Cache-disk"
+        "Purpose"        = "UbuntuCache"
+        "TerraformedBy"  = "nyasha@cloud-fundis"
     }
     type                 = "gp2"
 }
@@ -296,8 +317,9 @@ resource "aws_ebs_volume" "ESETAntiVirus-disk" {
     size                 = 30
     snapshot_id          = "snap-04ee53a3dd52f5005"
     tags                 = {
-        "Name"    = "ESETAntiVirus-disk"
-        "creator" = "hamish@cloud-fundis"
+        "Name"           = "ESETAntiVirus-disk"
+        "creator"        = "hamish@cloud-fundis"
+        "TerraformedBy"  = "nyasha@cloud-fundis"
     }
     type                 = "gp2" 
 }
@@ -306,7 +328,8 @@ resource "aws_ebs_volume" "ESETAntiVirus-disk" {
 resource "aws_ebs_snapshot" "icdl-za-south-snapshot0" {
     description = "Created by CreateImage(i-01476a11b33a4b2b3) for ami-0d5b85a61c6c618cc from vol-03e88b8a7c6e09a1e"
     tags        = {
-        "Name" = "icdl-za-south-snapshot0"
+        "Name"           = "icdl-za-south-snapshot0"
+        "TerraformedBy"  = "nyasha@cloud-fundis"
     }
     volume_id   = "vol-03e88b8a7c6e09a1e"
     timeouts {}
@@ -315,7 +338,8 @@ resource "aws_ebs_snapshot" "icdl-za-south-snapshot0" {
 resource "aws_ebs_snapshot" "icdl-za-south-snapshot1" {
     description = "Created by CreateImage(i-0a19cf5616e3ff1d6) for ami-0de4b5fc23601a94d"
     tags        = {
-        "Name" = "icdl-za-south-snapshot1"
+        "Name"           = "icdl-za-south-snapshot1"
+        "TerraformedBy"  = "nyasha@cloud-fundis"
     }
     volume_id   = "vol-0a34a9e1d7b1fa0e7"
 
@@ -325,7 +349,8 @@ resource "aws_ebs_snapshot" "icdl-za-south-snapshot1" {
 resource "aws_ebs_snapshot" "icdl-za-south-snapshot2" {
     description = "Created by CreateImage(i-0a19cf5616e3ff1d6) for ami-03ea0be72ed92e263 from vol-0a34a9e1d7b1fa0e7"
     tags        = {
-        "Name" = "icdl-za-south-snapshot2"
+        "Name"           = "icdl-za-south-snapshot2"
+        "TerraformedBy"  = "nyasha@cloud-fundis"
     }
     volume_id   = "vol-0a34a9e1d7b1fa0e7"
 
@@ -335,7 +360,8 @@ resource "aws_ebs_snapshot" "icdl-za-south-snapshot2" {
 resource "aws_ebs_snapshot" "icdl-za-south-snapshot3" {
     description = "Copied for DestinationAmi ami-04ff25332bc840d3d from SourceAmi ami-0aea0af5dd4db7dbf for SourceSnapshot snap-0197b1ff455be2ad6. Task created on 1,587,635,416,745."
     tags        = {
-        "Name" = "icdl-za-south-snapshot3"
+        "Name"          = "icdl-za-south-snapshot3"
+        "TerraformedBy" = "nyasha@cloud-fundis"
     }
     volume_id   = "vol-ffffffff"
 
@@ -345,7 +371,8 @@ resource "aws_ebs_snapshot" "icdl-za-south-snapshot3" {
 resource "aws_ebs_snapshot" "icdl-za-south-snapshot4" {
     description = "Created by CreateImage(i-079912a33481e8728) for ami-02ab4f9dbc7bafbf9"
     tags        = {
-        "Name" = "icdl-za-south-snapshot4"
+        "Name"           = "icdl-za-south-snapshot4"
+        "TerraformedBy"  = "nyasha@cloud-fundis"
     }
     volume_id   = "vol-04ecaf213f84fd5b3"
     timeouts {}
@@ -354,7 +381,8 @@ resource "aws_ebs_snapshot" "icdl-za-south-snapshot4" {
 resource "aws_ebs_snapshot" "icdl-za-south-snapshot5" {
     description = "Created by CreateImage(i-079912a33481e8728) for ami-02f32747edc660277 from vol-04ecaf213f84fd5b3"
     tags        = {
-        "Name" = "icdl-za-south-snapshot5"
+        "Name"           = "icdl-za-south-snapshot5"
+        "TerraformedBy"  = "nyasha@cloud-fundis"
     }
     volume_id   = "vol-04ecaf213f84fd5b3"
 
@@ -364,7 +392,8 @@ resource "aws_ebs_snapshot" "icdl-za-south-snapshot5" {
 resource "aws_ebs_snapshot" "icdl-za-south-snapshot6" {
     description = "Created by CreateImage(i-079912a33481e8728l) for ami-0277fd5b8865c77be from vol-04ecaf213f84fd5b3"
     tags        = {
-        "Name" = "icdl-za-south-snapshot6"
+        "Name"           = "icdl-za-south-snapshot6"
+        "TerraformedBy"  = "nyasha@cloud-fundis"
     }
     volume_id   = "vol-04ecaf213f84fd5b3"
 
@@ -374,7 +403,8 @@ resource "aws_ebs_snapshot" "icdl-za-south-snapshot6" {
 resource "aws_ebs_snapshot" "icdl-za-south-snapshot7" {
     description = "Copied for DestinationAmi ami-0aa317924368277f8 from SourceAmi ami-0c5dd94226daed594 for SourceSnapshot snap-06475bde11ea114b8. Task created on 1,594,658,958,567."
     tags        = {
-        "Name" = "icdl-za-south-snapshot7"
+        "Name"           = "icdl-za-south-snapshot7"
+        "TerraformedBy"  = "nyasha@cloud-fundis"
     }
     volume_id   = "vol-ffffffff"
 
@@ -384,9 +414,11 @@ resource "aws_ebs_snapshot" "icdl-za-south-snapshot7" {
 resource "aws_ebs_snapshot" "icdl-za-south-snapshot8" {
     description = "Created by CreateImage(i-0e99043ab6328e846) for ami-0ba7eb336aa97ffc3 from vol-0a62d40990ca2c1cd"
     tags        = {
-        "Name" = "icdl-za-south-snapshot8"
+        "Name"           = "icdl-za-south-snapshot8"
+        "TerraformedBy"  = "nyasha@cloud-fundis"
     }
     volume_id   = "vol-0a62d40990ca2c1cd"
+    
 
     timeouts {}
 }
@@ -394,7 +426,8 @@ resource "aws_ebs_snapshot" "icdl-za-south-snapshot8" {
 resource "aws_ebs_snapshot" "icdl-za-south-snapshot9" {
     description = "Created by CreateImage(i-07f33411ef414aabe) for ami-0dbccb7a0677f6a98 from vol-0202014404183eadd"
     tags        = {
-        "Name" = "icdl-za-south-snapshot9"
+        "Name"           = "icdl-za-south-snapshot9"
+        "TerraformedBy"  = "nyasha@cloud-fundis"
     }
     volume_id   = "vol-0202014404183eadd"
 
@@ -404,7 +437,8 @@ resource "aws_ebs_snapshot" "icdl-za-south-snapshot9" {
 resource "aws_ebs_snapshot" "icdl-za-south-snapshot10" {
     description = "Created by CreateImage(i-0689c11a5bb1f6f54) for ami-062d01a7ff216d72c from vol-0a6be54b943b547dd"
     tags        = {
-        "Name" = "icdl-za-south-snapshot10"
+        "Name"           = "icdl-za-south-snapshot10"
+        "TerraformedBy"  = "nyasha@cloud-fundis"
     }
     volume_id   = "vol-0a6be54b943b547dd"
 
@@ -551,16 +585,112 @@ resource "aws_security_group" "default" {
             to_port          = 0
         },
     ]
-    name        = "default"
-    tags        = {}
-    tags_all    = {}
-    vpc_id      = "vpc-05853c0c9f0293771"
+    name            = "default"
+    tags            = {
+        "Name"      = "default"
+        "Creator"   = "nyasha@cloud-fundis"
+        "Createdby" = "terraform"
+        "Region"    = "cape town"
+    }
+    vpc_id          = "vpc-05853c0c9f0293771"
 
     timeouts {}
 }
 
 resource "aws_security_group" "OpenVPNAccessServer" { 
-    name    = "OpenVPNAccessServer"
+    description = "This security group was generated by AWS Marketplace and is based on recommended settings for OpenVPN Access Server (10 Connected Devices) version 2.7.5 provided by OpenVPN Inc"
+    egress      = [
+        {
+            cidr_blocks      = [
+                "0.0.0.0/0",
+            ]
+            description      = ""
+            from_port        = 0
+            ipv6_cidr_blocks = []
+            prefix_list_ids  = []
+            protocol         = "-1"
+            security_groups  = []
+            self             = false
+            to_port          = 0
+        },
+    ]
+    ingress     = [
+        {
+            cidr_blocks      = [
+                "0.0.0.0/0",
+            ]
+            description      = ""
+            from_port        = 1194
+            ipv6_cidr_blocks = []
+            prefix_list_ids  = []
+            protocol         = "udp"
+            security_groups  = []
+            self             = false
+            to_port          = 1194
+        },
+        {
+            cidr_blocks      = [
+                "0.0.0.0/0",
+            ]
+            description      = ""
+            from_port        = 22
+            ipv6_cidr_blocks = []
+            prefix_list_ids  = []
+            protocol         = "tcp"
+            security_groups  = []
+            self             = false
+            to_port          = 22
+        },
+        {
+            cidr_blocks      = [
+                "0.0.0.0/0",
+            ]
+            description      = ""
+            from_port        = 443
+            ipv6_cidr_blocks = []
+            prefix_list_ids  = []
+            protocol         = "tcp"
+            security_groups  = []
+            self             = false
+            to_port          = 443
+        },
+        {
+            cidr_blocks      = [
+                "0.0.0.0/0",
+            ]
+            description      = ""
+            from_port        = 943
+            ipv6_cidr_blocks = []
+            prefix_list_ids  = []
+            protocol         = "tcp"
+            security_groups  = []
+            self             = false
+            to_port          = 943
+        },
+        {
+            cidr_blocks      = [
+                "0.0.0.0/0",
+            ]
+            description      = ""
+            from_port        = 945
+            ipv6_cidr_blocks = []
+            prefix_list_ids  = []
+            protocol         = "tcp"
+            security_groups  = []
+            self             = false
+            to_port          = 945
+        },
+    ]
+    name            = "OpenVPNAccessServer"
+    tags            = {
+        "Name"      = "default"
+        "Creator"   = "nyasha@cloud-fundis"
+        "Createdby" = "terraform"
+        "Region"    = "cape town"
+    }
+    vpc_id      = "vpc-05853c0c9f0293771"
+
+    timeouts {}
 }
 
 
@@ -609,9 +739,14 @@ resource "aws_security_group" "sg_for_ESET" {
             to_port          = 3389
         },
     ]
-    name        = "sg_for_ESET"
-    tags        = {}
-    vpc_id      = "vpc-05853c0c9f0293771"
+    name            = "sg_for_ESET"
+    tags            = {
+        "Name"      = "sg_for_ESET"
+        "Creator"   = "nyasha@cloud-fundis"
+        "Createdby" = "terraform"
+        "Region"    = "cape town"
+    }
+    vpc_id          = "vpc-05853c0c9f0293771"
 
     timeouts {}
 
@@ -649,9 +784,14 @@ resource "aws_security_group" "sg_pastel" {
             to_port          = 3389
         },
     ]
-    name        = "sg_pastel"
-    tags        = {}
-    vpc_id      = "vpc-05853c0c9f0293771"
+    name            = "sg_pastel"
+    tags            = {
+        "Name"      = "sg_pastel"
+        "Creator"   = "nyasha@cloud-fundis"
+        "Createdby" = "terraform"
+        "Region"    = "cape town"
+    }
+    vpc_id          = "vpc-05853c0c9f0293771"
 
     timeouts {} 
 }
@@ -706,9 +846,13 @@ resource "aws_security_group" "sg_windows_server" {
             to_port          = 0
         },
     ]
-    name        = "sg_windows_server"
-    tags        = {}
-    tags_all    = {}
+    name            = "sg_windows_server"
+    tags            = {
+        "Name"      = "sg_windows_server"
+        "Creator"   = "nyasha@cloud-fundis"
+        "Createdby" = "terraform"
+        "Region"    = "cape town"
+    }
     vpc_id      = "vpc-05853c0c9f0293771"
 
     timeouts {}
@@ -760,10 +904,14 @@ resource "aws_security_group" "Allow-from-eu-west-to-af-south" {
             to_port          = 0
         },
     ]
-    name        = "Allow-from-eu-west-to-af-south"
-    tags        = {}
-    tags_all    = {}
-    vpc_id      = "vpc-0c092d552baffc13d"
+    name            = "Allow-from-eu-west-to-af-south"
+    tags            = {
+        "Name"      = "Allow-from-eu-west-to-af-south"
+        "Creator"   = "nyasha@cloud-fundis"
+        "Createdby" = "terraform"
+        "Region"    = "cape town"
+    }
+    vpc_id          = "vpc-0c092d552baffc13d"
 
     timeouts {}
 
@@ -817,10 +965,14 @@ resource "aws_security_group" "sg_ubuntu_cache" {
             to_port          = 0
         },
     ]
-    name        = "sg_ubuntu_cache"
-    tags        = {}
-    tags_all    = {}
-    vpc_id      = "vpc-05853c0c9f0293771"
+    name            = "sg_ubuntu_cache"
+    tags            = {
+        "Name"      = "sg_ubuntu_cache"
+        "Creator"   = "nyasha@cloud-fundis"
+        "Createdby" = "terraform"
+        "Region"    = "cape town"
+    }
+    vpc_id          = "vpc-05853c0c9f0293771"
 
     timeouts {}
 
@@ -871,13 +1023,19 @@ resource "aws_security_group" "default-cf-SG" {
             to_port          = 22
         },
     ]
-    name        = "default-cf-SG"
-    tags        = {}
-    vpc_id      = "vpc-05853c0c9f0293771"
+    name            = "default-cf-SG"
+    tags            = {
+        "Name"      = "default-cf-SG"
+        "Creator"   = "nyasha@cloud-fundis"
+        "Createdby" = "terraform"
+        "Region"    = "cape town"
+    }
+    vpc_id          = "vpc-05853c0c9f0293771"
 
     timeouts {}
     
 }
+
 /*
 resource "aws_lambda_function" "icdl-south-nat-lambda" {
   filename      = ""
