@@ -161,7 +161,7 @@ resource "aws_vpc_dhcp_options" "ICDL-local-DHCP-options" {
 #aws_ec2_managed_prefix_list
 resource "aws_ec2_managed_prefix_list" "north-s3" {
    address_family = "IPv4"
-    max_entries    = 0
+    max_entries    = 1
     name           = "com.amazonaws.eu-west-1.s3"
     tags           = {
         "Name"       = "north-s3"
@@ -169,7 +169,6 @@ resource "aws_ec2_managed_prefix_list" "north-s3" {
         "Creator"    = "nyasha@cloud-fundis"
         "Region"     = "Ireland"
     }
-    version        = 0
 
     entry {
         cidr = "3.5.64.0/21"
@@ -187,7 +186,7 @@ resource "aws_ec2_managed_prefix_list" "north-s3" {
 
 resource "aws_ec2_managed_prefix_list" "north-dynamodb" {
     address_family = "IPv4"
-    max_entries    = 0
+    max_entries    = 1
     name           = "com.amazonaws.eu-west-1.dynamodb"
     tags           = {
         "Name"       = "north-dynamodb"
@@ -195,8 +194,7 @@ resource "aws_ec2_managed_prefix_list" "north-dynamodb" {
         "Creator"    = "nyasha@cloud-fundis"
         "Region"     = "Ireland"
     }
-    version        = 0
-
+    
     entry {
         cidr = "52.119.240.0/21"
     }
