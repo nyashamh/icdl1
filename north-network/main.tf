@@ -305,7 +305,7 @@ resource "aws_customer_gateway" "ICDL-vpn" {
     tags       = {
         "Name"       = "ICDL-vpn"
         "CreatedBy"  = "terraform"
-        "Creator"    = "nyasaah@cloud-fundis"
+        "Creator"    = "nyasha@cloud-fundis"
         "Region"     = "Ireland"
     }
 

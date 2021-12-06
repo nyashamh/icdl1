@@ -1,3 +1,7 @@
+module "iam" {
+  source = "./iam"
+}
+
 module "south-network" {
   source = "./south-network"
   #region = af-south-1

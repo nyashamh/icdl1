@@ -1,0 +1,26 @@
+iam role 0
+terraform import module.iam.aws_iam_role.icdl-backup icdl-backup-role
+
+iam role 1
+terraform import module.iam.aws_iam_role.samba icdl-samba-file-gateway
+
+iam role 2
+terraform import module.iam.aws_iam_role.s3Access RoleForS3AccessFromEc2
+
+iam role 3
+terraform import module.iam.aws_iam_role.StopStartIcdl StopStartICDLCRM-role-bki579o2
+
+iam role 4
+terraform import module.iam.aws_iam_role.StorageGateway StorageGatewayBucketAccessRole92aa6fd8-4300-433f-9710-750be38a20
+
+iam user 0
+terraform import module.iam.aws_iam_user.usr-backup backup_user
+
+iam user 1
+terraform import module.iam.aws_iam_user.usr-hamish hamish
+
+iam user 2
+terraform import module.iam.aws_iam_user.usr-nyasha nyasha@cloud-fundis.co.za
+
+iam user 3
+terraform import module.iam.aws_iam_user.usr-pre-signed pre-signed-user

@@ -24,7 +24,7 @@ resource "aws_instance" "ICDL2K12-CRM01" {
     tags                                 = {
         "Name"       = "ICDL2K12-CRM01"
         "CreatedBy"  = "terraform"
-        "Creator"    = "nyasaah@cloud-fundis"
+        "Creator"    = "nyasha@cloud-fundis"
         "Region"     = "Ireland"
     }
     tenancy                              = "default"
@@ -82,7 +82,7 @@ resource "aws_ami" "CRM-13-Oct-19-Final"  {
     tags                = {
         "Name"          = "ICDL2K12r2CRM2011"
         "CreatedBy"     = "terraform"
-        "Creator"       = "nyasaah@cloud-fundis"
+        "Creator"       = "nyasha@cloud-fundis"
         "Region"        = "Ireland"
     }
 
@@ -113,7 +113,7 @@ resource "aws_ami" "ICDL2K12-CRM01-0729"  {
     tags                = {
         "Name"          = "ICDL2K12-CRM01-BACKUP-0729"
         "CreatedBy"     = "terraform"
-        "Creator"       = "nyasaah@cloud-fundis"
+        "Creator"       = "nyasha@cloud-fundis"
         "Region"        = "Ireland"
     }
 
@@ -144,7 +144,7 @@ resource "aws_ebs_volume" "ICDL2K12-CRM01-disk" {
     tags                 = {
         "Name"           = "ICDL2K12-CRM01-disk"
         "CreatedBy"      = "terraform"
-        "Creator"        = "nyasaah@cloud-fundis"
+        "Creator"        = "nyasha@cloud-fundis"
         "Region"         = "Ireland"
     }
 
@@ -157,7 +157,7 @@ resource "aws_ebs_snapshot" "icdl-za-north-snapshot0" {
     tags        = {
         "Name"       = "icdl-za-north-snapshot0"
         "CreatedBy"  = "terraform"
-        "Creator"    = "nyasaah@cloud-fundis"
+        "Creator"    = "nyasha@cloud-fundis"
         "Region"     = "Ireland"
     }
 
@@ -185,7 +185,7 @@ resource "aws_ebs_snapshot" "icdl-za-north-snapshot2" {
     tags        = {
         "Name"       = "icdl-za-north-snapshot2"
         "CreatedBy"  = "terraform"
-        "Creator"    = "nyasaah@cloud-fundis"
+        "Creator"    = "nyasha@cloud-fundis"
         "Region"     = "Ireland"
     }
 
@@ -356,7 +356,7 @@ resource "aws_security_group" "VPNAccess" {
     tags             = {
         "Name"       = "icdl-za-north-snapshot2"
         "CreatedBy"  = "terraform"
-        "Creator"    = "nyasaah@cloud-fundis"
+        "Creator"    = "nyasha@cloud-fundis"
         "Region"     = "Ireland"
 
     }
@@ -427,7 +427,7 @@ resource "aws_security_group" "SG-In-Priv-subnet" {
     tags             = {
         "Name"       = "SG-In-Priv-subnet"
         "CreatedBy"  = "terraform"
-        "Creator"    = "nyasaah@cloud-fundis"
+        "Creator"    = "nyasha@cloud-fundis"
         "Region"     = "Ireland"
     }
     vpc_id           = "vpc-0c092d552baffc13d"
@@ -484,7 +484,7 @@ resource "aws_security_group" "Allow-from-af-south-to-eu-west" {
     tags             = {
         "Name"       = "Allow-from-af-south-to-eu-west"
         "CreatedBy"  = "terraform"
-        "Creator"    = "nyasaah@cloud-fundis"
+        "Creator"    = "nyasha@cloud-fundis"
         "Region"     = "Ireland"
     }
     vpc_id      = "vpc-0c092d552baffc13d"
