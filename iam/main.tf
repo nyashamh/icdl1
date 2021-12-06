@@ -128,36 +128,6 @@ resource "aws_iam_role" "StopStartIcdl" {
     inline_policy {}
 }
 
-resource "aws_iam_role" "StorageGateway" {
-    assume_role_policy    = jsonencode(
-        {
-            Statement = [
-                {
-                    Action    = "sts:AssumeRole"
-                    Effect    = "Allow"
-                    Principal = {
-                        Service = "storagegateway.amazonaws.com"
-                    }
-                },
-            ]
-            Version   = "2012-10-17"
-        }
-    )
-    force_detach_policies = false
-    managed_policy_arns   = [
-        "arn:aws:iam::813260210012:policy/service-role/AllowStorageGatewayAssumeBucketAccessRolec63e279a-bd6c-48c1-9949-231fde2316a3",
-    ]
-    max_session_duration  = 3600
-    name                  = "StorageGatewayBucketAccessRole92aa6fd8-4300-433f-9710-750be38a20"
-    path                  = "/service-role/"
-    tags                  = {
-        "creator"         = "hamish@cloud-fundis"
-        "TerraformedBy"   = "nyasha@cloud-fundis"
-    }
-
-    inline_policy {}  
-}
-
 #iam users
 
 resource "aws_iam_user" "usr-backup" {
@@ -179,7 +149,6 @@ resource "aws_iam_user" "usr-hamish" {
     }
 }
  
-
 resource "aws_iam_user" "usr-nyasha" {
     name      = "nyasha@cloud-fundis.co.za"
     path      = "/"

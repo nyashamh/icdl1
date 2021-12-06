@@ -14,6 +14,14 @@ resource "aws_s3_bucket" "bucket0" {
         enabled    = false
         mfa_delete = false
     }
+
+      lifecycle_rule {
+          prefix  = "config/"
+          enabled = true
+          noncurrent_version_expiration {
+              days = 90
+	  }
+ }
 }
 
 resource "aws_s3_bucket" "bucket1" {
