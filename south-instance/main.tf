@@ -6,6 +6,7 @@ resource "aws_instance" "OpenVPN-BYOL" {
       tags = {
           "Name" = "OpenVPN-BYOL"
           "Creator"   = "nyasha@cloud-fundis"
+          "Reason"    = "OpenVPN Access Server" 
           "Createdby" = "terraform"
           "Region"    = "cape town"
           }
@@ -17,6 +18,7 @@ resource "aws_instance" "ICDL2K19-DC01" {
       tags = {
           "Name" = "ICDL2K19-DC01"
           "Creator"   = "nyasha@cloud-fundis"
+          "Purpose"   = "To run AD, Pastel and Eset"
           "Createdby" = "terraform"
           "Region"    = "cape town"
           }
@@ -390,7 +392,7 @@ resource "aws_ebs_snapshot" "icdl-za-south-snapshot5" {
 }
 
 resource "aws_ebs_snapshot" "icdl-za-south-snapshot6" {
-    description = "Created by CreateImage(i-079912a33481e8728l) for ami-0277fd5b8865c77be from vol-04ecaf213f84fd5b3"
+    description          = "Created by CreateImage(i-079912a33481e8728) for ami-0277fd5b8865c77be from vol-04ecaf213f84fd5b3"
     tags        = {
         "Name"           = "icdl-za-south-snapshot6"
         "TerraformedBy"  = "nyasha@cloud-fundis"

@@ -10,9 +10,6 @@ terraform import module.iam.aws_iam_role.s3Access RoleForS3AccessFromEc2
 iam role 3
 terraform import module.iam.aws_iam_role.StopStartIcdl StopStartICDLCRM-role-bki579o2
 
-iam role 4
-terraform import module.iam.aws_iam_role.StorageGateway StorageGatewayBucketAccessRole92aa6fd8-4300-433f-9710-750be38a20
-
 iam user 0
 terraform import module.iam.aws_iam_user.usr-backup backup_user
 
