@@ -3,21 +3,13 @@ import vpc
 terraform import module.south-network.aws_vpc.icdl-za-south-network vpc-05853c0c9f0293771
 
 import subnets
-terraform state show module.south-network.aws_subnet.icdl-za-south-pub-1-0
-
-terraform import module.south-network.aws_subnet.icdl-za-pub-1-64 subnet-0079ed87b2bc005ee
-
-terraform import module.south-network.aws_subnet.icdl-za-pub-1-128 subnet-0d4d26a43155146e9
+terraform import module.south-network.aws_subnet.icdl-za-south-pub-1-0 subnet-058d9e91725b55e0d
 
 private subnets
 terraform import module.south-network.aws_subnet.icdl-za-priv-0-0 subnet-0b4e65b06a02f3ffa
 
-terraform import module.south-network.aws_subnet.icdl-za-priv-0-64 subnet-09a787cd42ae02ec8
-
-terraform import module.south-network.aws_subnet.icdl-za-priv-0-128 subnet-0817f27901aa2d887
-
 route tables
-terraform state show module.south-network.aws_route_table.icdl-za-rt-table
+terraform import module.south-network.aws_route_table.icdl-za-rt-table rtb-00a48c6df4b8ffd38
 
 terraform import module.south-network.aws_route_table.icdl-za-pvt-rt-table rtb-0f724982f511d86dd
 
@@ -43,7 +35,8 @@ aws_ec2_managed_prefix_list 1
 terraform import module.south-network.aws_ec2_managed_prefix_list.za-dynamodb pl-d6ae4bbf
 
 vpc_endpoint
-terraform imterraform import module.south-network.aws_s3_bucket.bucket credentials-and-licences port module.south-network.aws_vpc_endpoint.icdl-za-s3endpoint vpce-07f9f7e5d7b4055ae
+xxxxxxx terraform import module.south-network.aws_s3_bucket.bucket credentials-and-licences port
+terraformimport module.south-network.aws_vpc_endpoint.icdl-za-s3endpoint vpce-07f9f7e5d7b4055ae
 
 vpc_peeering
 terraform import module.south-network.aws_vpc_peering_connection.icdl-af-to-icdl-eu pcx-0c53b96062c6831fe
@@ -66,6 +59,3 @@ terraform import module.south-network.aws_customer_gateway.icdl-za-south-cus-gw 
 virtual private gateway
 terraform import module.south-network.aws_vpn_gateway.VPN-to-af-south-1 vgw-05df61bdc819ee812
 
-
-{security groups
-terraform import module.south-network.aws_security_group.OpenVPN_Access_Server_SG sg-008f65bc805894974}
