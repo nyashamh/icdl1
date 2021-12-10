@@ -205,6 +205,20 @@ resource "aws_route_table" "icdl-za-pvt-rt-table" {
   }
 
 }
+
+resource "aws_vpc_endpoint_route_table_association" "south_s3_pref_list" {
+  route_table_id   = "rtb-0f724982f511d86dd"
+  vpc_endpoint_id  = "vpce-07f9f7e5d7b4055ae"
+
+  /*tags           = {
+    "Name"         = "icdl-za-pvt-rt-table"
+    "Creator"      = "nyasha@cloud-fundis"
+    "Createdby"    = "terraform"
+    "Region"       = "cape town"
+  }*/
+
+}
+
 /*
 #internet gtw
 resource "aws_internet_gateway" "icdl-za-igw" {

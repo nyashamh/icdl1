@@ -869,7 +869,7 @@ resource "aws_security_group" "Allow-from-eu-west-to-af-south" {
             cidr_blocks      = [
                 "0.0.0.0/0",
             ]
-            description      = ""
+            description      = "Allow traffic from eu-west-1"
             from_port        = 0
             ipv6_cidr_blocks = []
             prefix_list_ids  = []
@@ -895,9 +895,9 @@ resource "aws_security_group" "Allow-from-eu-west-to-af-south" {
         },
         {
             cidr_blocks      = [
-                "10.1.0.0/16",
+                "172.16.0.0/16",
             ]
-            description      = "Allow all traffic from af-south-1 to eu-west"
+            description      = "Allow from eu-west"
             from_port        = 0
             ipv6_cidr_blocks = []
             prefix_list_ids  = []
@@ -907,6 +907,7 @@ resource "aws_security_group" "Allow-from-eu-west-to-af-south" {
             to_port          = 0
         },
     ]
+    #name           = "Allow-from-eu-west-to-af-south"
     name            = "Allow-from-eu-west-to-af-south"
     tags            = {
         "Name"      = "Allow-from-eu-west-to-af-south"
@@ -914,11 +915,11 @@ resource "aws_security_group" "Allow-from-eu-west-to-af-south" {
         "Createdby" = "terraform"
         "Region"    = "cape town"
     }
-    vpc_id          = "vpc-0c092d552baffc13d"
-
-    timeouts {}
+   vpc_id      = "vpc-05853c0c9f0293771"
+   timeouts{}
 
 }
+
 
 resource "aws_security_group" "sg_ubuntu_cache" {
     description = "Security Group for Ubuntu Cache"
