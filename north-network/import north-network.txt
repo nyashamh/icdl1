@@ -21,12 +21,17 @@ terraform import module.north-network.aws_internet_gateway.ICDL-temp-IGW igw-0cb
 
 aws_vpc_dhcp_options
 terraform import module.north-network.aws_vpc_dhcp_options.ICDL-local-DHCP-options dopt-05451db6d565783b7
+'
+
 
 aws_ec2_managed_prefix_list
-xxx terraform import module.north-network.aws_ec2_managed_prefix_list.com.amazonaws.eu-west-1.s3 pl-6da54004
+xxx terraform import module.north-network.aws_ec2_managed_prefix_list.north-s3 pl-6da54004
 
 aws_ec2_managed_prefix_list
 xxx terraform import module.north-network.aws_ec2_managed_prefix_list.com.amazonaws.eu-west-1.dynamodb pl-6fa54006
+
+
+
 
 storage gateway endpoint
 terraform import module.north-network.aws_vpc_endpoint.icdl-za-endpoint-1 vpce-072604ab85afcdce2

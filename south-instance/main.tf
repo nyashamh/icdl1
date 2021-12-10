@@ -393,6 +393,7 @@ resource "aws_ebs_snapshot" "icdl-za-south-snapshot5" {
 
 resource "aws_ebs_snapshot" "icdl-za-south-snapshot6" {
     description          = "Created by CreateImage(i-079912a33481e8728) for ami-0277fd5b8865c77be from vol-04ecaf213f84fd5b3"
+
     tags        = {
         "Name"           = "icdl-za-south-snapshot6"
         "TerraformedBy"  = "nyasha@cloud-fundis"
@@ -685,7 +686,7 @@ resource "aws_security_group" "OpenVPNAccessServer" {
     ]
     name            = "OpenVPNAccessServer"
     tags            = {
-        "Name"      = "default"
+        "Name"      = "OpenVPNAccessServer"
         "Creator"   = "nyasha@cloud-fundis"
         "Createdby" = "terraform"
         "Region"    = "cape town"

@@ -486,6 +486,7 @@ resource "aws_security_group" "Allow-from-af-south-to-eu-west" {
         "CreatedBy"  = "terraform"
         "Creator"    = "nyasha@cloud-fundis"
         "Region"     = "Ireland"
+        "tag" = "test"
     }
     vpc_id      = "vpc-0c092d552baffc13d"
 

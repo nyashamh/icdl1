@@ -176,6 +176,24 @@ resource "aws_route_table" "icdl-za-pvt-rt-table" {
             vpc_endpoint_id            = ""
             vpc_peering_connection_id  = "pcx-0c53b96062c6831fe"
         },
+
+        #test
+      /*
+        {
+            carrier_gateway_id         = ""
+            cidr_block                 = ""
+            destination_prefix_list_id = "pl-a3ac49ca"
+            egress_only_gateway_id     = ""
+            gateway_id                 = ""
+            instance_id                = ""
+            ipv6_cidr_block            = ""
+            local_gateway_id           = ""
+            nat_gateway_id             = ""
+            network_interface_id       = ""
+            transit_gateway_id         = ""
+            vpc_endpoint_id            = "vpce-07f9f7e5d7b4055ae"
+            vpc_peering_connection_id  = ""
+        }*/
     ]
     #nat_gateway_id = aws_nat_gateway.icdl-za-south-nat-gw.id
 
