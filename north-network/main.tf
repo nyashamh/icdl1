@@ -80,7 +80,7 @@ resource "aws_route_table" "ICDL-default-routing-table" {
             vpc_endpoint_id            = ""
             vpc_peering_connection_id  = "pcx-0c53b96062c6831fe"
         },
-        {
+       /* {
             carrier_gateway_id         = ""
             cidr_block                 = "192.168.1.0/24"
             destination_prefix_list_id = ""
@@ -94,7 +94,7 @@ resource "aws_route_table" "ICDL-default-routing-table" {
             transit_gateway_id         = ""
             vpc_endpoint_id            = ""
             vpc_peering_connection_id  = ""
-        },
+        },*/
     ]
     tags             = {
         "Name"       = "ICDL-default-routing-table"
@@ -297,7 +297,7 @@ resource "aws_vpc_peering_connection" "icdl-eu-to-icdl-af" {
     timeouts {}
 
 }
-
+/*
 resource "aws_customer_gateway" "ICDL-vpn" {
     bgp_asn    = "65000"
 
@@ -322,4 +322,4 @@ resource "aws_vpn_gateway" "ICDL-VGW" {
     }
 
     vpc_id          = "vpc-0c092d552baffc13d"
-}
+}*/

@@ -145,6 +145,7 @@ resource "aws_route_table" "icdl-za-rt-table" {
             vpc_endpoint_id            = ""
             vpc_peering_connection_id  = "pcx-0c53b96062c6831fe"
         },
+
     ]
   
   tags          = {
@@ -154,6 +155,11 @@ resource "aws_route_table" "icdl-za-rt-table" {
     "Region"    = "cape town"
   }
 
+}
+
+resource "aws_vpc_endpoint_route_table_association" "south_pub_s3_pref_list" {
+  route_table_id   = "rtb-00a48c6df4b8ffd38"
+  vpc_endpoint_id  = "vpce-07f9f7e5d7b4055ae"
 }
 
 resource "aws_route_table" "icdl-za-pvt-rt-table" {
@@ -470,7 +476,7 @@ resource "aws_internet_gateway" "icdl-za-igw" {
 
 }
 
-#customer gateway
+/*#customer gateway
 resource "aws_customer_gateway" "icdl-za-south-cus-gw" {
     bgp_asn    = "65000"
     ip_address = "105.22.73.14"
@@ -494,4 +500,4 @@ resource "aws_vpn_gateway" "VPN-to-af-south-1" {
       "Region"      = "cape town"
     }
     vpc_id          = "vpc-05853c0c9f0293771"
-}
+}*/

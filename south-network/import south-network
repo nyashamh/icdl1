@@ -54,8 +54,8 @@ s3 bucket2
 terraform import module.south-network.aws_s3_bucket.bucket2 icdl-za-file-gateway
 
 customer gateway
-terraform import module.south-network.aws_customer_gateway.icdl-za-south-cus-gw cgw-05f0a308cb041ce23
+terraform import module.south-network.aws_customer_gateway.icdl-za-south-cus-gw 
 
 virtual private gateway
-terraform import module.south-network.aws_vpn_gateway.VPN-to-af-south-1 vgw-05df61bdc819ee812
+terraform import module.south-network.aws_vpn_gateway.VPN-to-af-south-1 
 
