@@ -157,7 +157,7 @@ resource "aws_vpc_dhcp_options" "ICDL-local-DHCP-options" {
     }
 
 }
-
+/*
 #aws_ec2_managed_prefix_list
 resource "aws_ec2_managed_prefix_list" "north-s3" {
    address_family = "IPv4"
@@ -239,7 +239,7 @@ resource "aws_vpc_endpoint" "icdl-za-endpoint-1" {
     }
     vpc_endpoint_type     = "Interface"
 }
-
+*/
 resource "aws_vpc_endpoint" "icdl-za-endpoint-2" {
   vpc_id                 = aws_vpc.icdl-za-north-network.id
   service_name           = "com.amazonaws.eu-west-1.s3"

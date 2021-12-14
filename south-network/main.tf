@@ -300,7 +300,7 @@ resource "aws_vpc_dhcp_options" "icdl-za-dhcp-01" {
 
     }
 }
-
+/*
 resource "aws_ec2_managed_prefix_list" "za-s3" {
     address_family = "IPv4"
     max_entries    = 1
@@ -329,7 +329,7 @@ resource "aws_ec2_managed_prefix_list" "za-dynamodb" {
     entry {
         cidr = "52.94.30.0/24"
     }
-}
+}*/
 
 #vpc_endpoint
 resource "aws_vpc_endpoint" "icdl-za-s3endpoint" {
