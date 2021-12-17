@@ -182,24 +182,6 @@ resource "aws_route_table" "icdl-za-pvt-rt-table" {
             vpc_endpoint_id            = ""
             vpc_peering_connection_id  = "pcx-0c53b96062c6831fe"
         },
-
-        #test
-      /*
-        {
-            carrier_gateway_id         = ""
-            cidr_block                 = ""
-            destination_prefix_list_id = "pl-a3ac49ca"
-            egress_only_gateway_id     = ""
-            gateway_id                 = ""
-            instance_id                = ""
-            ipv6_cidr_block            = ""
-            local_gateway_id           = ""
-            nat_gateway_id             = ""
-            network_interface_id       = ""
-            transit_gateway_id         = ""
-            vpc_endpoint_id            = "vpce-07f9f7e5d7b4055ae"
-            vpc_peering_connection_id  = ""
-        }*/
     ]
     #nat_gateway_id = aws_nat_gateway.icdl-za-south-nat-gw.id
 
@@ -300,10 +282,13 @@ resource "aws_vpc_dhcp_options" "icdl-za-dhcp-01" {
 
     }
 }
-/*
+
 resource "aws_ec2_managed_prefix_list" "za-s3" {
     address_family = "IPv4"
     max_entries    = 1
+    lifecycle {
+      ignore_changes = [max_entries]
+  }
     name           = "com.amazonaws.af-south-1.s3"
     #tags           = {}
     entry {
@@ -324,12 +309,16 @@ resource "aws_ec2_managed_prefix_list" "za-s3" {
 resource "aws_ec2_managed_prefix_list" "za-dynamodb" {
     address_family = "IPv4"
     max_entries    = 1
+
+    lifecycle {
+      ignore_changes = [max_entries]
+    }
     name           = "com.amazonaws.af-south-1.dynamodb"
     tags           = {}
     entry {
         cidr = "52.94.30.0/24"
     }
-}*/
+}
 
 #vpc_endpoint
 resource "aws_vpc_endpoint" "icdl-za-s3endpoint" {
@@ -435,7 +424,7 @@ resource "aws_network_acl" "icdl-za-network-acl" {
         "Createdby"= "terraform"
     }
 }
-/*
+
 resource "aws_network_interface" "icdl-za-south-eni" {
   subnet_id       = aws_subnet.icdl-za-south-pub-1-0.id
   #private_ips     = [""]
@@ -451,9 +440,9 @@ tags             = {
   "Createdby"    = "terraform"
 
 }
-*/ 
 
-/*
+
+
 resource "aws_nat_gateway" "icdl-za-south-nat-gw" {
   allocation_id = aws_eip.icdl-za-eip.id
   subnet_id     = aws_subnet.icdl-za-south-pub-1-0.id
@@ -463,8 +452,8 @@ resource "aws_nat_gateway" "icdl-za-south-nat-gw" {
     "Createdby"    = "terraform"
   }
 }
-*/
 
+/*
 #internet gateway
 resource "aws_internet_gateway" "icdl-za-igw" {
       vpc_id           = "vpc-05853c0c9f0293771"
@@ -476,7 +465,7 @@ resource "aws_internet_gateway" "icdl-za-igw" {
 
 }
 
-/*#customer gateway
+#customer gateway
 resource "aws_customer_gateway" "icdl-za-south-cus-gw" {
     bgp_asn    = "65000"
     ip_address = "105.22.73.14"
@@ -500,4 +489,5 @@ resource "aws_vpn_gateway" "VPN-to-af-south-1" {
       "Region"      = "cape town"
     }
     vpc_id          = "vpc-05853c0c9f0293771"
-}*/
+}
+*/

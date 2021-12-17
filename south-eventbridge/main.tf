@@ -14,7 +14,7 @@ module "south-eventbridge" {
   rules = {
     crons = {
       description         = "Trigger for a Lambda to shutdown nat-gw"
-      cron_expression     = "cron(0 22 ?  * 56L *)"
+      cron_expression     = "cron(0 22 ?  * 6L *)"
     }
   }
 

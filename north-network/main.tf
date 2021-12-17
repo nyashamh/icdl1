@@ -80,21 +80,6 @@ resource "aws_route_table" "ICDL-default-routing-table" {
             vpc_endpoint_id            = ""
             vpc_peering_connection_id  = "pcx-0c53b96062c6831fe"
         },
-       /* {
-            carrier_gateway_id         = ""
-            cidr_block                 = "192.168.1.0/24"
-            destination_prefix_list_id = ""
-            egress_only_gateway_id     = ""
-            gateway_id                 = "vgw-08d6781e4479aea48"
-            instance_id                = ""
-            ipv6_cidr_block            = ""
-            local_gateway_id           = ""
-            nat_gateway_id             = ""
-            network_interface_id       = ""
-            transit_gateway_id         = ""
-            vpc_endpoint_id            = ""
-            vpc_peering_connection_id  = ""
-        },*/
     ]
     tags             = {
         "Name"       = "ICDL-default-routing-table"
@@ -157,11 +142,14 @@ resource "aws_vpc_dhcp_options" "ICDL-local-DHCP-options" {
     }
 
 }
-/*
+
 #aws_ec2_managed_prefix_list
 resource "aws_ec2_managed_prefix_list" "north-s3" {
    address_family = "IPv4"
     max_entries    = 1
+    lifecycle {
+      ignore_changes = [max_entries]
+    }
     name           = "com.amazonaws.eu-west-1.s3"
     tags           = {
         "Name"       = "north-s3"
@@ -187,6 +175,9 @@ resource "aws_ec2_managed_prefix_list" "north-s3" {
 resource "aws_ec2_managed_prefix_list" "north-dynamodb" {
     address_family = "IPv4"
     max_entries    = 1
+    lifecycle {
+      ignore_changes = [max_entries]
+    }
     name           = "com.amazonaws.eu-west-1.dynamodb"
     tags           = {
         "Name"       = "north-dynamodb"
@@ -239,7 +230,7 @@ resource "aws_vpc_endpoint" "icdl-za-endpoint-1" {
     }
     vpc_endpoint_type     = "Interface"
 }
-*/
+
 resource "aws_vpc_endpoint" "icdl-za-endpoint-2" {
   vpc_id                 = aws_vpc.icdl-za-north-network.id
   service_name           = "com.amazonaws.eu-west-1.s3"
