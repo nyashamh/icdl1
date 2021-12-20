@@ -222,9 +222,9 @@ resource "aws_internet_gateway" "icdl-za-igw" {
 */ 
 
 resource "aws_eip" "icdl-za-eip" {
-    instance             = "i-07f33411ef414aabe"
+    instance             = data.aws_instance.OpenVPN-BYOL.id
     network_border_group = "af-south-1"
-    network_interface    = "eni-0815bdcd755b73218"
+    network_interface    = data.aws_network_interface.icdl-south-eni-2.id
     public_ipv4_pool     = "amazon"
     tags                 = {
         "Name"           = "icdl-za-eip"
@@ -424,28 +424,11 @@ resource "aws_network_acl" "icdl-za-network-acl" {
         "Createdby"= "terraform"
     }
 }
-/*
-resource "aws_network_interface" "icdl-za-south-eni" {
-  subnet_id       = aws_subnet.icdl-za-south-pub-1-0.id
-  #private_ips     = [""]
-  #security_groups = [aws_security_group.OpenVPN_Access_Server_SG.id]
 
-  attachment {
-    instance     = aws_instance.OpenVPN-BYOL.id
-    device_index = 1
-  }
-tags             = {
-  "Name"         = "icdl-za-south-eni"
-  "Creator"      = "nyasha@cloud-fundis"
-  "Createdby"    = "terraform"
-
-}
-*/
-
-
+#nat gateway
 resource "aws_nat_gateway" "icdl-za-south-nat-gw" {
-  allocation_id = "eipalloc-0214a896d931068f5"
-  subnet_id     = "subnet-058d9e91725b55e0d"
+  allocation_id = data.aws_eip.icdl-za-eip.id
+  subnet_id     = data.aws_subnet.icdl-za-south-pub-1-0.id
   #single_nat_gateway = true
   tags           = {  
     "Name"         = "icdl-za-south-nat-gw"
@@ -478,7 +461,6 @@ resource "aws_customer_gateway" "icdl-za-south-cus-gw" {
     }
 
     type       = "ipsec.1"
-}
 
 #virtual private gateway
 resource "aws_vpn_gateway" "VPN-to-af-south-1" {
