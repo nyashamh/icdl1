@@ -424,7 +424,7 @@ resource "aws_network_acl" "icdl-za-network-acl" {
         "Createdby"= "terraform"
     }
 }
-
+/*
 resource "aws_network_interface" "icdl-za-south-eni" {
   subnet_id       = aws_subnet.icdl-za-south-pub-1-0.id
   #private_ips     = [""]
@@ -440,12 +440,13 @@ tags             = {
   "Createdby"    = "terraform"
 
 }
-
+*/
 
 
 resource "aws_nat_gateway" "icdl-za-south-nat-gw" {
-  allocation_id = aws_eip.icdl-za-eip.id
-  subnet_id     = aws_subnet.icdl-za-south-pub-1-0.id
+  allocation_id = "eipalloc-0214a896d931068f5"
+  subnet_id     = "subnet-058d9e91725b55e0d"
+  #single_nat_gateway = true
   tags           = {  
     "Name"         = "icdl-za-south-nat-gw"
     "Creator"      = "nyasha@cloud-fundis"
