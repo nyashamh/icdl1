@@ -194,10 +194,9 @@ resource "aws_route_table" "icdl-za-pvt-rt-table" {
 
 }
 
-#
-
+#route 
 resource "aws_route" "icdl-south-route-nat-gw" {
-  route_table_id         = "rtb-09b8aa4a97487c2bc"
+  route_table_id         = "rtb-0f724982f511d86dd"
   #destination_cidr_block = "0.0.0.0/0"
   nat_gateway_id         = aws_nat_gateway.icdl-za-south-nat-gw.id
 }
