@@ -432,9 +432,9 @@ resource "aws_network_acl" "icdl-za-network-acl" {
 resource "aws_eip" "icdl-nat-gw-eip" {
   vpc = true
   tags = {
-    Name = "icdl-za-south-nat-gateway"
-          "Creator" = "nyasha@cloud-fundis"
-        "Createdby"= "terraform"
+    "Name" = "icdl-za-south-nat-gateway"
+    "Creator" = "nyasha@cloud-fundis"
+    "Createdby"= "terraform"
   }
 }
 
@@ -455,6 +455,11 @@ resource "aws_route" "icdl-south-route-nat-gw" {
   route_table_id         = "rtb-0f724982f511d86dd"
   destination_cidr_block = "0.0.0.0/0"
   nat_gateway_id         = aws_nat_gateway.icdl-za-south-nat-gw.id
+    tags           = {  
+    "Name"         = "icdl-south-route-nat-gw"
+    "Creator"      = "nyasha@cloud-fundis"
+    "Createdby"    = "terraform"
+  }
 }
 
 

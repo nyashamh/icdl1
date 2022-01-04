@@ -328,6 +328,6 @@ resource "aws_nat_gateway" "icdl-north-nat-gateway" {
 
 resource "aws_route" "icdl-north-route-nat-gw" {
   route_table_id         = "rtb-09b8aa4a97487c2bc"
-  #destination_cidr_block = "0.0.0.0/0"
+  destination_cidr_block = "0.0.0.0/0"
   nat_gateway_id         = aws_nat_gateway.icdl-north-nat-gateway.id
 }
