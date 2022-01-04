@@ -433,12 +433,14 @@ resource "aws_eip" "icdl-nat-gw-eip" {
   vpc = true
   tags = merge(var.default_tags, {
     Name = "icdl-za-south-nat-gateway"
+          "Creator" = "nyasha@cloud-fundis"
+        "Createdby"= "terraform"
   })
 }
 
 #nat gateway
 resource "aws_nat_gateway" "icdl-za-south-nat-gw" {
-  allocation_id = data.aws_eip.icdl-za-eip.id
+  allocation_id = aws_eip.icdl-nat-gw-eip.id
   subnet_id     = data.aws_subnet.icdl-za-south-pub-1-0.id
   #single_nat_gateway = true
   tags           = {  
