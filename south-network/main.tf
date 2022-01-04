@@ -450,9 +450,6 @@ resource "aws_nat_gateway" "icdl-za-south-nat-gw" {
   }
 }
 
-<<<<<<< HEAD
-
-=======
 # Add route for the NAT gateway 
 resource "aws_route" "icdl-south-route-nat-gw" {
   route_table_id         = "rtb-0f724982f511d86dd"
@@ -461,7 +458,6 @@ resource "aws_route" "icdl-south-route-nat-gw" {
 }
 
 /*
->>>>>>> 73f6c6fdef6fa5c9ea53b2a4a37440650e0fa03b
 #internet gateway
 resource "aws_internet_gateway" "icdl-za-igw" {
       vpc_id           = "vpc-05853c0c9f0293771"
