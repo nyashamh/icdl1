@@ -445,7 +445,7 @@ resource "aws_nat_gateway" "icdl-za-south-nat-gw" {
   }
 }
 
-/*
+
 #internet gateway
 resource "aws_internet_gateway" "icdl-za-igw" {
       vpc_id           = "vpc-05853c0c9f0293771"
@@ -481,4 +481,4 @@ resource "aws_vpn_gateway" "VPN-to-af-south-1" {
     }
     vpc_id          = "vpc-05853c0c9f0293771"
 }
-*/
+}
