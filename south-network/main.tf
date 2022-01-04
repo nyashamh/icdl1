@@ -431,11 +431,11 @@ resource "aws_network_acl" "icdl-za-network-acl" {
 # EIP for the NAT gateway
 resource "aws_eip" "icdl-nat-gw-eip" {
   vpc = true
-  tags = merge(var.default_tags, {
+  tags = {
     Name = "icdl-za-south-nat-gateway"
           "Creator" = "nyasha@cloud-fundis"
         "Createdby"= "terraform"
-  })
+  }
 }
 
 #nat gateway
@@ -453,11 +453,11 @@ resource "aws_nat_gateway" "icdl-za-south-nat-gw" {
 # Add route for the NAT gateway 
 resource "aws_route" "icdl-south-route-nat-gw" {
   route_table_id         = "rtb-0f724982f511d86dd"
-  #destination_cidr_block = "0.0.0.0/0"
+  destination_cidr_block = "0.0.0.0/0"
   nat_gateway_id         = aws_nat_gateway.icdl-za-south-nat-gw.id
 }
 
-/*
+
 #internet gateway
 resource "aws_internet_gateway" "icdl-za-igw" {
       vpc_id           = "vpc-05853c0c9f0293771"
@@ -481,6 +481,7 @@ resource "aws_customer_gateway" "icdl-za-south-cus-gw" {
     }
 
     type       = "ipsec.1"
+}
 
 #virtual private gateway
 resource "aws_vpn_gateway" "VPN-to-af-south-1" {
@@ -493,4 +494,4 @@ resource "aws_vpn_gateway" "VPN-to-af-south-1" {
     }
     vpc_id          = "vpc-05853c0c9f0293771"
 }
-}
+
