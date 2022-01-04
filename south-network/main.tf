@@ -194,12 +194,7 @@ resource "aws_route_table" "icdl-za-pvt-rt-table" {
 
 }
 
-#route 
-resource "aws_route" "icdl-south-route-nat-gw" {
-  route_table_id         = "rtb-0f724982f511d86dd"
-  #destination_cidr_block = "0.0.0.0/0"
-  nat_gateway_id         = aws_nat_gateway.icdl-za-south-nat-gw.id
-}
+
 
 
 resource "aws_vpc_endpoint_route_table_association" "south_s3_pref_list" {
@@ -433,6 +428,14 @@ resource "aws_network_acl" "icdl-za-network-acl" {
     }
 }
 
+# EIP for the NAT gateway
+resource "aws_eip" "icdl-nat-gw-eip" {
+  vpc = true
+  tags = merge(var.default_tags, {
+    Name = "icdl-za-south-nat-gateway"
+  })
+}
+
 #nat gateway
 resource "aws_nat_gateway" "icdl-za-south-nat-gw" {
   allocation_id = data.aws_eip.icdl-za-eip.id
@@ -443,6 +446,13 @@ resource "aws_nat_gateway" "icdl-za-south-nat-gw" {
     "Creator"      = "nyasha@cloud-fundis"
     "Createdby"    = "terraform"
   }
+}
+
+# Add route for the NAT gateway 
+resource "aws_route" "icdl-south-route-nat-gw" {
+  route_table_id         = "rtb-0f724982f511d86dd"
+  #destination_cidr_block = "0.0.0.0/0"
+  nat_gateway_id         = aws_nat_gateway.icdl-za-south-nat-gw.id
 }
 
 /*
