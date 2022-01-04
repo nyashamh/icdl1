@@ -38,6 +38,8 @@ vpc_endpoint
 xxxxxxx terraform import module.south-network.aws_s3_bucket.bucket credentials-and-licences port
 terraform import module.south-network.aws_vpc_endpoint.icdl-za-s3endpoint vpce-07f9f7e5d7b4055ae
 
+terraform import module.south-network.aws_vpc_endpoint.icdl-sts-endpoint vpce-08a3d48c429ea3730
+
 vpc_peeering
 terraform import module.south-network.aws_vpc_peering_connection.icdl-af-to-icdl-eu pcx-0c53b96062c6831fe
 

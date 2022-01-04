@@ -432,7 +432,7 @@ resource "aws_network_acl" "icdl-za-network-acl" {
 resource "aws_eip" "icdl-nat-gw-eip" {
   vpc = true
   tags = {
-    "Name" = "icdl-za-south-nat-gateway"
+    "Name" = "icdl-nat-gw-eip"
     "Creator" = "nyasha@cloud-fundis"
     "Createdby"= "terraform"
   }
@@ -500,3 +500,39 @@ resource "aws_vpn_gateway" "VPN-to-af-south-1" {
     vpc_id          = "vpc-05853c0c9f0293771"
 }
 
+resource "aws_vpc_endpoint" "icdl-sts-endpoint" {
+    vpc_id               = aws_vpc.icdl-za-south-network.id
+    service_name         = "com.amazonaws.af-south-1.sts"
+    policy                = jsonencode(
+        {
+            Statement = [
+                {
+                    Action    = "*"
+                    Effect    = "Allow"
+                    Principal = "*"
+                    Resource  = "*"
+                },
+            ]
+        }
+    )
+    private_dns_enabled   = true
+    route_table_ids       = []
+    security_group_ids    = [
+        "sg-058b98a494c29f67b",
+        "sg-09387b7f41417ca75",
+    ]
+    subnet_ids            = [
+        "subnet-0817f27901aa2d887",
+        "subnet-09a787cd42ae02ec8",
+        "subnet-0b4e65b06a02f3ffa",
+    ]
+    tags                  = {
+        "Name"            = "icdl-sts-endpoint"
+        "CreatedBy"       = "hamish@cloudfundis"
+        "TerraformedBy"   = "nyasha@cloudfundis"
+    }
+
+    vpc_endpoint_type     = "Interface"
+
+    timeouts {}
+}
