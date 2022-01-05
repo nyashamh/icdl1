@@ -40,4 +40,3 @@ provider "aws" {
   alias   = "north"
   region  = "eu-west-1"
 }
-
