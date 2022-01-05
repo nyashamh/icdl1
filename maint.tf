@@ -33,3 +33,11 @@ module "north-instance" {
   }
 
 }
+
+module "ecr" {
+  source = "./ecr"
+  #region = eu-west-1
+  providers = {
+    aws = aws.north
+}
+}
