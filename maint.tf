@@ -41,3 +41,7 @@ module "ecr" {
     aws = aws.north
 }
 }
+
+resource "aws_secretsmanager_secret" "github-oauth-token" {
+  name = "github-oauth-token"
+}

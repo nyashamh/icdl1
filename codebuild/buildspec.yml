@@ -16,3 +16,19 @@ phases:
       - echo Build completed on `date`
       - echo Pushing the Docker image...
       - docker push 813260210012.dkr.ecr.eu-west-1.amazonaws.com/icdl:latest
+
+version: 0.2
+env:
+  variables:
+  parameter-store:
+    TOKEN: /github/token
+phases:
+  build:
+    commands:
+      - apk add git
+      - git clone https://nyashamh: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@github.com/cloud-fundis/nyasha_terraform_icdl.git icdl
+      - terraform init
+	    - terraform apply -auto-approve -target module.north-network.aws_nat_gateway.icdl-north-nat-gateway
+	    - terraform apply -auto-approve -target module.north-network.aws_route.icdl-north-route-nat-gw
+	    - terraform apply -auto-approve -target module.north-network.aws_eip.icdl-za-north-eip
+  
