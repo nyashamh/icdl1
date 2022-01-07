@@ -45,3 +45,11 @@ module "ecr" {
 resource "aws_secretsmanager_secret" "github-oauth-token" {
   name = "github-oauth-token"
 }
+
+module "north-backend" {
+  source = "./north-backend"
+  #region = eu-west-1
+  providers = {
+    aws = aws.north
+   }
+}
