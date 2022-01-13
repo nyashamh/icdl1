@@ -1,2 +1,27 @@
 
-  
+version: 0.2
+env:
+  parameter-store:
+    TOKEN: /github/token
+phases:
+  install:
+    commands:
+      - apk add git
+      - git clone https://nyashamh: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@github.com/cloud-fundis/nyasha_terraform_icdl.git icdl
+  pre_build:
+    commands:
+      - /bin/terraform -v
+      - cd "$CODEBUILD_SRC_DIR"
+      - terraform init -input=false --backend-config=./north-backend/backend-north.conf
+  build:
+    commands:
+      - terraform apply -input=false -compact-warnings -no-color -target module.south-network.aws_eip.icdl-nat-gw-eip -auto-approve
+     #- echo "Performing a terraform ${TF_ACTION}"
+     #- terraform ${TF_ACTION} -input=false -compact-warnings -no-color -target module.south-network.aws_eip.icdl-nat-gw-eip -auto-approve
+     #- terraform ${TF_ACTION} -input=false -compact-warnings -no-color -target module.north-network.aws_eip.icdl-za-north-eip -auto-approve
+    # - echo "${TF_ACTION} on Nat-Gateway"
+   #  - terraform ${TF_ACTION} -input=false -compact-warnings -no-color -target module.north-network.aws_nat_gateway.icdl-north-nat-gateway -auto-approve
+    # - terraform ${TF_ACTION} -input=false -compact-warnings -no-color -target module.north-network.aws_route.icdl-north-route-nat-gw -auto-approve
+  post_build:
+    commands:
+      - echo "Terraform ${TF_ACTION} was successful"
