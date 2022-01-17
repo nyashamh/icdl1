@@ -429,10 +429,10 @@ resource "aws_network_acl" "icdl-za-network-acl" {
 }
 
 # EIP for the NAT gateway
-resource "aws_eip" "icdl-nat-gw-eip" {
+resource "aws_eip" "icdl-za-south-nat-eip" {
   vpc = true
   tags = {
-    "Name" = "icdl-nat-gw-eip"
+    "Name" = "icdl-za-south-nat-eip"
     "Creator" = "nyasha@cloud-fundis"
     "Createdby"= "terraform"
   }
@@ -451,7 +451,7 @@ resource "aws_nat_gateway" "icdl-za-south-nat-gw" {
 }
 
 # Add route for the NAT gateway 
-resource "aws_route" "icdl-south-route-nat-gw" {
+resource "aws_route" "icdl-south-route-nat-gw" {  
   route_table_id         = "rtb-0f724982f511d86dd"
   destination_cidr_block = "0.0.0.0/0"
   nat_gateway_id         = aws_nat_gateway.icdl-za-south-nat-gw.id

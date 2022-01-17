@@ -314,12 +314,12 @@ resource "aws_vpn_gateway" "ICDL-VGW" {
 
     vpc_id          = "vpc-0c092d552baffc13d"
 }*/
-resource "aws_eip" "icdl-za-north-eip" {
+resource "aws_eip" "icdl-za-north-nat-eip" { 
   #instance = ""
   vpc      = true
 }
 
-resource "aws_nat_gateway" "icdl-north-nat-gateway" {
+resource "aws_nat_gateway" "icdl-za-north-nat-gw" {  
   allocation_id = aws_eip.icdl-za-north-eip.id
   subnet_id     = data.aws_subnet.icdl-north-1-public-1-0.id
  
