@@ -317,6 +317,12 @@ resource "aws_vpn_gateway" "ICDL-VGW" {
 resource "aws_eip" "icdl-za-north-nat-eip" { 
   #instance = ""
   vpc      = true
+  tags = {
+      "Name"      = "icdl-za-north-nat-eip"
+      "CreatedBy" = "nyasha@cloud-fundis"
+  }
+
+  
 }
 
 resource "aws_nat_gateway" "icdl-za-north-nat-gw" {  
