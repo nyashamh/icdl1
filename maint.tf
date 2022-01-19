@@ -53,3 +53,7 @@ module "north-backend" {
     aws = aws.north
    }
 }
+
+module "codebuild" {
+  source = "./codebuild"
+}

@@ -1,4 +1,3 @@
-
 version: 0.2
 env:
   parameter-store:
@@ -15,13 +14,14 @@ phases:
       - terraform init -input=false --backend-config=./north-backend/backend-north.conf
   build:
     commands:
-      - terraform apply -input=false -compact-warnings -no-color -target module.south-network.aws_eip.icdl-nat-gw-eip -auto-approve
-     #- echo "Performing a terraform ${TF_ACTION}"
-     #- terraform ${TF_ACTION} -input=false -compact-warnings -no-color -target module.south-network.aws_eip.icdl-nat-gw-eip -auto-approve
-     #- terraform ${TF_ACTION} -input=false -compact-warnings -no-color -target module.north-network.aws_eip.icdl-za-north-eip -auto-approve
-    # - echo "${TF_ACTION} on Nat-Gateway"
-   #  - terraform ${TF_ACTION} -input=false -compact-warnings -no-color -target module.north-network.aws_nat_gateway.icdl-north-nat-gateway -auto-approve
-    # - terraform ${TF_ACTION} -input=false -compact-warnings -no-color -target module.north-network.aws_route.icdl-north-route-nat-gw -auto-approve
+     - echo "Performing a terraform ${TF_ACTION}"
+     - terraform ${TF_ACTION} -input=false -compact-warnings -no-color -target module.south-network.aws_eip.icdl-za-south-nat-eip -auto-approve
+     - terraform ${TF_ACTION} -input=false -compact-warnings -no-color -target module.north-network.aws_eip.icdl-za-north-nat-eip -auto-approve
+     #- echo "${TF_ACTION} on Nat-Gateway"
+     #- terraform ${TF_ACTION} -input=false -compact-warnings -no-color -target module.north-network.aws_nat_gateway.icdl-za-north-nat-gw -auto-approve
+     #- terraform ${TF_ACTION} -input=false -compact-warnings -no-color -target module.north-network.aws_nat_gateway.icdl-za-south-nat-gw -auto-approve
+     #- terraform ${TF_ACTION} -input=false -compact-warnings -no-color -target module.north-network.aws_route.icdl-north-route-nat-gw -auto-approve
+     #- terraform ${TF_ACTION} -input=false -compact-warnings -no-color -target module.north-network.aws_route.icdl-south-route-nat-gw -auto-approve 
   post_build:
     commands:
-      - echo "Terraform ${TF_ACTION} was successful"
+      - echo "Terraform ${TF_ACTION} was successful" 

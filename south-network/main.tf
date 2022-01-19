@@ -428,7 +428,7 @@ resource "aws_network_acl" "icdl-za-network-acl" {
     }
 }
 
-# EIP for the NAT gateway
+# EIP for the NAT gateway 
 resource "aws_eip" "icdl-za-south-nat-eip" {
   vpc = true
   tags = {
