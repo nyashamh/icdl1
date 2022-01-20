@@ -57,3 +57,23 @@ module "north-backend" {
 module "codebuild" {
   source = "./codebuild"
 }
+
+module "ecr" {
+  source = "./ecr"
+}
+
+module "eventbridge" {
+  source = "./eventbridge"
+}
+
+module "lambda" {
+  source = "./lambda"
+}
+
+module "sns" {
+  source = "./sns"
+}
+
+module "tfm-docker" {
+  source = "./tfm-docker"
+}

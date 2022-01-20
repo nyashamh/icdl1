@@ -1,4 +1,5 @@
-terraform {
+
+/*terraform {
   required_providers {
     docker = {
       source = "kreuzwerker/docker"
@@ -37,5 +38,5 @@ resource "docker_container" "nodered_container" {
     external = 1880
   }
 }
-
+*/
   
