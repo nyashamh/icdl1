@@ -1,0 +1,67 @@
+aws vpc
+terraform import module.north-network.aws_vpc.icdl-za-north-network vpc-0c092d552baffc13d
+
+vpc peering 
+terraform import module.north-network.aws_vpc_peering_connection.icdl-eu-to-icdl-af pcx-0c53b96062c6831fe
+
+public subnet
+terraform import module.north-network.aws_subnet.icdl-za-north-pub-1-0 subnet-057b56235bd001e7d
+
+private subnet
+terraform import module.north-network.aws_subnet.ICDL-private-subnet subnet-0146062e1f9031420
+
+route table1
+terraform import module.north-network.aws_route_table.ICDL-default-routing-table rtb-07b00e8bfe5a12ac1
+
+route table2
+terraform import module.north-network.aws_route_table.ICDL-private-subnet-rt-tbl rtb-09b8aa4a97487c2bc
+
+internet gateway
+terraform import module.north-network.aws_internet_gateway.ICDL-temp-IGW igw-0cbaa3aae7421ac90
+
+aws_vpc_dhcp_options
+terraform import module.north-network.aws_vpc_dhcp_options.ICDL-local-DHCP-options dopt-05451db6d565783b7
+'
+
+
+aws_ec2_managed_prefix_list
+xxx terraform import module.north-network.aws_ec2_managed_prefix_list.north-s3 pl-6da54004
+
+aws_ec2_managed_prefix_list
+xxx terraform import module.north-network.aws_ec2_managed_prefix_list.com.amazonaws.eu-west-1.dynamodb pl-6fa54006
+
+
+
+
+storage gateway endpoint
+terraform import module.north-network.aws_vpc_endpoint.icdl-za-endpoint-1 vpce-072604ab85afcdce2
+
+s3 endpoint
+terraform import module.north-network.aws_vpc_endpoint.icdl-za-endpoint-2 vpce-0e32b1da49d9b0f5b
+
+aws_ec2_managed_prefix_list1
+terraform import module.north-network.aws_ec2_managed_prefix_list.north-s3 pl-6da54004
+
+
+aws_ec2_managed_prefix_list2
+terraform import module.north-network.aws_ec2_managed_prefix_list.north-dynamodb pl-6fa54006
+
+customer gateway
+terraform import module.north-network.aws_customer_gateway.ICDL-vpn cgw-0b8e2627b49a4685f
+
+virtual private gateway
+terraform import module.north-network.aws_vpn_gateway.ICDL-VGW vgw-08d6781e4479aea48
+
+
+
+s3 bucket0
+terraform import module.north-network.aws_s3_bucket.bucket0 icdl-backups
+
+aws_s3_bucket1
+terraform import module.north-network.aws_s3_bucket.bucket1 icdl-presigned
+
+aws_s3_bucket2
+terraform import module.north-network.aws_s3_bucket.bucket2 icdl.org.za
+
+aws_s3_bucket3
+terraform import module.north-network.aws_s3_bucket.bucket3 icdlafrica.org

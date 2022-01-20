@@ -7,7 +7,7 @@ resource "aws_lambda_function" "icdl-nat-lambda" {
   role          = aws_iam_role.icdl-nat-lambda-role.arn
   handler       = "nat-lambda-function.lambda_handler"
 
-  runtime = "python3.7.x"
+  runtime = "python3.7"
 }
 
 data "archive_file" "init" {

@@ -1,6 +1,5 @@
-module "eventbridge" {
+module "icdl-shutdown-eventbridge" {
   source        = "terraform-aws-modules/eventbridge/aws"
-  description   = "triggers a lambda function to invoke a terraform destroy that brings down nat gateways every last friday of the month"
   create_bus    = false
 
   rules = {
@@ -24,7 +23,7 @@ module "eventbridge" {
 
     {
       name = "shutdown-nat-sns"
-      arn  = aws.sns.shutdown-nat-sns.arn
+      #arn  = aws.sns.shutdown-nat-sns.arn
 
     },
     {
@@ -37,5 +36,6 @@ module "eventbridge" {
  tags = {
    "Name" = "nat-destroy-rule"
    "CreatedBy" = "nyasha@cloud-fundis.co.za"
+   "Description" = "triggers a lambda function to invoke a terraform destroy that brings down nat gateways every last friday of the month"
   }
 }

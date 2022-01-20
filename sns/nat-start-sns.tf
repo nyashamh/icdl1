@@ -1,9 +1,9 @@
 resource "aws_sns_topic_subscription" "start-nat-sns" {
    topic_arn = aws_sns_topic.start-nat-sns.arn
-   display_name = "Created_NAT_gateways_in_CPT_and_Ireland"
-   protocol = "Email"
+   #display_name = "Created_NAT_gateways_in_CPT_and_Ireland"
+   protocol = "email-json"
    endpoint = "nyasha@cloud-fundis.co.za"
-   topic = "start-nat-sns"
+   #topic = "start-nat-sns"
 }
 
 resource "aws_sns_topic" "start-nat-sns" {

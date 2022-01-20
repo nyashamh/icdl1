@@ -76,9 +76,10 @@ module "build" {
     image_repo_name     = "icdl" 
     image_tag           = "latest"
 
-    environment_variable = [{
+    environment_variables = [{
       name  = "TF_ACTION"
       value = ""
+      type = "Plaintext"
     }]
   }
 

@@ -429,7 +429,7 @@ resource "aws_network_acl" "icdl-za-network-acl" {
 }
 
 # EIP for the NAT gateway 
-resource "aws_eip" "icdl-za-south-nat-eip" {
+resource "aws_eip" "icdl-za-south-nat-eip" { 
   vpc = true
   tags = {
     "Name" = "icdl-za-south-nat-eip"
@@ -440,7 +440,7 @@ resource "aws_eip" "icdl-za-south-nat-eip" {
 
 #nat gateway
 resource "aws_nat_gateway" "icdl-za-south-nat-gw" {
-  allocation_id = aws_eip.icdl-nat-gw-eip.id
+  allocation_id = aws_eip.icdl-za-south-nat-eip.id
   subnet_id     = data.aws_subnet.icdl-za-south-pub-1-0.id
   #single_nat_gateway = true
   tags           = {  

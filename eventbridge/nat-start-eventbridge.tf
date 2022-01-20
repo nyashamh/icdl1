@@ -1,6 +1,5 @@
-module "eventbridge" {
+module "icdl-start-eventbridge" {
   source        = "terraform-aws-modules/eventbridge/aws"
-  description   = "triggers a lambda function to invoke a terraform apply that brings up the nat gateway every last thursday of the month"
   create_bus    = false
 
   rules = {
@@ -24,7 +23,7 @@ module "eventbridge" {
 
     {
       name = "start-nat-sns"
-      arn  = aws.sns.start-nat-sns.arn
+      #arn  = aws.sns.start-nat-sns.arn
 
     },
     {
@@ -37,5 +36,6 @@ module "eventbridge" {
  tags = {
    "Name" = "nat-apply-rule"
    "CreatedBy" = "nyasha@cloud-fundis.co.za"
+   "Description" = "triggers a lambda function to invoke a terraform apply that brings up the nat gateway every last thursday of the month"
   }
 }
