@@ -5,6 +5,7 @@ resource "aws_sns_topic_subscription" "start-nat-sns" {
    endpoint = "nyasha@cloud-fundis.co.za"
    topic = "start-nat-sns"
 }
+
 resource "aws_sns_topic" "start-nat-sns" {
   name            = "start-nat-sns"
   delivery_policy = <<EOF

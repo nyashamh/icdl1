@@ -1,18 +1,17 @@
+locals {
+  lambda-zip-location = "outputs/nat-lambda-function.zip"
+}
+resource "aws_lambda_function" "icdl-nat-lambda" {
+  filename      = local.lambda-zip-location
+  function_name = "nat-lambda-function"
+  role          = aws_iam_role.icdl-nat-lambda-role.arn
+  handler       = "nat-lambda-function.lambda_handler"
 
-resource "aws_lambda_function" "icdl-natgw_lambda" {
-  filename      = data.archive_file. .output_path
-  function_name = ""
-  role          = aws_iam_role..arn
-  handler       = ".handler"
-
-  source_code_hash = data.archive_file.crawler_delete_code.output_base64sha256
-
-  runtime = "python3.7"
-  timeout =  
+  runtime = "python3.7.x"
 }
 
-data "archive_file" "" {
+data "archive_file" "init" {
   type        = "zip"
-  source_file = "${path.module}/lambda-code/"
-  output_path = "${path.module}/lambda-code/"
+  source_file = "nat-lambda-function.py"
+  output_path = local.lambda-zip-location
 }
