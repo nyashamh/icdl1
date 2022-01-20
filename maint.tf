@@ -57,11 +57,6 @@ module "north-backend" {
 module "codebuild" {
   source = "./codebuild"
 }
-
-module "ecr" {
-  source = "./ecr"
-}
-
 module "eventbridge" {
   source = "./eventbridge"
 }
