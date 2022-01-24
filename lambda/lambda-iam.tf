@@ -18,8 +18,8 @@ resource "aws_iam_role" "icdl-nat-lambda-role" {
 EOF
 }
 
-resource "aws_iam_policy" "nat-lambda_logging" {
-  name        = "nat-lambda_logging"
+resource "aws_iam_policy" "nat-lambda-logging" {
+  name        = "nat-lambda-logging"
   path        = "/"
   description = "IAM policy for logging from a lambda"
 
@@ -41,7 +41,7 @@ resource "aws_iam_policy" "nat-lambda_logging" {
 EOF
 }
 
-resource "aws_iam_role_policy_attachment" "icdl-lambda_logs" {
+resource "aws_iam_role_policy_attachment" "icdl-lambda-logs" {
   role       = aws_iam_role.icdl-nat-lambda-role.name
-  policy_arn = aws_iam_policy.nat-lambda_logging.arn
+  policy_arn = aws_iam_policy.nat-lambda-logging.arn
 }
