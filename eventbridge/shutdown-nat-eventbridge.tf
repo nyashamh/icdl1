@@ -1,4 +1,17 @@
-module "icdl-shutdown-eventbridge" {
+resource "aws_cloudwatch_event_rule" "nat-destroy-rule" {
+    event_bus_name      = "default"
+    is_enabled          = false
+    name                = "nat-destroy-rule"
+    schedule_expression = "cron(0 06 ? * 5L *)"
+  
+   tags = {
+   "Name" = "nat-destroy-rule"
+   "CreatedBy" = "nyasha@cloud-fundis.co.za"
+   "Description" = "triggers a lambda function to invoke a terraform destroy that brings down nat gateways every last friday of the month"
+  }
+}
+
+/*module "nat-destroy-rule" {
   source        = "terraform-aws-modules/eventbridge/aws"
   create_bus    = false
 
@@ -6,8 +19,10 @@ module "icdl-shutdown-eventbridge" {
 
     orders = {
     crons = {
-      description         = "Trigger for a Lambda to destroy nat gateways"
-      cron_expression     = "cron(0 06 ? * 5L * )"
+      description            = "Trigger for a Lambda to destroy nat gateways"
+      schedule               = "cron(0 06 ? * 5L * )"  
+      event_pattern          = jsonencode({ "source" : ["nat-destroy-rule.logs"] })
+      enabled                = false
     }
     }
   }
@@ -36,6 +51,6 @@ module "icdl-shutdown-eventbridge" {
  tags = {
    "Name" = "nat-destroy-rule"
    "CreatedBy" = "nyasha@cloud-fundis.co.za"
-   "Description" = "triggers a lambda function to invoke a terraform destroy that brings down nat gateways every last friday of the month"
+   "Description" = 
   }
-}
+}*/

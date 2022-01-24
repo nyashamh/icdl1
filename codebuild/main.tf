@@ -1,85 +1,46 @@
-
-
-/*
-resource "aws_codebuild_project" "1cdl-codebuild" {
-  name          = "1cdl-codebuild"
-  description   = "icdl codebiild project for "
+resource "aws_codebuild_project" "icdl-codebuild" {
+  name          = "icdl-codebuild"
+  description   = "icdl codebiild project "
   #build_timeout = "5"
-  service_role  = aws_iam_role.ivdl-codebuild.arn
-
+  service_role  = aws_iam_role.CodeBuildRole.arn
   artifacts {
     type = "NO_ARTIFACTS"
   }
-  }
-
   environment {
     compute_type                = "BUILD_GENERAL1_SMALL"
-    image                       = "aws/codebuild/standard:1.0"  #add docker image
+    image                       = "813260210012.dkr.ecr.eu-west-1.amazonaws.com/icdl:latest"  #add current ecr and image
     type                        = "LINUX_CONTAINER"
-    image_pull_credentials_type = "CODEBUILD"
+    image_pull_credentials_type = "SERVICE_ROLE"
 
     environment_variable {
       name  = "TF_ACTION"
       value = ""
+      type = "PLAINTEXT"
     }
   }
 
   logs_config {
     cloudwatch_logs {
       group_name  = "icdl-codebuild-log-group"
+      status      = "ENABLED"
       stream_name = "icdl-codebuild-log-stream"
     }
   }
 
   source {
-    type            = "GITHUB"
-    location        = "https://github.com/cloud-fundis/nyasha_terraform_icdl.git" 
-    git_clone_depth = 1
+        buildspec           = data.local_file.buildspec_local.content
+        git_clone_depth     = 1
+        insecure_ssl        = false
+        location            = "https://github.com/cloud-fundis/nyasha_terraform_icdl.git"
+        report_build_status = false
+        type                = "GITHUB"
 
-    git_submodules_config {
-      fetch_submodules = true
-    }
-  }
-
-  /*source_version = "main"
-
-  vpc_config {
-    vpc_id = aws_vpc.example.id
-
-    subnets = [
-      aws_subnet.example1.id,
-      aws_subnet.example2.id,
-    ]
-
-    security_group_ids = [
-      aws_security_group.example1.id,
-      aws_security_group.example2.id,
-    ]
-  }
-
+        git_submodules_config {
+            fetch_submodules = false
+        }
+  }  
   tags = {
-    Environment = "Test"
-  }
-}*/
-
-module "build" {
-    source = "cloudposse/codebuild/aws"
-    name                = "1cdl-codebuild"
-
-    build_image         = "aws/codebuild/standard:2.0" # I need a local image
-    build_compute_type  = "BUILD_GENERAL1_SMALL"
-    build_timeout       = 60
-
-    privileged_mode     = true
-    aws_region          = "eu-west-1"
-    aws_account_id      = "813260210012"
-    image_repo_name     = "icdl" 
-    image_tag           = "latest"
-
-    environment_variables = [{
-      name  = "TF_ACTION"
-      value = ""
-      type = "Plaintext"
-    }]
-  }
-
+    "CreatedBy" = "nyasha@cloud-fundis"
+    "Name"      = "icdl-codebuild"
+  }       
+}

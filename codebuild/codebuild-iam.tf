@@ -33,54 +33,7 @@ resource "aws_iam_role_policy" "CodeBuildBasePolicy-icdl-3-eu-west-1" {
         "logs:PutLogEvents"
       ]
     },
-    {
-      "Effect": "Allow",
-      "Action": [
-        "ec2:CreateNetworkInterface",
-        "ec2:DescribeDhcpOptions",
-        "ec2:DescribeNetworkInterfaces",
-        "ec2:DeleteNetworkInterface",
-        "ec2:DescribeSubnets",
-        "ec2:DescribeSecurityGroups",
-        "ec2:DescribeVpcs"
-      ],
-      "Resource": "*"
-    }
-  ]
-}
-POLICY
-}
 
-/*
-resource "aws_iam_role_policy" "CodeBuildBasePolicy-icdl-3-eu-west-1" {
-   role = aws_iam_role.CodeBuildRole.name
-
-   policy = <<POLICY
-   {
-       {
-    "Version": "2012-10-17",
-    "Statement": [
-        {
-            "Effect": "Allow",
-            "Resource": [
-                "arn:aws:logs:eu-west-1:813260210012:log-group:icdl-codebuild-group",
-                "arn:aws:logs:eu-west-1:813260210012:log-group:icdl-codebuild-group:*"
-            ],
-            "Action": [
-                "logs:CreateLogGroup",
-                "logs:CreateLogStream",
-                "logs:PutLogEvents"
-            ]
-        },
-        {
-            "Effect": "Allow",
-            "Action": [
-                "ssm:GetParameters*"
-            ],
-            "Resource": [
-                "*"
-            ]
-        },
         {
             "Effect": "Allow",
             "Resource": "*",
@@ -148,27 +101,7 @@ resource "aws_iam_role_policy" "CodeBuildBasePolicy-icdl-3-eu-west-1" {
             ],
             "Resource": "*"
         },
-        {
-            "Effect": "Allow",
-            "Action": [
-                "codebuild:CreateReportGroup",
-                "codebuild:CreateReport",
-                "codebuild:UpdateReport",
-                "codebuild:BatchPutTestCases",
-                "codebuild:BatchPutCodeCoverages"
-            ],
-            "Resource": [
-                "arn:aws:codebuild:eu-west-1:813260210012:report-group/icdl-codebuild-*"
-            ]
-        },
 
-        {
-            "Effect": "Allow",
-            "Action": [
-                "ecr:GetAuthorizationToken"
-            ],
-            "Resource": "*"
-        },
         {
             "Effect": "Allow",
             "Action": [
@@ -180,10 +113,82 @@ resource "aws_iam_role_policy" "CodeBuildBasePolicy-icdl-3-eu-west-1" {
                 "ecr:UploadLayerPart",
                 "ecr:CompleteLayerUpload"
             ],
-            "Resource": "arn:aws:ecr:eu-west-1:813260210012:repository/icdl"
-        }
-    ]
+            "Resource": "arn:aws:ecr:eu-west-1:813260210012:repository/icdl-codebuild"
+        },
 
+        {
+            "Effect": "Allow",
+            "Action": [
+                "ecr:GetAuthorizationToken"
+            ],
+            "Resource": "*"
+        },
+
+     {
+            "Effect": "Allow",
+            "Resource": [
+                "arn:aws:logs:eu-west-1:813260210012:log-group:icdl-codebuild-group",
+                "arn:aws:logs:eu-west-1:813260210012:log-group:icdl-codebuild-group:*"
+            ],
+            "Action": [
+                "logs:CreateLogGroup",
+                "logs:CreateLogStream",
+                "logs:PutLogEvents"
+            ]
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "ssm:GetParameters*"
+            ],
+            "Resource": [
+                "*"
+            ]
+        },
+
+        {
+            "Effect": "Allow",
+            "Action": [
+                "apigateway:*"
+            ],
+            "Resource": "arn:aws:apigateway:*::/*"
+        },
+
+        {
+            "Effect": "Allow",
+            "Action": "iam:PassRole",
+            "Resource": "*",
+            "Condition": {
+                "StringEquals": {
+                    "iam:PassedToService": "lambda.amazonaws.com"
+                }
+            }
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "logs:DescribeLogStreams",
+                "logs:GetLogEvents",
+                "logs:FilterLogEvents"
+            ],
+            "Resource": "arn:aws:logs:*:*:log-group:/aws/lambda/*"
+        },
+
+    {
+      "Effect": "Allow",
+      "Action": [
+        "ec2:CreateNetworkInterface",
+        "ec2:DescribeDhcpOptions",
+        "ec2:DescribeNetworkInterfaces",
+        "ec2:DeleteNetworkInterface",
+        "ec2:DescribeSubnets",
+        "ec2:DescribeSecurityGroups",
+        "ec2:DescribeVpcs"
+      ],
+      "Resource": "*"
+    }
+  ]
+}
 POLICY
 }
-*/
+

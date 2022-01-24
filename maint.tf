@@ -49,19 +49,38 @@ module "north-backend" {
 
 module "codebuild" {
   source = "./codebuild"
+  providers = {
+    aws = aws.north
+  }
 }
 module "eventbridge" {
   source = "./eventbridge"
+ providers = {
+    aws = aws.north
+  }
 }
 
 module "lambda" {
   source = "./lambda"
+  providers = {
+    aws = aws.north
+  }
 }
 
 module "sns" {
   source = "./sns"
+ providers = {
+    aws = aws.north
+  }
 }
 
 module "tfm-docker" {
   source = "./tfm-docker"
+}
+
+module "imports" {
+  source = "./imports"
+ providers = {
+    aws = aws.north
+  }
 }

@@ -1,5 +1,5 @@
 locals {
-  lambda-zip-location = "outputs/nat-lambda-function.zip"
+  lambda-zip-location = "./lambda/nat-lambda-function.zip"
 }
 resource "aws_lambda_function" "icdl-nat-lambda" {
   filename      = local.lambda-zip-location
@@ -13,5 +13,5 @@ resource "aws_lambda_function" "icdl-nat-lambda" {
 data "archive_file" "init" {
   type        = "zip"
   source_file = "nat-lambda-function.py"
-  output_path = local.lambda-zip-location
+  output_path = "./lambda/nat-lambda-function.zip"
 }

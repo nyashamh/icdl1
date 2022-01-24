@@ -1,4 +1,17 @@
-module "icdl-start-eventbridge" {
+resource "aws_cloudwatch_event_rule" "nat-apply-rule" {
+    event_bus_name      = "default"
+    is_enabled          = false
+    name                = "nat-apply-rule"
+    schedule_expression = "cron(0 06 ? * 5L *)"
+  
+   tags = {
+   "Name" = "nat-apply-rule"
+   "CreatedBy" = "nyasha@cloud-fundis.co.za"
+   "Description" = "triggers a lambda function to invoke a terraform apply that brings up the nat gateway every last thursday of the month"
+  }
+}
+/*
+module "nat-apply-rule" {
   source        = "terraform-aws-modules/eventbridge/aws"
   create_bus    = false
 
@@ -6,8 +19,10 @@ module "icdl-start-eventbridge" {
 
     orders = {
     crons = {
-      description         = "Trigger for a Lambda to start nat gateway"
-      cron_expression     = "cron(0 06 ? * 5L * )"
+      description             = "Trigger for a Lambda to start nat gateway"
+      schedule                = "cron(0 06 ? * 5L * )"
+      event_pattern           = jsonencode({ "source" : ["nat-apply-rule.logs"] })
+      enabled                 = false
     }
     }
   }
@@ -33,9 +48,5 @@ module "icdl-start-eventbridge" {
   
     ]
 }
- tags = {
-   "Name" = "nat-apply-rule"
-   "CreatedBy" = "nyasha@cloud-fundis.co.za"
-   "Description" = "triggers a lambda function to invoke a terraform apply that brings up the nat gateway every last thursday of the month"
-  }
-}
+
+}*/
