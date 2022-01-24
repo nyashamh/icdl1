@@ -1,7 +1,7 @@
 resource "aws_sns_topic_subscription" "shutdown-nat-sns" {
    topic_arn = aws_sns_topic.shutdown-nat-sns.arn
    #display_name = "Shutdown_NAT_gateways_in_CPT_and_Ireland"
-   protocol = "email-json"
+   protocol = "email"
    endpoint = "nyasha@cloud-fundis.co.za"
    #topic = "shutdown-nat-sns"
 }
