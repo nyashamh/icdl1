@@ -26,17 +26,17 @@ terraform {
 provider "aws" {
   # default region
   #profile = "icdl-prod"
-  region  = "af-south-1"
+  region = "af-south-1"
 }
 
 provider "docker" {
   # default region
   #profile = "icdl-prod"
-  region  = "af-south-1"
+  region = "af-south-1"
 }
 
 provider "aws" {
   #profile = "icdl-prod"
-  alias   = "north"
-  region  = "eu-west-1"
+  alias  = "north"
+  region = "eu-west-1"
 }

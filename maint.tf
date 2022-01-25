@@ -32,7 +32,7 @@ module "ecr" {
   #region = eu-west-1
   providers = {
     aws = aws.north
-}
+  }
 }
 
 resource "aws_secretsmanager_secret" "github-oauth-token" {
@@ -44,7 +44,7 @@ module "north-backend" {
   #region = eu-west-1
   providers = {
     aws = aws.north
-   }
+  }
 }
 
 module "codebuild" {
@@ -55,7 +55,7 @@ module "codebuild" {
 }
 module "eventbridge" {
   source = "./eventbridge"
- providers = {
+  providers = {
     aws = aws.north
   }
 }
@@ -69,7 +69,7 @@ module "lambda" {
 
 module "sns" {
   source = "./sns"
- providers = {
+  providers = {
     aws = aws.north
   }
 }
@@ -80,7 +80,7 @@ module "tfm-docker" {
 
 module "imports" {
   source = "./imports"
- providers = {
+  providers = {
     aws = aws.north
   }
 }
