@@ -21,7 +21,7 @@ EOF
 resource "aws_iam_policy" "nat-lambda-logging" {
   name        = "nat-lambda-logging"
   path        = "/"
-  description = "IAM policy for logging from a lambda"
+  description = "IAM policy for lambda"
 
   policy = <<EOF
 {
@@ -33,9 +33,44 @@ resource "aws_iam_policy" "nat-lambda-logging" {
         "logs:CreateLogStream",
         "logs:PutLogEvents"
       ],
-      "Resource": "arn:aws:logs:*:*:*",
+      "Resource": "arn:aws:logs:*:*:*",      
       "Effect": "Allow"
-    }
+    },
+
+        {
+            "Effect": "Allow",
+            "Action": "logs:CreateLogGroup",
+            "Resource": "arn:aws:logs:eu-west-1:813260210012:*"
+        },
+        {
+            "Effect": "Allow",
+            "Action": "sts:AssumeRole",
+            "Resource": "arn:aws:codebuild:eu-west-1:813260210012:project/icdl-codebuild"
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "codebuild:CreateProject",
+                "codebuild:StartBuild",
+                "codebuild:StopBuild",
+                "codebuild:ListProjects"
+            ],
+            "Resource": "arn:aws:codebuild:eu-west-1:813260210012:report-group/icdl-codebuild-*"
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "codebuild:CreateReportGroup",
+                "codebuild:CreateReport",
+                "codebuild:UpdateReport",
+                "codebuild:BatchPutTestCases",
+                "codebuild:BatchPutCodeCoverages"
+            ],
+            "Resource": [
+                "arn:aws:codebuild:eu-west-1:813260210012:report-group/icdl-codebuild-*"
+            ]
+        }
+
   ]
 }
 EOF

@@ -1,5 +1,5 @@
-resource "aws_ecr_repository" "icdl-north1-ecr" {
-  name            = "icdl-north1-ecr"
+resource "aws_ecr_repository" "icdl-north-ecr" {
+  name            = "icdl-north-ecr"
 
     encryption_configuration {
         encryption_type = "AES256"
@@ -9,33 +9,13 @@ resource "aws_ecr_repository" "icdl-north1-ecr" {
         scan_on_push = false
     }
   tags            = {
-      "Name"      = "icdl-north1-ecr"
+      "Name"      = "icdl-north-ecr"
       "CreatedBy" = "nyasha@cloud-fundis"
   }
 }
 
-/*
-resource "aws_ecr_repository" "icdl" {
-    arn                  = "arn:aws:ecr:eu-west-1:813260210012:repository/icdl"
-    id                   = "icdl"
-    image_tag_mutability = "MUTABLE"
-    name                 = "icdl"
-    registry_id          = "813260210012"
-    repository_url       = "813260210012.dkr.ecr.eu-west-1.amazonaws.com/icdl"
-    tags                 = {
-        "CreatedBy" = "nyasha@cloud-fundis"
-        "Name"      = "icdl-north-ecr"
-    }
-    tags_all             = {
-        "CreatedBy" = "nyasha@cloud-fundis"
-        "Name"      = "icdl-north-ecr"
-    }
-
-    encryption_configuration {
-        encryption_type = "AES256"
-    }
-
-    image_scanning_configuration {
-        scan_on_push = false
-    }
-}*/
+#push image manually
+#aws ecr get-login-password --region eu-west-1 | docker login --username AWS --password-stdin 813260210012.dkr.ecr.eu-west-1.amazonaws.com
+#docker build -t icdl-north-ecr .
+#docker tag icdl-north-ecr:latest 813260210012.dkr.ecr.eu-west-1.amazonaws.com/icdl-north-ecr:latest
+#docker push 813260210012.dkr.ecr.eu-west-1.amazonaws.com/icdl-north-ecr:latest
