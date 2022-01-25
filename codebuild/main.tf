@@ -8,7 +8,7 @@ resource "aws_codebuild_project" "icdl-codebuild" {
   }
   environment {
     compute_type                = "BUILD_GENERAL1_SMALL"
-    image                       = "813260210012.dkr.ecr.eu-west-1.amazonaws.com/icdl:latest"  #add current ecr and image
+    image                       = "813260210012.dkr.ecr.eu-west-1.amazonaws.com/icdl-north-ecr:latest"  #add current ecr and image 
     type                        = "LINUX_CONTAINER"
     image_pull_credentials_type = "SERVICE_ROLE"
 
