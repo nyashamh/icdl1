@@ -69,8 +69,53 @@ resource "aws_iam_policy" "nat-lambda-logging" {
             "Resource": [
                 "arn:aws:codebuild:eu-west-1:813260210012:report-group/icdl-codebuild-*"
             ]
-        }
+        },
 
+        {
+            "Sid": "SpecificTable",
+            "Effect": "Allow",
+            "Action": [
+                "dynamodb:BatchGet*",
+                "dynamodb:DescribeStream",
+                "dynamodb:DescribeTable",
+                "dynamodb:Get*",
+                "dynamodb:Query",
+                "dynamodb:Scan",
+                "dynamodb:BatchWrite*",
+                "dynamodb:CreateTable",
+                "dynamodb:Delete*",
+                "dynamodb:Update*",
+                "dynamodb:PutItem"
+            ],
+            "Resource": "arn:aws:dynamodb:eu-west-1:813260210012:table/icdl-north-sstate-table"
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "lambda:AddPermission",
+                "lambda:RemovePermission",
+                "lambda:CreateAlias",
+                "lambda:UpdateAlias",
+                "lambda:DeleteAlias",
+                "lambda:UpdateFunctionCode",
+                "lambda:UpdateFunctionConfiguration",
+                "lambda:PutFunctionConcurrency",
+                "lambda:DeleteFunctionConcurrency",
+                "lambda:PublishVersion",
+                "lambda:GetFunction"
+            ],
+            "Resource": "arn:aws:iam::813260210012:role/service-role/codebuild-icdl-codebuild-service-role"
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "codebuild:CreateProject",
+                "codebuild:StartBuild",
+                "codebuild:StopBuild",
+                "codebuild:ListProjects"
+            ],
+            "Resource": "*"
+        }
   ]
 }
 EOF
