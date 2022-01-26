@@ -15,7 +15,7 @@ def lambda_handler(event, context):
     elif (event["TF_ACTION"]== 'destroy'):
         print("Destroying a Nat gateway")
     
-    response = cb.start_build(projectName='icdl-2',
+    response = cb.start_build(projectName='icdl-codebuild',
     
     environmentVariablesOverride=[
         {

@@ -1,0 +1,9 @@
+import zipfile
+
+target = 'lambda.py'
+
+handle = zipfile.ZipFile('nat-lambda-function.py', 'w')
+
+handle.write(target, compress_type = zipfile.ZIP_DEFLATED)
+
+handle.close()
