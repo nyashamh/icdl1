@@ -1,5 +1,0 @@
-          aws lambda invoke \
-              --cli-binary-format raw-in-base64-out \
-              --function-name my-function \
-              --payload '{ "name": "Bob" }' \
-              response.json 

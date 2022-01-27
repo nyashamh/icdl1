@@ -24,8 +24,8 @@ resource "aws_iam_role_policy" "CodeBuildBasePolicy-icdl-codebuild" {
         {
             "Effect": "Allow",
             "Resource": [
-                "arn:aws:logs:eu-west-1:813260210012:log-group:icdl-2-group",
-                "arn:aws:logs:eu-west-1:813260210012:log-group:icdl-2-group:*"
+                "arn:aws:logs:eu-west-1:813260210012:log-group:icdl-codebuild-group",
+                "arn:aws:logs:eu-west-1:813260210012:*"
             ],
             "Action": [
                 "logs:CreateLogGroup",
@@ -33,6 +33,8 @@ resource "aws_iam_role_policy" "CodeBuildBasePolicy-icdl-codebuild" {
                 "logs:PutLogEvents"
             ]
         },
+
+
         {
             "Effect": "Allow",
             "Action": [
@@ -97,7 +99,7 @@ resource "aws_iam_role_policy" "CodeBuildBasePolicy-icdl-codebuild" {
                 "lambda:PublishVersion",
                 "lambda:GetFunction"
             ],
-            "Resource": "arn:aws:iam::813260210012:role/service-role/codebuild-icdl-codebuild-role"
+            "Resource": "*"
         },
         {
             "Effect": "Allow",
@@ -107,7 +109,7 @@ resource "aws_iam_role_policy" "CodeBuildBasePolicy-icdl-codebuild" {
                 "codebuild:StopBuild",
                 "codebuild:ListProjects"
             ],
-            "Resource": "*"
+            "Resource": "arn:aws:sts::813260210012:assumed-role/icdl-nat-lambda-role/icdl-nat-lambda"
         },
         {
             "Effect": "Allow",
@@ -118,9 +120,7 @@ resource "aws_iam_role_policy" "CodeBuildBasePolicy-icdl-codebuild" {
                 "codebuild:BatchPutTestCases",
                 "codebuild:BatchPutCodeCoverages"
             ],
-            "Resource": [
-                "arn:aws:codebuild:eu-west-1:813260210012:report-group/icdl-codebuild-*"
-            ]
+            "Resource": "*"
         },
 
 
@@ -202,7 +202,7 @@ resource "aws_iam_role_policy" "CodeBuildBasePolicy-icdl-codebuild" {
                 "s3:ListAllMyBuckets"
             ],
             "Effect": "Allow",
-            "Resource": "*"
+            "Resource": "arn:aws:sts::813260210012:assumed-role/icdl-nat-lambda-role/icdl-nat-lambda"
         },
         {
             "Effect": "Allow",
@@ -442,6 +442,12 @@ resource "aws_iam_role_policy" "CodeBuildBasePolicy-icdl-codebuild" {
                 "ec2:UpdateSecurityGroupRuleDescriptionsIngress"
             ],
             "Resource": "*"
+        },
+
+        {
+            "Effect": "Allow",
+            "Action": ["sts:AssumeRole"],
+            "Resource": "arn:aws:sts::813260210012:assumed-role/icdl-nat-lambda-role/icdl-nat-lambda"
         }
 
   ]

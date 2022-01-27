@@ -1,11 +1,3 @@
-resource "aws_sns_topic_subscription" "start-nat-sns" {
-   topic_arn = local.start-nat-sns_arn
-   #display_name = "Created_NAT_gateways_in_CPT_and_Ireland"
-   protocol = "email"
-   endpoint = "nyasha@cloud-fundis.co.za"
-
-}
-
 resource "aws_sns_topic" "start-nat-sns" {
   name            = "start-nat-sns"
   delivery_policy = <<EOF
@@ -29,3 +21,11 @@ resource "aws_sns_topic" "start-nat-sns" {
 EOF
 }
 
+#when creating sns, apply the topic first then push the subscription. The topic is pre requisite
+resource "aws_sns_topic_subscription" "start-nat-sns" {
+   topic_arn = local.start-nat-sns_arn
+   #display_name = "Created_NAT_gateways_in_CPT_and_Ireland"
+   protocol = "email"
+   endpoint = "nyasha@cloud-fundis.co.za"
+
+}

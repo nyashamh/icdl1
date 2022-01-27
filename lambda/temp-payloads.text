@@ -1,0 +1,4 @@
+>> echo '{"TF_ACTION":"apply"}' > payload
+>> openssl base64 -out payload.enc -in payload
+>> cat payload.enc
+>> aws lambda invoke --function-name icdl-nat-lambda --payload file://payload.enc response.json     

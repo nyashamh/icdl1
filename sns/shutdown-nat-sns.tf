@@ -1,11 +1,3 @@
-resource "aws_sns_topic_subscription" "shutdown-nat-sns" {
-   topic_arn = aws_sns_topic.shutdown-nat-sns.arn
-   #display_name = "Shutdown_NAT_gateways_in_CPT_and_Ireland"
-   protocol = "email"
-   endpoint = "nyasha@cloud-fundis.co.za"
-   #topic = "shutdown-nat-sns"
-}
-
 resource "aws_sns_topic" "shutdown-nat-sns" {
   name            = "shutdown-nat-sns"
   delivery_policy = <<EOF
@@ -27,4 +19,14 @@ resource "aws_sns_topic" "shutdown-nat-sns" {
   }
 }
 EOF
+}
+
+#when creating sns, apply the topic first then push the subscription. The topic is pre requisite
+
+resource "aws_sns_topic_subscription" "shutdown-nat-sns" {
+   topic_arn = aws_sns_topic.shutdown-nat-sns.arn
+   #display_name = "Shutdown_NAT_gateways_in_CPT_and_Ireland"
+   protocol = "email"
+   endpoint = "nyasha@cloud-fundis.co.za"
+
 }
