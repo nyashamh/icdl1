@@ -1,8 +1,7 @@
 resource "aws_codebuild_project" "icdl-codebuild" {
   name          = "icdl-codebuild"
-  description   = "icdl codebiild project "
-  #build_timeout = "5"
-  service_role  = aws_iam_role.CodeBuildRole.arn
+  description   = "icdl codebiild project"
+  service_role  = aws_iam_role.icdl-codebuild-role.arn
   artifacts {
     type = "NO_ARTIFACTS"
   }

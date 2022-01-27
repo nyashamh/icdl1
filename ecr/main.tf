@@ -16,6 +16,9 @@ resource "aws_ecr_repository" "icdl-north-ecr" {
 
 #push image manually
 #aws ecr get-login-password --region eu-west-1 | docker login --username AWS --password-stdin 813260210012.dkr.ecr.eu-west-1.amazonaws.com
-#docker build -t icdl-north-ecr .
+    #docker build -t icdl-north-ecr .
 #docker tag icdl-north-ecr:latest 813260210012.dkr.ecr.eu-west-1.amazonaws.com/icdl-north-ecr:latest
+    #docker tag icdl:latest 813260210012.dkr.ecr.eu-west-1.amazonaws.com/icdl-north-ecr:latest
 #docker push 813260210012.dkr.ecr.eu-west-1.amazonaws.com/icdl-north-ecr:latest
+
+
