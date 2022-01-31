@@ -2,8 +2,9 @@ resource "aws_cloudwatch_event_rule" "nat-destroy-rule" {
     event_bus_name      = "default"
     is_enabled          = true
     name                = "nat-destroy-rule"
+    description         =  "Destroyed_Nat_Gateway"
     #schedule_expression = "cron(0 06 ? * 5L *)"
-    schedule_expression = "cron(47 10 ? * * *)"
+    schedule_expression = "cron(25 11 ? * * *)"
   
    tags = {
    "Name" = "nat-destroy-rule"
@@ -21,7 +22,7 @@ resource "aws_cloudwatch_event_target" "lambda_destroy_target" {
 JSON
 }
 
-resource "aws_cloudwatch_event_target" "sns2-target" {
+resource "aws_cloudwatch_event_target" "sns-destroy-target" {
     target_id   = "shutdown-nat-sns"
     rule        = aws_cloudwatch_event_rule.nat-destroy-rule.name
     arn         = local.sns__nat_stop_arn
@@ -36,3 +37,6 @@ resource "aws_lambda_permission" "cloudwatch_to_call_icdl_nat_lambda" {
   source_arn    = local.nat-destroy-rule-arn
 
 }
+
+
+
