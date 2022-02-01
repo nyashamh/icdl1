@@ -11,7 +11,7 @@ resource "aws_cloudwatch_event_rule" "nat-apply-rule" {
     is_enabled          = true
     name                = "nat-apply-rule"
     #schedule_expression = "cron(0 06 ? * 5L *)"
-    schedule_expression = "cron(00 09 ? * * *)"
+    schedule_expression = "cron(58 05 ? * * *)"
     
   
    tags = {

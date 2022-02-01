@@ -84,6 +84,7 @@ data "aws_iam_policy_document" "start_nat_sns_topic_policy" {
       identifiers = ["events.amazonaws.com"]
     }
   }
+  
 }
 
 
