@@ -1,0 +1,11 @@
+
+
+
+ {
+   "Template": {
+     "TemplateName": "Got_event",
+     "SubjectPart": "Software update events",
+     "HtmlPart": "Hi we got an event for monthly software updates",
+     "TextPart": "Hi we got an event for monthly software updates"
+   }
+ }

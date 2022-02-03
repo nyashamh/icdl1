@@ -1,0 +1,10 @@
+{
+    "Source":"nyasha@cloud-fundis.co.za",
+    "Template": "Got_event",
+    "ConfigurationSetName": "config1",
+    "Destination": {
+      "ToAddresses": [ "nyasha@cloud-fundis.co.za"
+      ]
+    },
+    "TemplateData": "{ \"Message\":\" Hi we got an event for monthly software updates\"}"
+  }
