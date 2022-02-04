@@ -84,10 +84,3 @@ module "imports" {
     aws = aws.north
   }
 }
-
-module "ses" {
-  source = "./ses"
-  providers = {
-    aws = aws.north
-  }
-}
